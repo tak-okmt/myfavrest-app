@@ -1,0 +1,5 @@
+<h1>新規投稿</h1>
+<div class="nav justify-content-end">
+    <%= link_to '一覧', posts_path, class:'nav-link' %>
+</div>
+<%= render partial:'form', locals:{post: @post} %>

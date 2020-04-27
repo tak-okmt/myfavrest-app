@@ -1,0 +1,25 @@
+<div class="like_btn">
+<% if user_signed_in? %>
+    <% like = current_user.likes.find_by(post_id: post.id) %>
+    <% if like != nil %>
+        <%= link_to post_like_path(post, like), method: :delete, remote: true do %>
+            <i class="fas fa-heart"></i>
+        <% end %>
+        <span>
+            <%= post.likes_count %>
+        </span>
+    <% else %>
+        <%= link_to post_likes_path(post), method: :post, remote: true do %>
+            <i class="far fa-heart"></i>
+        <% end %>
+        <span>
+            <%= post.likes_count %>
+        </span>
+    <% end %>
+<% else %>
+    <i class="fas fa-heart"></i>
+    <span>
+        <%= post.likes_count %>
+    </span>
+<% end %>
+</div>

@@ -1,0 +1,32 @@
+<h1>投稿の詳細</h1>
+<div class="nav justify-content-end"><%= link_to '一覧',posts_path, class:'nav-link' %></div>
+<table class="table table-hover">
+    <tbody>
+        <tr>
+            <th><%= Post.human_attribute_name(:user_id) %></th>
+            <td><%= @post.user.user_id %></td>
+        </tr>
+        <tr>
+            <th><%= Post.human_attribute_name(:title) %></th>
+            <td><%= @post.title %></td>
+        </tr>
+        <tr>
+            <th><%= Post.human_attribute_name(:description) %></th>
+            <td><%= simple_format(h(@post.description), {}, sanitize: false, wrapper_tag:"div") %></td>
+        </tr>
+        <tr>
+            <th><%= Post.human_attribute_name(:created_at) %></th>
+            <td><%= @post.created_at %></td>
+        </tr>
+        <tr>
+            <th><%= Post.human_attribute_name(:updated_at) %></th>
+            <td><%= @post.updated_at %></td>
+        </tr>
+    </tbody>
+</table>
+<% if user_signed_in? %>
+    <% if @post.user.user_id == current_user.user_id %>
+        <%= link_to '編集',edit_post_path(@post),class:'btn btn-primary' %>
+        <%= link_to '削除', @post, method: :delete, data:{ confirm: "投稿「#{@post.title}」を削除します。よろしいですか？" } ,class:'btn btn-danger' %>
+    <% end %>
+<% end %>

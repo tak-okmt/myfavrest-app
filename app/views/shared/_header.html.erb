@@ -1,0 +1,16 @@
+<header class="app-title navbar navbar-expand-md navbar-light text-white">
+<%= link_to "myfavrest", root_path, class:"header_logo navbar-brand text-line-none text-white" %>
+<nav>
+    <div class="loginstauts">
+    <% if user_signed_in? %> 
+        <strong><%= current_user.username %></strong>でログインしています。
+        <%= link_to 'プロフィール変更', edit_user_registration_path %> |
+        <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+    <% else %>
+        <%= link_to "ユーザ登録", new_user_registration_path %> |
+        <%= link_to "ログイン", new_user_session_path %>
+    <% end %>
+        | <%= link_to "投稿一覧", posts_path %>
+    </div>
+</nav>
+</header>

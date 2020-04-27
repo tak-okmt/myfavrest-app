@@ -1,0 +1,18 @@
+<h1>ユーザ情報</h1>
+<div class="nav justify-content-end"><%= link_to '一覧',posts_path, class:'nav-link' %></div>
+<table class="table table-hover">
+    <tbody>
+        <tr>
+            <th><%= User.human_attribute_name(:user_id) %></th>
+            <td><%= @user.user_id %></td>
+        </tr>
+        <tr>
+            <th><%= User.human_attribute_name(:username) %></th>
+            <td><%= @user.username %></td>
+        </tr>
+        <tr>
+            <th><%= User.human_attribute_name(:email) %></th>
+            <td><%= @user.email %></td>
+        </tr>
+    </tbody>
+</table>
