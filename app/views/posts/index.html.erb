@@ -2,7 +2,7 @@
 <div><%= link_to '新規投稿', new_post_path, class:'btn btn-primary' %></div>
 <br>
 <%= search_form_for @search do |f| %>
-  <%= f.label :user_user_id_eq, "ユーザID:" %>
+  <%= f.label :user_user_id_cont, "ユーザID:" %>
   <%= f.search_field :user_user_id_cont %>
   &nbsp&nbsp<%= f.label :title_cont, "タイトルを含む:" %>
   <%= f.search_field :title_cont %>
