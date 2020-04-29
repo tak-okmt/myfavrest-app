@@ -24,9 +24,17 @@
         </tr>
     </tbody>
 </table>
+
+<h2>コメント一覧</h2>
+<div id="comments_area">
+    <%= render partial: 'comments/index', locals: { comments: @comments } %>
+</div>
+
 <% if user_signed_in? %>
+    <%= render partial: 'comments/form', locals: { comment: @comment, post: @post } %>
+    <br>
     <% if @post.user.user_id == current_user.user_id %>
-        <%= link_to '編集',edit_post_path(@post),class:'btn btn-primary' %>
-        <%= link_to '削除', @post, method: :delete, data:{ confirm: "投稿「#{@post.title}」を削除します。よろしいですか？" } ,class:'btn btn-danger' %>
+        <%= link_to "編集",edit_post_path(@post),class:"btn btn-primary" %>
+        <%= link_to "削除", @post, method: :delete, data:{ confirm: "投稿「#{@post.title}」を削除します。よろしいですか？" } ,class:"btn btn-danger" %>
     <% end %>
 <% end %>

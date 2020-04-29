@@ -1,0 +1,5 @@
+<% comments.each do |c| %>
+    <%= link_to "#{c.user.username}さん", user_path(c.user.id) %>
+    <%= c.content %>
+    <br>
+<% end %>
