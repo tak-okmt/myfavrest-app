@@ -10,6 +10,7 @@
 <% end %>
 <br>
 <div class="mb-4">
+    <%= paginate @posts %>
     <table class="table table-hover">
         <div class="thead thead-light">
             <tr>
@@ -41,4 +42,5 @@
         </div>
         </div>
     </table>
+    <%= paginate @posts %>
 </div>

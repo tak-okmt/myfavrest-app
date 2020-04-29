@@ -6,6 +6,7 @@ class PostsController < ApplicationController
     @search = Post.ransack(params[:q])
     #検索結果
     @posts = @search.result
+    @posts = @posts.page(params[:page]).per(3)
   end
 
   def show
