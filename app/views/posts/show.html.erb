@@ -22,6 +22,12 @@
             <th><%= Post.human_attribute_name(:updated_at) %></th>
             <td><%= @post.updated_at %></td>
         </tr>
+        <tr>
+            <% if @post.image? %>
+            <th>画像</th>
+            <td><%= image_tag @post.image.url %></td>
+            <% end %>
+        </tr>
     </tbody>
 </table>
 
