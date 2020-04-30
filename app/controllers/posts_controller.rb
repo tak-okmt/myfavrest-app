@@ -6,7 +6,7 @@ class PostsController < ApplicationController
     @search = Post.ransack(params[:q])
     #検索結果
     @posts = @search.result
-    @posts = @posts.page(params[:page]).per(3)
+    @posts = @posts.page(params[:page])
   end
 
   def show
@@ -48,6 +48,6 @@ class PostsController < ApplicationController
   private
 
     def post_params
-      params.require(:post).permit(:title, :description, :content)
+      params.require(:post).permit(:title, :description, :content, :image)
     end
 end
