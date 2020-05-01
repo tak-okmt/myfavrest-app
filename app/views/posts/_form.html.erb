@@ -18,5 +18,6 @@
         <%= f.label "画像をアップロード" %>
         <%= f.file_field :image, class: 'form-control' %>
     </div>
+    <%= render partial: 'shared/gmap-new' %>
     <%= f.submit "更新する", class:'btn btn-primary' %>
 <% end %>
