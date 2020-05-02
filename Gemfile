@@ -3,6 +3,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.6.5'
 
+gem 'omniauth-google-oauth2'
 gem 'carrierwave'
 gem 'kaminari'
 gem 'font_awesome5_rails'
