@@ -1,7 +1,6 @@
 <div class="input-field col s12 m12 l4" style="padding-top: 50px;">
   <input id="address" class="controls" type="text" placeholder="店名を入れて住所検索">
-  <input type="button" value="Encode" onclick="codeAddress()">
-  <div id="map" style="max-width: 700px; height: 400px;"></div>
+  <div id="map" style="max-width: 500px; height: 300px;"></div>
 </div>
 
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBsrNulBIlCFfLAkYJNwofZ7O_jB_kDHYs&callback=initMap" async defer></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBsrNulBIlCFfLAkYJNwofZ7O_jB_kDHYs&libraries=places&callback=initAutocomplete" async defer></script>
