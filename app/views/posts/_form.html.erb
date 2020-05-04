@@ -24,15 +24,15 @@
     </div>
     <div class="form-group">
         <%= f.label "エリア" %>
-        <%= f.collection_select :area, Post.all, :area, :area, include_blank: 'エリアを選択してください' %>
+        <%= f.collection_select :area, code.where(code_id: "1"), :code, :name, include_blank: 'エリアを選択してください' %>
     </div>
     <div class="form-group">
         <%= f.label "料理ジャンル" %>
-        <%= f.collection_select :type, Post.all, :type, :type, include_blank: '料理ジャンルを選択してください' %>
+        <%= f.collection_select :type, code.where(code_id: "2"), :code, :name, include_blank: '料理ジャンルを選択してください' %>
     </div>
     <div class="form-group">
         <%= f.label "利用シーン" %>
-        <%= f.collection_select :objective, Post.all, :objective, :objective, include_blank: '利用シーンを選択してください' %>
+        <%= f.collection_select :objective, code.where(code_id: "3"), :code, :name, include_blank: '利用シーンを選択してください' %>
     </div>
     <div class="form-group">
         <%= f.label "こだわり条件" %>
@@ -40,7 +40,7 @@
     </div>
     <div class="form-group">
         <%= f.label "利用人数" %>
-        <%= f.text_field :people, class:'form-control', id: 'people_number' %>
+        <%= f.collection_select :people, code.where(code_id: "4"), :code, :name, include_blank: '利用人数を選択してください' %>
     </div>
     <div class="form-group">
         <%= f.label "画像をアップロード" %>
