@@ -33,7 +33,7 @@
 * Rspecによる自動テスト機能
 
 ## 環境
-開発環境：docker、docker-compose（現在構築中のため、現状はVScode使用）  
+開発環境：docker、docker-compose（現在構築中のため、現状は未使用）  
 本番環境（現在未整備）：AWS（VPC、EC2、RDS、S3、Route53、ALB、ACM）  
                        Webサーバ：Nginx  
                        APサーバ：Rail  
