@@ -11,8 +11,8 @@
         <%= f.text_field :title, class:'form-control', id: 'title_name' %>
     </div>
     <div class="form-group">
-        <%= f.label "評価" %>
-        <%= f.collection_select :score, Post.all, :score, :score, include_blank: '評価を選択してください' %>
+        <%= f.label "評価（5：最高評価、1：最低評価）" %>
+        <%= f.collection_select :score, code.where(code_id: "5"), :code, :name, include_blank: '評価を選択してください' %>
     </div>
     <div class="form-group">
         <%= f.label "口コミ" %>
@@ -46,6 +46,6 @@
         <%= f.label "画像をアップロード" %>
         <%= f.file_field :image, class: 'form-control' %>
     </div>
-    <%= render partial: 'shared/gmap-new' %>
+    <%= render partial: 'shared/gmap-new', locals: { f: f} %>
     <%= f.submit "更新する", class:'btn btn-primary' %>
 <% end %>

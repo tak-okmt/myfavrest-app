@@ -1,0 +1,6 @@
+<div id='address'>
+  <%= post.address %>
+  <div id="map" style="max-width: 500px; height: 300px;"></div>
+</div>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GMAPS_API_KEY'] %>&libraries=places&callback=initAutocomplete" async defer></script>
