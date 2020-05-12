@@ -13,6 +13,11 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     @comments = @post.comments
     @comment = Comment.new
+    @hash = Gmaps4rails.build_markers(@post) do |post, marker|
+      marker.lat post.latitude
+      marker.lng post.longitude
+      marker.infowindow render_to_string(partial: 'posts/infowindow', locals: { post: post })
+    end
   end
 
   def new
@@ -50,6 +55,6 @@ class PostsController < ApplicationController
   private
 
     def post_params
-      params.require(:post).permit(:title, :description, :content, :image, :score, :area, :prefecture_code, :type, :objective, :features, :latitude, :longitude, :address)
+      params.require(:post).permit(:title, :description, :content, :image, :score, :area, :people, :prefecture_code, :rest_type, :objective, :features, :latitude, :longitude, :address)
     end
 end

@@ -3,6 +3,8 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.6.5'
 
+gem 'gmaps4rails'
+gem 'geocoder'
 gem 'openssl'
 gem 'http'
 gem 'jp_prefecture'
