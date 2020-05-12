@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_04_145002) do
+ActiveRecord::Schema.define(version: 2020_05_11_115246) do
 
   create_table "codes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "code_id", null: false
@@ -58,6 +58,8 @@ ActiveRecord::Schema.define(version: 2020_05_04_145002) do
     t.text "features"
     t.string "people"
     t.integer "score"
+    t.float "latitude"
+    t.float "longitude"
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
