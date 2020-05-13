@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_30_104134) do
+ActiveRecord::Schema.define(version: 2020_05_12_120525) do
+
+  create_table "codes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "code_id", null: false
+    t.string "sub_id", null: false
+    t.string "code", null: false
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["code_id", "sub_id", "code"], name: "index_codes_on_code_id_and_sub_id_and_code", unique: true
+  end
 
   create_table "comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.text "content"
@@ -40,6 +50,16 @@ ActiveRecord::Schema.define(version: 2020_04_30_104134) do
     t.bigint "user_id", null: false
     t.integer "likes_count", default: 0, null: false
     t.string "image"
+    t.string "prefecture_code"
+    t.string "address"
+    t.string "area"
+    t.string "rest_type"
+    t.string "objective"
+    t.text "features"
+    t.string "people"
+    t.integer "score"
+    t.float "latitude"
+    t.float "longitude"
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 

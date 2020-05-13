@@ -3,23 +3,47 @@
 <table class="table table-hover">
     <tbody>
         <tr>
-            <th><%= Post.human_attribute_name(:user_id) %></th>
-            <td><%= @post.user.user_id %></td>
+            <th>ユーザ名</th>
+            <td><%= @post.user.username %></td>
         </tr>
         <tr>
-            <th><%= Post.human_attribute_name(:title) %></th>
+            <th>店名</th>
             <td><%= @post.title %></td>
         </tr>
         <tr>
-            <th><%= Post.human_attribute_name(:description) %></th>
+            <th>評価</th>
+            <td><%= @post.score %></td>
+        </tr>
+        <tr>
+            <th>口コミ</th>
             <td><%= simple_format(h(@post.description), {}, sanitize: false, wrapper_tag:"div") %></td>
         </tr>
         <tr>
-            <th><%= Post.human_attribute_name(:created_at) %></th>
+            <th>都道府県</th>
+            <td><%= @post.prefecture_code %></td>
+        </tr>
+        <tr>
+            <th>エリア</th>
+            <td><%= @post.area %></td>
+        </tr>
+        <tr>
+            <th>料理ジャンル</th>
+            <td><%= @post.rest_type %></td>
+        </tr>
+        <tr>
+            <th>利用シーン</th>
+            <td><%= @post.objective %></td>
+        </tr>
+        <tr>
+            <th>こだわり条件</th>
+            <td><%= @post.features %></td>
+        </tr>
+        <tr>
+            <th>投稿日時</th>
             <td><%= @post.created_at %></td>
         </tr>
         <tr>
-            <th><%= Post.human_attribute_name(:updated_at) %></th>
+            <th>更新日時</th>
             <td><%= @post.updated_at %></td>
         </tr>
         <tr>
@@ -30,8 +54,6 @@
         </tr>
     </tbody>
 </table>
-
-<%= render partial: 'shared/gmap-show', locals: { post: @post } %>
 
 <h2>コメント一覧</h2>
 <div id="comments_area">

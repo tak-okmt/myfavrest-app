@@ -7,17 +7,45 @@
 <% end %>
 <%= form_with model:post, local:true do |f| %>
     <div class="form-group">
-        <%= f.label :title %>
+        <%= f.label "店名" %>
         <%= f.text_field :title, class:'form-control', id: 'title_name' %>
     </div>
     <div class="form-group">
-        <%= f.label :description %>
+        <%= f.label "評価（5：最高評価、1：最低評価）" %>
+        <%= f.collection_select :score, code.where(code_id: "5"), :code, :name, include_blank: '評価を選択してください' %>
+    </div>
+    <div class="form-group">
+        <%= f.label "口コミ" %>
         <%= f.text_area :description, row:5, class: 'form-control', id:'post_description' %>
+    </div>
+    <div class="form-group">
+        <%= f.label "都道府県" %>
+        <%= f.collection_select :prefecture_code, JpPrefecture::Prefecture.all, :code, :name, include_blank: '都道府県を選択してください' %>
+    </div>
+    <div class="form-group">
+        <%= f.label "エリア" %>
+        <%= f.collection_select :area, code.where(code_id: "1"), :code, :name, include_blank: 'エリアを選択してください' %>
+    </div>
+    <div class="form-group">
+        <%= f.label "料理ジャンル" %>
+        <%= f.collection_select :rest_type, code.where(code_id: "2"), :code, :name, include_blank: '料理ジャンルを選択してください' %>
+    </div>
+    <div class="form-group">
+        <%= f.label "利用シーン" %>
+        <%= f.collection_select :objective, code.where(code_id: "3"), :code, :name, include_blank: '利用シーンを選択してください' %>
+    </div>
+    <div class="form-group">
+        <%= f.label "こだわり条件" %>
+        <%= f.text_area :features, row:2, class: 'form-control', id:'post_features' %>
+    </div>
+    <div class="form-group">
+        <%= f.label "利用人数" %>
+        <%= f.collection_select :people, code.where(code_id: "4"), :code, :name, include_blank: '利用人数を選択してください' %>
     </div>
     <div class="form-group">
         <%= f.label "画像をアップロード" %>
         <%= f.file_field :image, class: 'form-control' %>
     </div>
-    <%= render partial: 'shared/gmap-new' %>
+    <%= render partial: 'shared/gmap-new', locals: { f: f} %>
     <%= f.submit "更新する", class:'btn btn-primary' %>
 <% end %>

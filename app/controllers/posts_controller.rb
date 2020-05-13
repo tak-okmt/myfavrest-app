@@ -17,10 +17,12 @@ class PostsController < ApplicationController
 
   def new
     @post = Post.new
+    @code = Code.all
   end
 
   def edit
     @post = current_user.posts.find(params[:id])
+    @code = Code.all
   end
 
   def create
@@ -48,6 +50,6 @@ class PostsController < ApplicationController
   private
 
     def post_params
-      params.require(:post).permit(:title, :description, :content, :image)
+      params.require(:post).permit(:title, :description, :content, :image, :score, :area, :people, :prefecture_code, :rest_type, :objective, :features, :latitude, :longitude, :address)
     end
 end

@@ -7,9 +7,13 @@ class Post < ApplicationRecord
     has_many :comments, dependent: :destroy
     mount_uploader :image, ImageUploader
 
+    include JpPrefecture
+    jp_prefecture :prefecture_code
+
     private
 
         def validate_title_not_including_comma
             errors.add(:title, 'にカンマを含めることはできません') if title&.include?(',')
         end
+
 end
