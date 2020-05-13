@@ -2,9 +2,6 @@ class Post < ApplicationRecord
     validates :title, presence: true, length: { maximum:30 }
     validate  :validate_title_not_including_comma
 
-    geocoded_by :address, latitude: :latitude, longitude: :longitude 
-    after_validation :geocode
-
     belongs_to :user
     has_many :likes, dependent: :destroy
     has_many :comments, dependent: :destroy
