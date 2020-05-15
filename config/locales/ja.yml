@@ -9,11 +9,10 @@ ja:
     models:
       post: 投稿
     attributes:
-      post: 投稿
-      id: ID
-      user_id: ユーザID
-      username: ユーザ名
-      title: タイトル
-      description: 詳細内容
-      created_at: 登録日時
-      updated_at: 更新日時
+      post:
+        id: ID
+        username: ユーザ名
+        title: 店名
+        description: 口コミ
+        created_at: 登録日時
+        updated_at: 更新日時
