@@ -16,3 +16,18 @@ ja:
         description: 口コミ
         created_at: 登録日時
         updated_at: 更新日時
+    models:
+      user: ユーザ
+    attributes:
+      user:
+        id: ID
+        user_id: ユーザID
+        username: ユーザ名
+        email: メールアドレス
+        age: 年齢
+        birth_ym: 生れた年と月
+        work_idt: 勤務先業界
+        work_comp: 勤務先会社名
+        work_ocpn: 職種
+        gender: 性別
+        image: 画像
