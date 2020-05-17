@@ -5,17 +5,14 @@
         <%= link_to post_like_path(post, like), method: :delete, remote: true do %>
             <i class="fas fa-heart"></i>
         <% end %>
-        <span>
-            <%= post.likes_count %>
-        </span>
     <% else %>
         <%= link_to post_likes_path(post), method: :post, remote: true do %>
             <i class="far fa-heart"></i>
         <% end %>
-        <span>
-            <%= post.likes_count %>
-        </span>
     <% end %>
+    <span>
+        <%= post.likes_count %>
+    </span>
 <% else %>
     <i class="fas fa-heart"></i>
     <span>

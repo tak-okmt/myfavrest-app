@@ -54,7 +54,9 @@
         </tr>
     </tbody>
 </table>
-
+<div class="post-<%= @post.id %>">
+    <%= render partial: 'shared/like', locals: {post: @post} %>
+</div>
 <h2>コメント一覧</h2>
 <div id="comments_area">
     <%= render partial: 'comments/index', locals: { comments: @comments } %>

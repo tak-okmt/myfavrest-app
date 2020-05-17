@@ -8,6 +8,7 @@ ja:
           has_many: "%{record}が存在しているので削除できません"
     models:
       post: 投稿
+      user: ユーザ
     attributes:
       post:
         id: ID
@@ -16,9 +17,6 @@ ja:
         description: 口コミ
         created_at: 登録日時
         updated_at: 更新日時
-    models:
-      user: ユーザ
-    attributes:
       user:
         id: ID
         user_id: ユーザID
