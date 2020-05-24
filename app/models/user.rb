@@ -3,8 +3,12 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, authentication_keys: [:user_id]
-  validates :user_id, presence: true, uniqueness: true, length: { in: 3..30 }
-  validates :username, presence: true, length: { in: 3..30 }
+  validates :user_id, presence: true, uniqueness: true, length: { maximum: 30 }
+  validates :email, presence: true, uniqueness: true
+  validates :username, length: { maximum: 30 }
+  # validates :age, presence: true
+  # validates :birth_ym, presence: true
+  # validates :work_idt, presence: true
 
   has_many :posts, dependent: :destroy
   has_many :likes, dependent: :destroy

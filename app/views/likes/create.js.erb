@@ -1,1 +1,1 @@
-$("#post-<%= @post.id %> .like_btn").html("<%= escape_javascript(render "shared/like", post: @post) %>");
+$(".post-<%= @post.id %> .like_btn").html("<%= escape_javascript(render "shared/like", post: @post) %>");
