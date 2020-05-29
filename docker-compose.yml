@@ -1,24 +1,31 @@
 version: '3'
 services:
   db:
-    image: mysql:5.6
-    command: mysqld --character-set-server=utf8 --explicit_defaults_for_timestamp=true
+    image: mysql:5.7
     environment:
-      MYSQL_DATABASE: myfavrest-app_development
       MYSQL_ROOT_PASSWORD: myportfolio123rubyonrails5@mysqldb
+      MYSQL_DATABASE: myfavrest-app_development
       MYSQL_USER: mydev
       MYSQL_PASSWORD: myportfolio123rubyonrails5@mysqldb
     ports:
-      - "3306:3306" # ホストからゲストへポートフォワード
+      - "3306:3306"
+  test-db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: myportfolio123rubyonrails5@mysqldb
+      MYSQL_DATABASE: myfavrest-app_test
+      MYSQL_USER: mydev
+      MYSQL_PASSWORD: myportfolio123rubyonrails5@mysqldb
+    ports:
+      - '3307:3306' # ローカルPCから接続するために設定
   web:
     build: .
     command: bundle exec rails s -p 3000 -b '0.0.0.0'
     tty: true
     stdin_open: true
-    depends_on:
-      - db # DB側のコンテナが出来上がってからwebを実行する
-    ports:
-      - "3000:3000" # ホストからゲストへポートフォワード
     volumes:
-      # - .:/myfavrest-app # ソースコード変更したらDocker側も即反映されるように
-      - .:/usr/local/src # ソースコード変更したらDocker側も即反映されるように
+      - .:/myapp
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db      

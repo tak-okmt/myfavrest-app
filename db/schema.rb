@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema.define(version: 2020_05_16_121346) do
 
-  create_table "codes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "codes", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.string "code_id", null: false
     t.string "sub_id", null: false
     t.string "code", null: false
@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(version: 2020_05_16_121346) do
     t.index ["code_id", "sub_id", "code"], name: "index_codes_on_code_id_and_sub_id_and_code", unique: true
   end
 
-  create_table "comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "comments", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.text "content"
     t.bigint "user_id"
     t.bigint "post_id"
@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(version: 2020_05_16_121346) do
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
-  create_table "likes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "likes", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "post_id", null: false
     t.datetime "created_at", null: false
@@ -42,7 +42,7 @@ ActiveRecord::Schema.define(version: 2020_05_16_121346) do
     t.index ["user_id"], name: "index_likes_on_user_id"
   end
 
-  create_table "posts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "posts", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.string "title", limit: 30, null: false
     t.text "description"
     t.datetime "created_at", null: false
@@ -63,14 +63,14 @@ ActiveRecord::Schema.define(version: 2020_05_16_121346) do
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
-  create_table "relationships", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "relationships", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.integer "follower_id"
     t.integer "followed_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
