@@ -47,10 +47,8 @@
             <td><%= @post.updated_at %></td>
         </tr>
         <tr>
-            <% if @post.image? %>
             <th>画像</th>
-            <td><%= image_tag @post.image.url %></td>
-            <% end %>
+            <td><%= image_tag @post.image if @post.image.attached? %></td>
         </tr>
     </tbody>
 </table>

@@ -1,11 +1,11 @@
 class Post < ApplicationRecord
     validates :title, presence: true, length: { maximum:30 }, uniqueness: { scope: :user_id }
     validate  :validate_title_not_including_comma
+    has_one_attached :image
 
     belongs_to :user
     has_many :likes, dependent: :destroy
     has_many :comments, dependent: :destroy
-    mount_uploader :image, ImageUploader
 
     include JpPrefecture
     jp_prefecture :prefecture_code
