@@ -16,11 +16,24 @@
         </tr>
         <tr>
             <th><%= User.human_attribute_name(:age) %></th>
-            <td><%= @user.age %></td>
+            <td>
+                <% begin %>
+                    <%= (Date.today.strftime("%Y%m%d").to_i - @user.birth_ym.strftime("%Y%m%d").to_i) / 10000 %>
+                    歳
+                <% rescue %>
+                    <%= %>
+                <% end %>
+            </td>
         </tr>
         <tr>
             <th><%= User.human_attribute_name(:birth_ym) %></th>
-            <td><%= @user.birth_ym %></td>
+            <td>
+                <% begin %>
+                    <%= @user.birth_ym.strftime("%Y年 %m月") %>
+                <% rescue %>
+                    <%= %>
+                <% end %>
+            </td>
         </tr>
         <tr>
             <th><%= User.human_attribute_name(:work_idt) %></th>

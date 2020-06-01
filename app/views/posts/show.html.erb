@@ -48,7 +48,14 @@
         </tr>
         <tr>
             <th>画像</th>
-            <td><%= image_tag @post.image if @post.image.attached? %></td>
+            <td><%= image_tag @post.image.variant(
+                        combine_options: {   
+                            resize: "200^",   
+                            gravity: "Center",   
+                            crop: "400x400+0+0",   
+                            auto_orient: true    
+                        }
+                    ),alt: "shop image" if @post.image.attached? %></td>
         </tr>
     </tbody>
 </table>
