@@ -3,12 +3,19 @@
 <table class="table table-hover">
     <tbody>
         <tr>
-            <th><%= User.human_attribute_name(:user_id) %></th>
-            <td><%= @user.user_id %></td>
-        </tr>
-        <tr>
             <th><%= User.human_attribute_name(:username) %></th>
             <td><%= @user.username %></td>
+        </tr>
+        <tr>
+            <th>アイコン画像</th>
+            <td><%= image_tag @user.image.variant(
+                        combine_options: {   
+                            resize: "200^",   
+                            gravity: "Center",   
+                            crop: "500x500+0+0",   
+                            auto_orient: true    
+                        }
+                    ),alt: "shop image" if @user.image.attached? %></td>
         </tr>
         <tr>
             <th><%= User.human_attribute_name(:email) %></th>
@@ -20,16 +27,6 @@
                 <% begin %>
                     <%= (Date.today.strftime("%Y%m%d").to_i - @user.birth_ym.strftime("%Y%m%d").to_i) / 10000 %>
                     歳
-                <% rescue %>
-                    <%= %>
-                <% end %>
-            </td>
-        </tr>
-        <tr>
-            <th><%= User.human_attribute_name(:birth_ym) %></th>
-            <td>
-                <% begin %>
-                    <%= @user.birth_ym.strftime("%Y年 %m月") %>
                 <% rescue %>
                     <%= %>
                 <% end %>
@@ -50,10 +47,6 @@
         <tr>
             <th><%= User.human_attribute_name(:gender) %></th>
             <td><%= @user.gender %></td>
-        </tr>
-        <tr>
-            <th><%= User.human_attribute_name(:image) %></th>
-            <td><%= @user.image %></td>
         </tr>
     </tbody>
 </table>

@@ -4,7 +4,7 @@
     <tbody>
         <tr>
             <th>ユーザ名</th>
-            <td><%= @post.user.username %></td>
+            <td><%= link_to @post.user.username, user_path(@post.user_id) %></td>
         </tr>
         <tr>
             <th>店名</th>
@@ -20,7 +20,7 @@
         </tr>
         <tr>
             <th>都道府県</th>
-            <td><%= @post.prefecture.name %></td>
+            <td><%= @pref_name %></td>
         </tr>
         <tr>
             <th>エリア</th>
@@ -52,25 +52,37 @@
                         combine_options: {   
                             resize: "200^",   
                             gravity: "Center",   
-                            crop: "400x400+0+0",   
+                            crop: "500x500+0+0",   
                             auto_orient: true    
                         }
                     ),alt: "shop image" if @post.image.attached? %></td>
         </tr>
     </tbody>
 </table>
+<h4>ユーザ情報</h4>
+<div>
+    <%= link_to @post.user.username, user_path(@post.user_id) %>さん
+    <% begin %>
+        <%= (Date.today.strftime("%Y%m%d").to_i - @post.user.birth_ym.strftime("%Y%m%d").to_i) / 10000 %>歳
+    <% rescue %>
+        <%= %>
+    <% end %>
+    <%= @post.user.work_idt %>
+    <%= @post.user.work_comp %>
+    <%= @post.user.work_ocpn %>
+    <%= @post.user.gender %>
+</div>
 <div class="post-<%= @post.id %>">
     <%= render partial: 'shared/like', locals: {post: @post} %>
 </div>
-<h2>コメント一覧</h2>
 <div id="comments_area">
-    <%= render partial: 'comments/index', locals: { comments: @comments } %>
+    <%= render partial: 'comments/index', locals: { comments: @comments, post: @post } %>
 </div>
 
 <% if user_signed_in? %>
     <%= render partial: 'comments/form', locals: { comment: @comment, post: @post } %>
     <br>
-    <% if @post.user.user_id == current_user.user_id %>
+    <% if @post.user.id == current_user.id %>
         <%= link_to "編集",edit_post_path(@post),class:"btn btn-primary" %>
         <%= link_to "削除", @post, method: :delete, data:{ confirm: "投稿「#{@post.title}」を削除します。よろしいですか？" } ,class:"btn btn-danger" %>
     <% end %>
