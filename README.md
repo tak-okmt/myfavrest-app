@@ -26,15 +26,15 @@
 * ページネーション機能（Kaminari）
 * いいね機能（Ajax）
 * コメント機能（Ajax）
-* 画像アップロード機能（CarrierWave）
+* 画像アップロード機能（ActiveStorage、MiniMagic）
 * 検索機能（Ransack使用）
 * フォロー・フォロワー機能
 * ホットペッパーAPIを用いたホットペッパーグルメ情報の検索機能
 * Rspecによる自動テスト機能
 
 ## 環境
-開発環境：docker、docker-compose（現在構築中のため、現状は未使用）  
-本番環境（現在未整備）：AWS（VPC、EC2、RDS、S3、Route53、ALB、ACM）  
+開発環境：docker、docker-compose  
+本番環境（現在構築中）：AWS（VPC、EC2、RDS、S3、Route53、ALB、ACM）  
                        Webサーバ：Nginx  
                        APサーバ：Rails  
                        DBサーバ：MySQL  
@@ -65,10 +65,16 @@
 - 5/3  GitHubでissueを発行し、ブランチと連携させプルリクベースでの開発を開始  
         投稿画面の機能強化（項目追加）開始  
 - 5/4  「入門Docker」(https://y-ohgi.com/introduction-docker/)  や他サイトにてDocker学習、仕組みや基本コマンド理解  
-  
+- 5/5～8 投稿画面の項目追加（各飲食店の情報をより詳細に知ることができるようにする）
+- 5/9,10 Node.js、Expressについて学習、ローカル環境構築。画面表示やHTTPリクエスト/レスポンスを利用した機能を動作確認。
+- 5/11～19 投稿画面、ユーザ登録画面の項目追加  
+           フォロー・フォロワー機能をAjax化、フォロー・フォロワー数を各ユーザ詳細画面に表示  
+           Rspec学習、書籍にて学習しながらテストコード記述し、テスト実施（modelスペック、FactoryBot使用）  
+- 5/20～5/29  Docker,Docker-compose学習、開発環境にDocker導入（Dockerfile,Docker-compose.yml作成）
+- 5/30  投稿画面における画像アップロード機能をActiveStorageに変更
   
 **現在実施中：**
-- 投稿画面の機能強化（項目追加）実施中、
+- 投稿画面・ユーザ情報画面の機能強化（項目追加）実施中  
 - 本番環境へのデプロイ（EC2で環境構築）
 
 ## 学習において特に意識している点（上位3点）

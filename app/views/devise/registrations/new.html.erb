@@ -16,12 +16,8 @@
     <%= f.email_field :email, autocomplete: "email" %>
   </div>
   <div class="field">
-    <%= f.label :age %><br />
-    <%= f.text_field :age %>
-  </div>
-  <div class="field">
     <%= f.label :birth_ym %><br />
-    <%= f.text_field :birth_ym %>
+    <%= raw sprintf(f.date_select(:birth_ym, include_blank: true, discard_day: true, use_month_numbers: true, start_year: 1930, end_year: (Time.now.year - 1), date_separator: '%s'), '年 ')+ '月 ' %>
   </div>
   <div class="field">
     <%= f.label :work_idt %><br />

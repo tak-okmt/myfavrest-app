@@ -1,5 +1,6 @@
 <div class="input-field col s12 m12 l4 form-group" style="padding-top: 50px;">
-  <%= f.text_field :address, class:"controls", id: 'address', placeholder: "店名を入れて住所検索" %>
+  <input type="text" id="address" class="serchaddress" placeholder="店名を入れて住所検索" autocomplete="off">
+  &nbsp<button class="copybtn" onclick="copy()">コピー</button>
   <div id="map" style="max-width: 500px; height: 300px;"></div>
 </div>
 
