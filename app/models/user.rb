@@ -32,6 +32,13 @@ class User < ApplicationRecord
     following_user.include?(user)
   end
 
+  def self.guest
+    find_or_create_by!(email: 'guest@example.com') do |user|
+      user.password = SecureRandom.urlsafe_base64
+      user.username = "ゲストユーザー"
+    end
+  end
+
   private
 
     def image_type
