@@ -1,0 +1,55 @@
+<h1>投稿一覧</h1>
+<div><%= link_to '新規投稿', new_post_path, class:'btn btn-primary' %></div>
+<br>
+<%= search_form_for @search do |f| %>
+  <%= f.label :user_username_cont, "ユーザ名:" %>
+  <%= f.search_field :user_username_cont %>
+  &nbsp&nbsp<%= f.label :title_cont, "タイトルを含む:" %>
+  <%= f.search_field :title_cont %>
+  &nbsp&nbsp<%= f.submit "検索" %>
+<% end %>
+<br>
+<div class="mb-4">
+    <%= paginate @posts %>
+    <table class="table table-hover">
+        <div class="thead thead-light">
+            <tr>
+                <th></th>
+                <th><%= Post.human_attribute_name(:username) %></th>
+                <th><%= Post.human_attribute_name(:title) %></th>
+                <th></th>
+                <th></th>
+                <th><%= Post.human_attribute_name(:created_at) %></th>
+                <th></th>
+            </tr>
+        <div class="tbody">
+        <% @posts.each do |post| %>
+            <tr class="post-<%= post.id %>">
+                <td><%= image_tag post.user.image.variant(
+                            combine_options: {   
+                                resize: "200^",   
+                                gravity: "Center",   
+                                crop: "500x500+0+0",   
+                                auto_orient: true    
+                            }
+                        ),alt: "shop image" if post.user.image.attached? %></td>
+                <td><%= link_to post.user.username, user_path(post.user_id) %></td>
+                <td><%= link_to post.title, post_path(post) %></td>
+                <td><%= render partial: 'shared/like', locals: {post: post} %></td>
+                <td><i class="fas fa-comment-alt"></i>&nbsp<%= post.comments.count %></td>
+                <td><%= post.created_at %></td>
+                <td>
+                    <% if user_signed_in? %>
+                        <% if post.user.id == current_user.id %>
+                            <%= link_to '編集',edit_post_path(post),class:'btn btn-primary mr-3' %>
+                            <%= link_to '削除', post, method: :delete, data:{ confirm: "投稿「#{post.title}」を削除します。よろしいですか？" } ,class:'btn btn-danger' %>
+                        <% end %>
+                    <% end %>
+                </td>
+            </tr>
+        <% end %>
+        </div>
+        </div>
+    </table>
+    <%= paginate @posts %>
+</div>

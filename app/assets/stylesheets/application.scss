@@ -1,38 +1,9 @@
 @import "bootstrap";
 @import "home.scss";
+@import "./posts";
 @import 'font_awesome5_webfont';
 @import 'font_awesome5.css';
 
 body{
     font-family: "Font Awesome 5 Free";
-}
-
-body,
-#wrapper{
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-}
-
-.app-title{
-    background-color: #202020;
-}
-
-header {
-    .loginstauts{
-        a:link,a:visited{
-                color: #afafb0;
-            }
-            a:hover{
-                color: white;
-                font-weight: bold;
-            }
-    }
-}
-
-footer{
-    margin-top: auto;
-    .cpright{
-        font-size: 10px;
-    }
 }

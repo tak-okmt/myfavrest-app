@@ -3,6 +3,8 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.6.5'
 
+gem 'materialize-sass'
+gem 'material_icons'
 gem 'rails-i18n'
 gem 'jp_prefecture'
 gem 'dotenv-rails'

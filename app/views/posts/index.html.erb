@@ -1,55 +1,80 @@
-<h1>投稿一覧</h1>
-<div><%= link_to '新規投稿', new_post_path, class:'btn btn-primary' %></div>
-<br>
-<%= search_form_for @search do |f| %>
-  <%= f.label :user_username_cont, "ユーザ名:" %>
-  <%= f.search_field :user_username_cont %>
-  &nbsp&nbsp<%= f.label :title_cont, "タイトルを含む:" %>
-  <%= f.search_field :title_cont %>
-  &nbsp&nbsp<%= f.submit "検索" %>
-<% end %>
-<br>
-<div class="mb-4">
-    <%= paginate @posts %>
-    <table class="table table-hover">
-        <div class="thead thead-light">
-            <tr>
-                <th></th>
-                <th><%= Post.human_attribute_name(:username) %></th>
-                <th><%= Post.human_attribute_name(:title) %></th>
-                <th></th>
-                <th></th>
-                <th><%= Post.human_attribute_name(:created_at) %></th>
-                <th></th>
-            </tr>
-        <div class="tbody">
+<div class="searchform container">
+    <%= search_form_for @search do |f| %>
+        <div class="row">
+            <div class="form-group cond1 col-sm-5 m-0">
+                <%= f.search_field :title_or_user_username_cont, class:"form-control" ,placeholder: "店名またはユーザー名で探す "  %>
+            </div>
+            <div class="form-group cond2 col-sm-4 m-0">
+                <%= f.collection_select( :prefecture_code_eq_any, JpPrefecture::Prefecture.all, :code, :name, {include_blank: '都道府県を選択してください'}, {class: "form-control"}) %>
+            </div>
+            <div class="form-group cond3 col-sm-3 m-0">
+                <%= f.select( :sorts, {'並び替え': 'updated_at desc', 'いいねの多い順': 'likes_count desc','日付の新しい順': 'updated_at desc', '日付の古い順': 'updated_at asc' }, {},{class: "form-control"}) %>
+            </div>
+            <div class="form-group cond_sbtn col-sm-2 mt-2">
+                <%= f.submit "検索", class: 'sbtn' %>
+            </div>
+        </div>
+    <% end %>
+</div>
+<div class="container">
+    <div class="row">
         <% @posts.each do |post| %>
-            <tr class="post-<%= post.id %>">
-                <td><%= image_tag post.user.image.variant(
-                            combine_options: {   
-                                resize: "200^",   
-                                gravity: "Center",   
-                                crop: "500x500+0+0",   
-                                auto_orient: true    
-                            }
-                        ),alt: "shop image" if post.user.image.attached? %></td>
-                <td><%= link_to post.user.username, user_path(post.user_id) %></td>
-                <td><%= link_to post.title, post_path(post) %></td>
-                <td><%= render partial: 'shared/like', locals: {post: post} %></td>
-                <td><i class="fas fa-comment-alt"></i>&nbsp<%= post.comments.count %></td>
-                <td><%= post.created_at %></td>
-                <td>
-                    <% if user_signed_in? %>
-                        <% if post.user.id == current_user.id %>
-                            <%= link_to '編集',edit_post_path(post),class:'btn btn-primary mr-3' %>
-                            <%= link_to '削除', post, method: :delete, data:{ confirm: "投稿「#{post.title}」を削除します。よろしいですか？" } ,class:'btn btn-danger' %>
+            <div class = "col-sm-12 col-md-12 col-lg-4">
+                <!-- カード START -->
+                <div class="card large">
+                    <div class="card-image">
+                        <% if post.user.image.nil? %>
+                            <%= image_tag post.image, class:"activator"%>
                         <% end %>
-                    <% end %>
-                </td>
-            </tr>
+                    </div>
+                    <div class="card-content">
+                        <span class="card-title"><%= post.title %></span>
+                        <ul class="card-icons">
+                            <li>
+                                <% if post.prefecture_code.present? %>
+                                    <%= post.prefecture.name %>
+                                <% end %>
+                            </li>
+                            <li><%= post.area %></li>
+                            <li><%= link_to "詳細", post_path(post), class: "underline" %></li>
+                            <li><%= post.updated_at.strftime("%Y/%m/%d") %></li>
+                            <li>
+                                <i class="fas fa-comment-alt"></i>
+                                <span class="small"><%= post.comments.count %></span>
+                            </li>
+                        </ul>
+                        <%= link_to user_path(post.user_id), class:"card-link" do %>
+                            <% if post.user.image.nil? %>
+                                <%= image_tag post.user.image, class:"image-icon" %>
+                            <% end %>
+                            <h6 class="card-user"><%= post.user.username %></h6>
+                        <% end %>
+                        <div class="edit-delete">
+                            <% if post.user == current_user %>
+                            <%= link_to edit_post_path(post) do %>
+                                <i class="material-icons">edit</i>
+                            <% end %>
+                            <%= link_to post, data: { confirm: "本当に削除しますか?" }, method: :delete do %>
+                                <i class="material-icons">delete</i>
+                            <% end %>
+                            <% end %>
+                        </div>
+                        <div class="flow-text" id="likes_buttons_<%= post.id %>">
+                            <%= render partial: 'shared/like', locals: {post: post} %>
+                        </div>
+                    </div>
+                    <!-- 店舗情報（スライドアップ） START -->
+                    <div class="card-reveal">
+                        <span class="card-title"><%= post.title %><i class="material-icons">close</i></span>
+                        <p><%= post.description %></p>
+                    </div>
+                    <!-- 店舗情報（スライドアップ） START -->
+                </div>
+                <!-- カード END -->
+            </div>
         <% end %>
-        </div>
-        </div>
-    </table>
-    <%= paginate @posts %>
+    </div>
+</div>
+<div class="center">
+  <%= paginate(@posts)%>
 </div>
