@@ -1,0 +1,27 @@
+@media screen and (min-width:992px) {
+    .shopwrapper{
+        width: 70%;
+    }
+}
+
+.shopinfo{
+    border: solid 1px #d3d3d3;
+    box-shadow: 3px 3px 5px rgba(0,0,0,0.25);
+
+    .card-img-top{
+        max-width: 430px;
+        max-height: 400px;  
+        padding: 10px;
+        border: 1px solid black;
+    }
+}
+.shopinfo-header{
+    display: flex;
+}
+.commentlist{
+    margin-top: 50px;
+
+    .cmntlst-title{
+        text-align: center;
+    }
+}

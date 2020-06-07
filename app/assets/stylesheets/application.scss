@@ -1,9 +1,37 @@
 @import "bootstrap";
 @import "home.scss";
-@import "./posts";
+@import "./posts/index";
+@import "./posts/new";
+@import "./posts/show";
 @import 'font_awesome5_webfont';
 @import 'font_awesome5.css';
 
 body{
     font-family: "Font Awesome 5 Free";
+}
+
+.app-title a{
+    text-decoration: none;
+}
+
+header {
+    .loginstauts{
+        .loginuser-name{
+            color: white;
+        }
+        a:link,a:visited{
+                color: #afafb0;
+            }
+            a:hover{
+                color: white;
+                font-weight: bold;
+            }
+    }
+}
+
+footer{
+    margin-top: auto;
+    .cpright{
+        font-size: 10px;
+    }
 }

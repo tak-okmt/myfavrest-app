@@ -1,89 +1,35 @@
-<h1>投稿の詳細</h1>
-<div class="nav justify-content-end"><%= link_to '一覧',posts_path, class:'nav-link' %></div>
-<table class="table table-hover">
-    <tbody>
-        <tr>
-            <th>ユーザ名</th>
-            <td><%= link_to @post.user.username, user_path(@post.user_id) %></td>
-        </tr>
-        <tr>
-            <th>店名</th>
-            <td><%= @post.title %></td>
-        </tr>
-        <tr>
-            <th>評価</th>
-            <td><%= @post.score %></td>
-        </tr>
-        <tr>
-            <th>口コミ</th>
-            <td><%= simple_format(h(@post.description), {}, sanitize: false, wrapper_tag:"div") %></td>
-        </tr>
-        <tr>
-            <th>都道府県</th>
-            <td><%= @pref_name %></td>
-        </tr>
-        <tr>
-            <th>エリア</th>
-            <td><%= @post.area %></td>
-        </tr>
-        <tr>
-            <th>料理ジャンル</th>
-            <td><%= @post.rest_type %></td>
-        </tr>
-        <tr>
-            <th>利用シーン</th>
-            <td><%= @post.objective %></td>
-        </tr>
-        <tr>
-            <th>こだわり条件</th>
-            <td><%= @post.features %></td>
-        </tr>
-        <tr>
-            <th>投稿日時</th>
-            <td><%= @post.created_at %></td>
-        </tr>
-        <tr>
-            <th>更新日時</th>
-            <td><%= @post.updated_at %></td>
-        </tr>
-        <tr>
-            <th>画像</th>
-            <td><%= image_tag @post.image.variant(
-                        combine_options: {   
-                            resize: "200^",   
-                            gravity: "Center",   
-                            crop: "500x500+0+0",   
-                            auto_orient: true    
-                        }
-                    ),alt: "shop image" if @post.image.attached? %></td>
-        </tr>
-    </tbody>
-</table>
-<h4>ユーザ情報</h4>
-<div>
-    <%= link_to @post.user.username, user_path(@post.user_id) %>さん
-    <% begin %>
-        <%= (Date.today.strftime("%Y%m%d").to_i - @post.user.birth_ym.strftime("%Y%m%d").to_i) / 10000 %>歳
-    <% rescue %>
-        <%= %>
-    <% end %>
-    <%= @post.user.work_idt %>
-    <%= @post.user.work_comp %>
-    <%= @post.user.work_ocpn %>
-    <%= @post.user.gender %>
-</div>
-<div class="post-<%= @post.id %>">
-    <%= render partial: 'shared/like', locals: {post: @post} %>
-</div>
-<div id="comments_area">
-    <%= render partial: 'comments/index', locals: { comments: @comments, post: @post } %>
-</div>
+<div class="container shopwrapper">
+    <h3><%= @post.title %></h3>
+    <div class="shopinfo">
+        <div class="row">
+            <div class="col-sm-12 col-md-6">
+            <% if @post.image.attached? %>
+                <%= image_tag @post.image, class:"card-img-top" %>
+            <% else %>
+                <%= image_tag ("no_image.png"), class:"card-img-top" %>
+            <% end %>
+            </div>
+            <div class="col-sm-12 col-md-6">
+                評価：<%= @post.score %>
+                <div class="shopinfo-header">
+                    <div class="post-<%= @post.id %> shopinfo-like">
+                        <%= render partial: 'shared/like', locals: {post: @post} %>
+                    </div>&nbsp&nbsp
+                    <div id="comments_area">
+                        <i class="fas fa-comments"></i> <%= @comments.count %>
+                    </div>&nbsp&nbsp
+                    <div class="category-tag"><% @post.rest_type %>居酒屋</div>
+                </div>
+                <span class="shopupd"><%= @post.updated_at.strftime("%Y/%m/%d") %></span><br>
+                <span class="shopadr"><%= @post.address %></span><br>
+                <%= simple_format(h(@post.description), {}, sanitize: false, wrapper_tag:"div") %>
+            </div>
+            <div class="col-sm-12 mapdetail">地図</div>
+        </div>
+    </div>
 
-<% if user_signed_in? %>
-    <%= render partial: 'comments/form', locals: { comment: @comment, post: @post } %>
-    <br>
-    <% if @post.user.id == current_user.id %>
-        <%= link_to "編集",edit_post_path(@post),class:"btn btn-primary" %>
-        <%= link_to "削除", @post, method: :delete, data:{ confirm: "投稿「#{@post.title}」を削除します。よろしいですか？" } ,class:"btn btn-danger" %>
-    <% end %>
-<% end %>
+    <div class="col-sm-12 commentlist">
+        <h3 class="cmntlst-title"><i class="fas fa-comments"></i><br>口コミ一覧</h3>
+
+    </div>
+</div>
