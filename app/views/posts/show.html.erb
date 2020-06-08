@@ -1,5 +1,5 @@
 <div class="container shopwrapper">
-    <h3><%= @post.title %></h3>
+    <h3 class="shoptitle"><i class="fas fa-utensils"></i> <%= @post.title %></h3>
     <div class="shopinfo">
         <div class="row">
             <div class="col-sm-12 col-md-6">
@@ -20,16 +20,41 @@
                     </div>&nbsp&nbsp
                     <div class="category-tag"><% @post.rest_type %>居酒屋</div>
                 </div>
-                <span class="shopupd"><%= @post.updated_at.strftime("%Y/%m/%d") %></span><br>
+                <span class="shopupd"><%= @post.updated_at.strftime("%Y-%m-%d") %></span><br>
                 <span class="shopadr"><%= @post.address %></span><br>
                 <%= simple_format(h(@post.description), {}, sanitize: false, wrapper_tag:"div") %>
             </div>
             <div class="col-sm-12 mapdetail">地図</div>
         </div>
     </div>
-
     <div class="col-sm-12 commentlist">
         <h3 class="cmntlst-title"><i class="fas fa-comments"></i><br>口コミ一覧</h3>
-
+        <div id="comments_area">
+            <% @comments.each do |c| %>
+                <div class="cmnt">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-5 cmntuser">
+                            <% if c.user.image.attached? %>
+                                <%= image_tag c.user.image, class:"card-img-top" %>
+                            <% else %>
+                                <p>写真</p>
+                            <% end %>
+                            <%= link_to "#{c.user.username}さん", user_path(c.user.id) %><br>
+                        </div>
+                        <div class="col-sm-12 col-md-7 cmntttl">
+                            <%= c.updated_at.strftime("%Y-%m-%d") %><br>
+                            <%= c.score %><br>
+                            <%= c.title %>
+                            <%= link_to "口コミの詳細を見る", post_comment_path(@post,c), class: "cmnt-link" %>
+                            <% if c.user == current_user %>
+                                <%= link_to 'コメント削除', post_comment_path(c.post_id, c.id), method: :delete, remote: true %>
+                            <% end %>
+                            <br>
+                        </div>
+                    </div>
+                </div>
+            <% end %>
+        </div>
     </div>
 </div>
+<%= link_to '口コミ登録', new_post_comment_path(@post), class: 'new-comment-btn' %>
