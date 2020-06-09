@@ -1,0 +1,48 @@
+/////////////////////////
+/******テキスト関連*******/
+/////////////////////////
+
+/* アンダーラインなし */
+.text-line-none{
+    text-decoration: none;
+  }
+
+/////////////////////////
+/******フォント関連*******/
+/////////////////////////
+
+  /* 太字 */
+  .font-bold{
+    font-weight: 600;
+  }
+
+
+/////////////////////////
+/******ボタン関連*********/
+/////////////////////////
+
+
+/* ミニ緑色リンクボタン */
+.mini-green-link-btn{
+    @include btn-set(60px, 20px);
+    display: inline-block;
+    color: #4ba53a;
+    border:1px solid #4ba53a;
+    font-size: 12px;
+    &:hover{
+      color: white;
+      background-color: #4ba53a;
+    }
+  }
+
+.mini-red-link-btn{
+    @include btn-set(60px, 20px);
+    display: inline-block;
+    color: #d30000;
+    border:1px solid #d30000;
+    font-size: 12px;
+    &:hover{
+      color: white;
+      background-color: #d30000;
+    }  
+}

@@ -1,0 +1,25 @@
+.comment-edit{
+    margin: 0 auto;
+
+    label{
+        font-size: 0.7em;
+    }
+}
+
+@media screen and (min-width:992px) {
+    .comment-edit{
+        width: 40%;
+    }
+}
+
+@media screen and (max-width:991px) {
+    .comment-edit{
+        width: 50%;
+    }
+}
+
+@media screen and (max-width:767px) {
+    .comment-edit{
+        width: 80%;
+    }
+}

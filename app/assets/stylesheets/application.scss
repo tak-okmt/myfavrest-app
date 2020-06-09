@@ -1,5 +1,19 @@
 @import "bootstrap";
+
+@import "./modules/mixin";
+@import "./modules/common";
+
 @import "home.scss";
+
+@import "./posts/index";
+@import "./posts/new";
+@import "./posts/show";
+@import "./posts/edit";
+
+@import "./comments/new";
+@import "./comments/show";
+@import "./comments/edit";
+
 @import 'font_awesome5_webfont';
 @import 'font_awesome5.css';
 
@@ -7,19 +21,15 @@ body{
     font-family: "Font Awesome 5 Free";
 }
 
-body,
-#wrapper{
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-}
-
-.app-title{
-    background-color: #202020;
+.app-title a{
+    text-decoration: none;
 }
 
 header {
     .loginstauts{
+        .loginuser-name{
+            color: white;
+        }
         a:link,a:visited{
                 color: #afafb0;
             }

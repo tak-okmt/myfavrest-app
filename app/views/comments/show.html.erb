@@ -1,0 +1,53 @@
+<div class="container comment-wrapper">
+    <h3>口コミの詳細</h3>
+    <h3 class="comment-title"><%= @comment.title %>仮タイトル</h3>
+    <div class="comment-linkbtn">
+        <% if @comment.user == current_user %>
+            <div class="comment-edit">
+                <%= link_to "編集",edit_post_comment_path(@comment.post.id,@comment), class:"mini-green-link-btn font-bold text-line-none" %>
+            </div>
+            <div class="comment-delete">
+                <%= link_to "削除", post_comment_path(@comment.post.id,@comment), method: :delete, data:{ confirm: "口コミを削除します。よろしいですか？" } ,class:"mini-red-link-btn font-bold text-line-none" %>
+            </div>
+        <% end %>
+    </div>
+    <div class="row cmnt-userandshop">
+        <div class="col-sm-6">
+            <% if @comment.user.image.attached? %>
+                <%= image_tag @comment.user.image, class:"cmnt-user-icon" %>
+            <% else %>
+                ユーザ画像
+            <% end %>
+            <br><%= @comment.user.username %>
+        </div>
+        <div class="col-sm-6">
+            <span class="cmnt-shoplabel">店名</span><br>
+            <span class="cmnt-shopname"><%= @comment.post.title %></span>
+        </div>
+    </div>
+    <div class="row cmnt-info">
+        <div class="col-sm-4">訪問日</div>
+        <div class="col-sm-4">利用シーン</div>
+        <div class="col-sm-4">利用人数</div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12 col-md-6">
+        <% if @comment.image.attached? %>
+            <%= image_tag @comment.image, class:"card-img-top" %>
+        <% else %>
+            <%= image_tag ("no_image.png"), class:"card-img-top" %>
+        <% end %>
+        </div>
+        <div class="col-sm-12 col-md-6">
+            評価：<%= @comment.score %>
+            <div class="shopinfo-header">
+                <div class="scene-tag"><% @comment.scene %></div>
+                <div class="people-tag"><% @comment.people %></div>
+            </div>
+            <div class="content-box">
+                <%= simple_format(h(@comment.content), {}, sanitize: false, wrapper_tag:"div") %>
+            </div>
+            <span class="shopupd"><%= @comment.updated_at.strftime("%Y-%m-%d") %></span><br>
+        </div>
+    </div>
+</div>

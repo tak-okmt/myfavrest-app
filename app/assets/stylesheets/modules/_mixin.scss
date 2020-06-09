@@ -1,0 +1,9 @@
+/* ボタン設定 */
+@mixin btn-set($width, $height) {
+    width: $width;
+    height: $height;
+    line-height: $height;
+    text-align: center;
+    border-radius: 22px;
+    cursor: pointer;
+  }

@@ -4,8 +4,33 @@ class CommentsController < ApplicationController
   def create
     @comment = current_user.comments.build(comment_params)
     if @comment.save
-      render :index
+      redirect_to posts_url, notice:"「#{@comment.post.title}」の口コミを登録しました。"
+    else
+      render :new
     end
+  end
+
+  def destroy
+    @comment = Comment.find(params[:id])
+    if @comment.destroy
+      redirect_to posts_url, notice: "「#{@comment.post.title}」の口コミを削除しました。"
+    end
+  end
+
+  def new
+    @post = Post.find_by(params[:post_id])
+    @comment = Comment.new
+    @code = Code.all
+  end
+
+  def edit
+    @post = Post.find_by(params[:post_id])
+    @comment = current_user.comments.find(params[:id])
+    @code = Code.all
+  end
+
+  def show
+    @comment = Comment.find(params[:id])
   end
     
   private

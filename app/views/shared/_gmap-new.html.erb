@@ -1,7 +1,7 @@
-<div class="input-field col s12 m12 l4 form-group" style="padding-top: 50px;">
+<div class="form-group" id="gmapnew" style="padding-top: 50px;">
   <input type="text" id="address" class="serchaddress" placeholder="店名を入れて住所検索" autocomplete="off">
-  &nbsp<button class="copybtn" onclick="copy()">コピー</button>
-  <div id="map" style="max-width: 500px; height: 300px;"></div>
+  &nbsp<button class="copybtn" onclick="copy()">住所をコピー</button>
+  <div id="map" style="max-width: 500px; height: 400px;"></div>
 </div>
 
 <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GMAPS_API_KEY'] %>&libraries=places&callback=initAutocomplete" async defer></script>

@@ -1,0 +1,80 @@
+// 検索フォーム START
+.searchform{
+  border: solid 1px #d3d3d3;
+  box-shadow: 0 0 8px gray;
+  margin-bottom:20px;
+  height: 100px;
+  padding: 10px 10px;
+
+  .sbtn{
+    cursor: pointer;
+    font-family: FontAwesome;
+    background: #3879D9;
+    color: white;
+    width: 80px;
+  }
+}
+// 検索フォーム END
+
+// コミュニティ情報 START
+.communitydtl{
+  border: solid 1px #d3d3d3;
+}
+// コミュニティ情報 END
+
+// 店一覧 START
+.shops{
+
+  .card{
+    box-shadow: 5px 10px 20px rgba(0,0,0,0.25);
+    height: 450px;
+
+    .category-tag{
+      position: absolute;
+      background-color: #ffbe00;
+      z-index: 2;
+      width: 50px;
+      height: 20px;
+      text-align: center;
+      font-size: 0.7em;
+      color: white;
+    }
+    .card-img-top{
+      max-width: 276px;
+      max-height: 200px;  
+    }
+    .card-title{
+      font-size: 1.2em;
+    }
+    .card-text{
+      list-style: none;
+    }
+  }
+
+}
+// 店一覧 END
+
+// 新規登録ボタン START
+.new-post-btn {
+
+  position: fixed;
+  z-index: 1000;
+  border-radius: 50%;
+  background-color: #ffa600;
+  color: white;
+  text-align: center;
+  bottom: 32px;
+  right: 32px;
+  width: 120px;
+  height: 120px;
+  font-size: 1.2em;
+  padding-top: 46px;
+
+  &:hover {
+    text-decoration: none;
+    background-color: #ffa666;
+    color: white;
+  }
+}
+
+// 新規登録ボタン END

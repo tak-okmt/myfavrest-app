@@ -3,7 +3,7 @@ FROM ruby:2.6.5
 ENV DEBCONF_NOWARNINGS yes
 RUN apt-get update -qq && \
     apt-get install -y --no-install-recommends build-essential \ 
-                       libpq-dev \        
+                       libpq-dev \      
                        nodejs \
                        && rm -rf /var/lib/apt/lists/*
 

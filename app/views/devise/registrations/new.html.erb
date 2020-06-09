@@ -4,24 +4,24 @@
   <%= render "devise/shared/error_messages", resource: resource %>
 
   <div class="field">
-    <%= f.label :user_id %><br />
-    <%= f.text_field :user_id, autofocus: true %>
-  </div>
-  <div class="field">
-    <%= f.label :username %><br />
-    <%= f.text_field :username, autofocus: true, autocomplete: "username" %>
-  </div>
-  <div class="field">
     <%= f.label :email %><br />
     <%= f.email_field :email, autocomplete: "email" %>
   </div>
   <div class="field">
-    <%= f.label :birth_ym %><br />
+    <%= f.label :username %><br />
+    <%= f.text_field :username, autocomplete: "username" %>
+  </div>
+  <div class="field">
+    <%= f.label "アイコン画像を選択" %><br />
+    <%= f.file_field :image %>
+  </div>
+  <div class="field">
+    <%= f.label :birth_ym %>（他ユーザには、計算された年齢のみ表示され生まれた年と月は表示されません）<br />
     <%= raw sprintf(f.date_select(:birth_ym, include_blank: true, discard_day: true, use_month_numbers: true, start_year: 1930, end_year: (Time.now.year - 1), date_separator: '%s'), '年 ')+ '月 ' %>
   </div>
   <div class="field">
     <%= f.label :work_idt %><br />
-    <%= f.text_field :work_idt %>
+    <%= f.collection_select :work_idt, Code.where(code_id: "6"), :code, :name, include_blank: '勤務先業界を選択してください' %>
   </div>
   <div class="field">
     <%= f.label :work_comp %><br />
@@ -29,13 +29,17 @@
   </div>
   <div class="field">
     <%= f.label :work_ocpn %><br />
-    <%= f.text_field :work_ocpn %>
+    <%= f.collection_select :work_ocpn, Code.where(code_id: "7"), :code, :name, include_blank: '職種を選択してください' %>
   </div>
   <div class="field">
     <%= f.label :gender %><br />
-    <%= f.text_field :gender %>
+    <%= f.radio_button :gender, "男性" %>
+    <%= f.label :gender, "男性" %>
+    <%= f.radio_button :gender, "女性" %>
+    <%= f.label :gender, "女性" %>
+    <%= f.radio_button :gender, "その他" %>
+    <%= f.label :gender, "その他" %>
   </div>
-
   <div class="field">
     <%= f.label :password %>
     <% if @minimum_password_length %>

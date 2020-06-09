@@ -1,5 +1,9 @@
+<h4>コメント一覧： <%= comments.count %>件</h4>
 <% comments.each do |c| %>
     <%= link_to "#{c.user.username}さん", user_path(c.user.id) %>
     <%= c.content %>
+    <% if c.user == current_user %>
+      <%= link_to 'コメント削除', post_comment_path(c.post_id, c.id), method: :delete, remote: true %>
+    <% end %>
     <br>
 <% end %>

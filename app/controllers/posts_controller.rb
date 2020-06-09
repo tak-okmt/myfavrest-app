@@ -11,6 +11,11 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
+    if @post.prefecture_code.present?
+      @pref_name = @post.prefecture.name
+    else
+      @pref_name = ""
+    end
     @comments = @post.comments
     @comment = Comment.new
   end

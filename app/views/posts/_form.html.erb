@@ -7,49 +7,34 @@
 <% end %>
 <%= form_with model:post, local:true do |f| %>
     <div class="form-group">
+        <%= f.label "写真のアップロード" %>
+        <%= f.file_field :image %>
+    </div>
+    <div class="form-group">
         <%= f.label "店名" %>
         <%= f.text_field :title, class:'form-control', id: 'title_name' %>
     </div>
     <div class="form-group">
-        <%= f.label "評価（5：最高評価、1：最低評価）" %>
-        <%= f.collection_select :score, code.where(code_id: "5"), :code, :name, include_blank: '評価を選択してください' %>
-    </div>
-    <div class="form-group">
-        <%= f.label "口コミ" %>
+        <%= f.label "お店の説明" %>
         <%= f.text_area :description, row:5, class: 'form-control', id:'post_description' %>
     </div>
     <div class="form-group">
-        <%= f.label "都道府県" %>
-        <%= f.collection_select :prefecture_code, JpPrefecture::Prefecture.all, :code, :name, include_blank: '都道府県を選択してください' %>
+        <%= f.label "都道府県" %><br>
+        <%= f.collection_select :prefecture_code, JpPrefecture::Prefecture.all, :code, :name, {include_blank: '都道府県を選択してください'}, {class: "form-control"} %>
     </div>
     <div class="form-group">
-        <%= f.label "エリア" %>
-        <%= f.collection_select :area, code.where(code_id: "1"), :code, :name, include_blank: 'エリアを選択してください' %>
+        <%= f.label "エリア" %><br>
+        <%= f.collection_select :area, code.where(code_id: "1"), :code, :name, {include_blank: 'エリアを選択してください'}, {class: "form-control"} %>
     </div>
     <div class="form-group">
-        <%= f.label "住所（住所検索から貼り付けも可能）" %>
+        <label for="post_住所">住所（<a href="#gmapnew">住所検索</a>から貼り付け可能）</label>
         <%= f.text_field :address, class: 'form-control', id:'post_address', placeholder: "住所" %>
     </div>
     <div class="form-group">
-        <%= f.label "料理ジャンル" %>
-        <%= f.collection_select :rest_type, code.where(code_id: "2"), :code, :name, include_blank: '料理ジャンルを選択してください' %>
-    </div>
-    <div class="form-group">
-        <%= f.label "利用シーン" %>
-        <%= f.collection_select :objective, code.where(code_id: "3"), :code, :name, include_blank: '利用シーンを選択してください' %>
-    </div>
-    <div class="form-group">
-        <%= f.label "こだわり条件" %>
-        <%= f.text_area :features, row:2, class: 'form-control', id:'post_features' %>
-    </div>
-    <div class="form-group">
-        <%= f.label "利用人数" %>
-        <%= f.collection_select :people, code.where(code_id: "4"), :code, :name, include_blank: '利用人数を選択してください' %>
-    </div>
-    <div class="form-group">
-        <%= f.label "画像をアップロード" %>
-        <%= f.file_field :image, class: 'form-control' %>
+        <%= f.label "料理ジャンル" %><br>
+        <%= f.collection_select :rest_type, code.where(code_id: "2"), :code, :name, {include_blank: '料理ジャンルを選択してください'}, {class: "form-control"} %>
     </div>
     <%= f.submit "更新する", class:'btn btn-primary' %>
+    <%= link_to '戻る', posts_path, class:'btn' %>
 <% end %>
 <%= render partial: 'shared/gmap-new' %>
