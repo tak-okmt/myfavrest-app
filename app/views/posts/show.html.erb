@@ -1,5 +1,17 @@
 <div class="container shopwrapper">
     <h3 class="shoptitle"><i class="fas fa-utensils"></i> <%= @post.title %></h3>
+    <div class="shop-linkbtn">
+        <div class="shop-edit">
+        <% if @post.user == current_user %>
+            <%= link_to "編集",edit_post_path(@post), class:"mini-green-link-btn font-bold text-line-none" %>
+        <% end %>
+        </div>
+        <div class="shop-delete">
+        <% if @post.user == current_user %>
+            <%= link_to "削除", @post, method: :delete, data:{ confirm: "投稿「#{@post.title}」を削除します。よろしいですか？" } ,class:"mini-red-link-btn font-bold text-line-none" %>
+        <% end %>
+        </div>
+    </div>
     <div class="shopinfo">
         <div class="row">
             <div class="col-sm-12 col-md-6">

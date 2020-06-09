@@ -18,7 +18,18 @@
     border: dashed 1px #FF9900;
     padding: 0.2em 0.5em;
     color: #454545;
-    margin-bottom: 40px;
+    margin-bottom: 10px;
+}
+
+.shop-linkbtn{
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 10px;
+
+    .shop-delete{
+        margin-left: 10px;
+    }
+
 }
 
 .shopinfo{

@@ -1,5 +1,39 @@
+<% if comment.errors.present? %>
+    <ul id="error_explanation">
+        <% comment.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+        <% end %>
+    </ul>
+<% end %>
 <%= form_with(model: [post,comment], local: true) do |f| %>
-    <%= f.text_area :content %>
+    <div class="form-group">
+        <%= f.label "写真のアップロード" %>
+        <%= f.file_field :image, class:'form-control-file' %>
+    </div>
+    <div class="form-group">
+        <%= f.label "口コミタイトル" %>
+        <%= f.text_field :title, class:'form-control', id: 'title_name' %>
+    </div>
+    <div class="form-group">
+        <%= f.label "評価" %><br>
+        <%= f.collection_select :score, code.where(code_id: "5"), :code, :name, {include_blank: '評価を選択'}, {class: "form-control"} %>
+    </div>
+    <div class="form-group">
+        <%= f.label "訪問日" %><br>
+        <%= raw sprintf(f.date_select(:visitday, include_blank: true, with_css_classes:'form-control',use_month_numbers: true, start_year: Time.now.year, end_year: 2010, date_separator: '%s'), '年','月')+'日' %>
+    </div>
+    <div class="form-group">
+        <%= f.label "口コミ詳細" %>
+        <%= f.text_area :content, row:5, class: 'form-control', id:'comment-content' %>
+    </div>
+    <div class="form-group">
+        <%= f.label "利用シーン" %><br>
+        <%= f.collection_select :scene, code.where(code_id: "3"), :code, :name, {include_blank: '利用シーンを選択'}, {class: "form-control"} %>
+    </div>
+    <div class="form-group">
+        <%= f.label "利用人数" %><br>
+        <%= f.collection_select :people, code.where(code_id: "4"), :code, :name, {include_blank: '利用人数を選択'}, {class: "form-control"} %>
+    </div>
     <%= f.hidden_field :post_id, value: post.id %>
-    <%= f.submit "コメントする" %>
+    <%= f.submit "口コミを登録する" %>
 <% end %>

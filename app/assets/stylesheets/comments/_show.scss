@@ -33,4 +33,20 @@
         width: 80%;
         text-align: center;
     }
+    .content-box{
+        padding: 0.5em 1em;
+        margin: 2em 0;
+        border: double 5px #ffe4b1;
+        height: 300px;
+    }
+    .comment-linkbtn{
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 10px;
+        
+        .comment-delete{
+            margin-left: 10px;
+        }
+    }
+
 }

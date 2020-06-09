@@ -23,6 +23,12 @@ class CommentsController < ApplicationController
     @code = Code.all
   end
 
+  def edit
+    @post = Post.find_by(params[:post_id])
+    @comment = current_user.comments.find(params[:id])
+    @code = Code.all
+  end
+
   def show
     @comment = Comment.find(params[:id])
   end
