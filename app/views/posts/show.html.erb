@@ -41,6 +41,11 @@
     </div>
     <div class="col-sm-12 commentlist">
         <h3 class="cmntlst-title"><i class="fas fa-comments"></i><br>口コミ一覧</h3>
+        <div class="order-link">
+            <%= order_link_active('更新日順', post_path, 'updated_at') %>
+            <%= order_link_active('評価順', post_path, 'score') %>
+            <%= order_link_active('訪問日順', post_path, 'visitday') %>
+        </div>
         <div id="comments_area">
             <% @comments.each do |c| %>
                 <div class="cmnt">
