@@ -17,6 +17,7 @@ class PostsController < ApplicationController
       @pref_name = ""
     end
     @comments = @post.comments
+    @comments = set_comment_order(@comments, params[:comment_order])
     @comment = Comment.new
   end
 
@@ -57,4 +58,18 @@ class PostsController < ApplicationController
     def post_params
       params.require(:post).permit(:title, :description, :content, :image, :score, :area, :people, :prefecture_code, :rest_type, :objective, :features, :latitude, :longitude, :address)
     end
+
+    def set_comment_order(comments, cmnt_order)
+      order_key = 'updated_at'
+      case cmnt_order
+      when 'updated_at'
+        order_key = 'updated_at'
+      when 'score'
+        order_key = 'score'
+      when 'visitday'
+        order_key = 'visitday'
+      end
+      comments.order(order_key)
+    end
+
 end
