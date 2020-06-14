@@ -3,23 +3,24 @@ class LikesController < ApplicationController
   before_action :set_post, only: [:create, :destroy]
 
   def create
-    @like = current_user.likes.create(like_params)
+    @like = current_user.likes.create(post_id: like_params[:post_id])
     @post = Post.find(params[:post_id])
   end
 
   def destroy
-    @like = Like.find_by(like_params.merge(user_id: current_user.id))
+    @like = Like.find(params[:id])
     @like.destroy!
     @post = Post.find(params[:post_id])
   end
 
   private
+    def like_params
+      params.permit(:post_id,:community_id)
+    end
+
     def set_post
       @post = Post.find(params[:post_id])
     end
 
-    def like_params
-      params.permit(:post_id)
-    end
 
 end

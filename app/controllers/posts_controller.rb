@@ -22,11 +22,13 @@ class PostsController < ApplicationController
   end
 
   def new
+    @community = Community.find_by(post_params[:community_id])
     @post = Post.new
     @code = Code.all
   end
 
   def edit
+    @community = Community.find_by(params[:community_id])
     @post = current_user.posts.find(params[:id])
     @code = Code.all
   end
@@ -35,28 +37,28 @@ class PostsController < ApplicationController
     @post = current_user.posts.build(post_params)
     
     if @post.save
-      redirect_to posts_url, notice:"投稿「#{@post.title}」を登録しました。"
+      redirect_to communities_url, notice:"投稿「#{@post.title}」を登録しました。"
     else
       render :new
     end
   end
 
   def update
-    post = Post.find(params[:id])
+    post = current_user.posts.find(params[:id])
     post.update!(post_params)
-    redirect_to posts_url notice:"投稿「#{post.title}」を更新しました。"
+    redirect_to communities_url notice:"投稿「#{post.title}」を更新しました。"
   end
 
   def destroy
-    post = Post.find(params[:id])
+    post = current_user.posts.find(params[:id])
     post.destroy
-    redirect_to posts_url, notice: "投稿「#{post.title}」を削除しました。"
+    redirect_to communities_url, notice: "投稿「#{post.title}」を削除しました。"
   end
 
   private
 
     def post_params
-      params.require(:post).permit(:title, :description, :content, :image, :score, :area, :people, :prefecture_code, :rest_type, :objective, :features, :latitude, :longitude, :address)
+      params.require(:post).permit(:title, :description, :content, :image, :score, :area, :people, :prefecture_code, :rest_type, :objective, :features, :latitude, :longitude, :address, :community_id)
     end
 
     def set_comment_order(comments, cmnt_order)
