@@ -21,16 +21,37 @@ services:
       MYSQL_PASSWORD: myportfolio123rubyonrails5@mysqldb
     ports:
       - '3307:3306' # ローカルPCから接続するために設定
-  web:
-    build: .
-    command: bundle exec rails s -p 3000 -b '0.0.0.0'
+  app:
+    build:
+      context: .
+      dockerfile: ./docker/rails/Dockerfile
+    command: bundle exec pumactl start
     tty: true
     stdin_open: true
     volumes:
       - .:/myapp
-    ports:
-      - "3000:3000"
+      - public-data:/myapp/public
+      - tmp-data:/myapp/tmp
+      - log-data:/myapp/log
+      - sockets:/myapp/tmp/sockets
+    privileged: true
     depends_on:
       - db
+  web:
+    build:
+      context: .
+      dockerfile: ./docker/nginx/Dockerfile
+    ports:
+      - '80:80'
+    volumes:
+      - public-data:/myapp/public
+      - tmp-data:/myapp/tmp
+      - sockets:/myapp/tmp/sockets
+    depends_on: 
+      - app
 volumes:
   db-volume:
+  public-data:
+  tmp-data:
+  log-data:
+  sockets:
