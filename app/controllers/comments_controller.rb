@@ -1,10 +1,10 @@
 class CommentsController < ApplicationController
-  before_action :authenticate_user!
-  
+  skip_before_action :authenticate_user!, only: [:show]
+
   def create
     @comment = current_user.comments.build(comment_params)
     if @comment.save
-      redirect_to posts_url, notice:"「#{@comment.post.title}」の口コミを登録しました。"
+      redirect_to community_post_url(@comment.post.community,@comment.post), notice:"「#{@comment.post.title}」の口コミを登録しました。"
     else
       render :new
     end
@@ -13,7 +13,7 @@ class CommentsController < ApplicationController
   def destroy
     @comment = Comment.find(params[:id])
     if @comment.destroy
-      redirect_to posts_url, notice: "「#{@comment.post.title}」の口コミを削除しました。"
+      redirect_to community_post_url(@comment.post.community,@comment.post), notice: "「#{@comment.post.title}」の口コミを削除しました。"
     end
   end
 
@@ -35,6 +35,6 @@ class CommentsController < ApplicationController
     
   private
     def comment_params
-      params.require(:comment).permit(:content, :post_id)
+      params.require(:comment).permit(:image,:title,:score,:visitday,:content,:scene,:people, :post_id)
     end
 end

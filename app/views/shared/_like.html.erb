@@ -2,11 +2,11 @@
 <% if user_signed_in? %>
     <% like = Like.find_by(user_id: current_user.id ,post_id: post.id) %>
     <% if like != nil %>
-        <%= link_to post_like_path(post, like), method: :delete, remote: true do %>
+        <%= link_to community_post_like_path(community,post, like), method: :delete, remote: true do %>
             <i class="fas fa-heart"></i>
         <% end %>
     <% else %>
-        <%= link_to post_likes_path(post), method: :post, remote: true do %>
+        <%= link_to community_post_likes_path(community,post), method: :post, remote: true do %>
             <i class="far fa-heart"></i>
         <% end %>
     <% end %>

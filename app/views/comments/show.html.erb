@@ -4,10 +4,10 @@
     <div class="comment-linkbtn">
         <% if @comment.user == current_user %>
             <div class="comment-edit">
-                <%= link_to "編集",edit_post_comment_path(@comment.post.id,@comment), class:"mini-green-link-btn font-bold text-line-none" %>
+                <%= link_to "編集",edit_community_post_comment_path(@comment.post.community,@comment.post,@comment), class:"mini-green-link-btn font-bold text-line-none" %>
             </div>
             <div class="comment-delete">
-                <%= link_to "削除", post_comment_path(@comment.post.id,@comment), method: :delete, data:{ confirm: "口コミを削除します。よろしいですか？" } ,class:"mini-red-link-btn font-bold text-line-none" %>
+                <%= link_to "削除", community_post_comment_path(@comment.post.community,@comment.post,@comment), method: :delete, data:{ confirm: "口コミを削除します。よろしいですか？" } ,class:"mini-red-link-btn font-bold text-line-none" %>
             </div>
         <% end %>
     </div>

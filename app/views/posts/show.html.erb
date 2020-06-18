@@ -3,12 +3,12 @@
     <div class="shop-linkbtn">
         <div class="shop-edit">
         <% if @post.user == current_user %>
-            <%= link_to "編集",edit_post_path(@post), class:"mini-green-link-btn font-bold text-line-none" %>
+            <%= link_to "編集",edit_community_post_path(@post.community,@post), class:"mini-green-link-btn font-bold text-line-none" %>
         <% end %>
         </div>
         <div class="shop-delete">
         <% if @post.user == current_user %>
-            <%= link_to "削除", @post, method: :delete, data:{ confirm: "投稿「#{@post.title}」を削除します。よろしいですか？" } ,class:"mini-red-link-btn font-bold text-line-none" %>
+            <%= link_to "削除", community_post_path(@post.community,@post), method: :delete, data:{ confirm: "投稿「#{@post.title}」を削除します。よろしいですか？" } ,class:"mini-red-link-btn font-bold text-line-none" %>
         <% end %>
         </div>
     </div>
@@ -25,7 +25,7 @@
                 評価：<%= @post.score %>
                 <div class="shopinfo-header">
                     <div class="post-<%= @post.id %> shopinfo-like">
-                        <%= render partial: 'shared/like', locals: {post: @post} %>
+                        <%= render partial: 'shared/like', locals: {community: @post.community, post: @post} %>
                     </div>&nbsp&nbsp
                     <div id="comments_area">
                         <i class="fas fa-comments"></i> <%= @comments.count %>
@@ -42,9 +42,9 @@
     <div class="col-sm-12 commentlist">
         <h3 class="cmntlst-title"><i class="fas fa-comments"></i><br>口コミ一覧</h3>
         <div class="order-link">
-            <%= order_link_active('更新日順', post_path, 'updated_at') %>
-            <%= order_link_active('評価順', post_path, 'score') %>
-            <%= order_link_active('訪問日順', post_path, 'visitday') %>
+            <%= order_link_active('更新日順', community_post_path(@post.community), 'updated_at') %>
+            <%= order_link_active('評価順', community_post_path(@post.community), 'score') %>
+            <%= order_link_active('訪問日順', community_post_path(@post.community), 'visitday') %>
         </div>
         <div id="comments_area">
             <% @comments.each do |c| %>
@@ -62,10 +62,7 @@
                             <%= c.updated_at.strftime("%Y-%m-%d") %><br>
                             <%= c.score %><br>
                             <%= c.title %>
-                            <%= link_to "口コミの詳細を見る", post_comment_path(@post,c), class: "cmnt-link" %>
-                            <% if c.user == current_user %>
-                                <%= link_to 'コメント削除', post_comment_path(c.post_id, c.id), method: :delete, remote: true %>
-                            <% end %>
+                            <%= link_to "口コミの詳細を見る", community_post_comment_path(@post.community,@post,c), class: "cmnt-link" %>
                             <br>
                         </div>
                     </div>
@@ -74,4 +71,4 @@
         </div>
     </div>
 </div>
-<%= link_to '口コミ登録', new_post_comment_path(@post), class: 'new-comment-btn' %>
+<%= link_to '口コミ登録', new_community_post_comment_path(@post.community,@post), class: 'new-comment-btn' %>
