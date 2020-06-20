@@ -3,4 +3,6 @@ class Community < ApplicationRecord
     belongs_to :create_user, class_name: "User"
     has_many :posts, dependent: :destroy
     has_many :belongings, dependent: :destroy
+    has_one_attached :image
+
 end

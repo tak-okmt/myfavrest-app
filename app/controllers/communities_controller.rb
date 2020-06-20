@@ -13,6 +13,23 @@ class CommunitiesController < ApplicationController
         @posts = @posts.page(params[:page])
     end
 
+    def edit
+        @community = Community.find(params[:id])
+        @code = Code.all
+    end
+
+    def update
+        community = current_user.communities.find(params[:id])
+        community.update!(community_params)
+        redirect_to community_url(community) notice:"投稿「#{community.name}」を更新しました。"
+    end
+
+    def destroy
+        community = current_user.communities.find(params[:id])
+        community.destroy
+        redirect_to communities_url, notice: "投稿「#{community.name}」を削除しました。"
+    end
+
     private
 
         def community_params
