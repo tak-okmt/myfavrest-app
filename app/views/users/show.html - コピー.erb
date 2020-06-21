@@ -1,0 +1,54 @@
+<h1>ユーザ情報</h1>
+<table class="table table-hover">
+    <tbody>
+        <tr>
+            <th><%= User.human_attribute_name(:username) %></th>
+            <td><%= @user.username %></td>
+        </tr>
+        <tr>
+            <th>アイコン画像</th>
+            <td><%= image_tag @user.image.variant(
+                        combine_options: {   
+                            resize: "200^",   
+                            gravity: "Center",   
+                            crop: "500x500+0+0",   
+                            auto_orient: true    
+                        }
+                    ),alt: "shop image" if @user.image.attached? %></td>
+        </tr>
+        <tr>
+            <th><%= User.human_attribute_name(:email) %></th>
+            <td><%= @user.email %></td>
+        </tr>
+        <tr>
+            <th><%= User.human_attribute_name(:age) %></th>
+            <td>
+                <% begin %>
+                    <%= (Date.today.strftime("%Y%m%d").to_i - @user.birth_ym.strftime("%Y%m%d").to_i) / 10000 %>
+                    歳
+                <% rescue %>
+                    <%= %>
+                <% end %>
+            </td>
+        </tr>
+        <tr>
+            <th><%= User.human_attribute_name(:work_idt) %></th>
+            <td><%= @user.work_idt %></td>
+        </tr>
+        <tr>
+            <th><%= User.human_attribute_name(:work_comp) %></th>
+            <td><%= @user.work_comp %></td>
+        </tr>
+        <tr>
+            <th><%= User.human_attribute_name(:work_ocpn) %></th>
+            <td><%= @user.work_ocpn %></td>
+        </tr>
+        <tr>
+            <th><%= User.human_attribute_name(:gender) %></th>
+            <td><%= @user.gender %></td>
+        </tr>
+    </tbody>
+</table>
+<p>
+    <%= render partial: 'shared/follow', locals: {user: @user} %>
+</p>

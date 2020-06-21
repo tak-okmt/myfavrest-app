@@ -1,16 +1,23 @@
-<div class="follow_btn">
-<% if user_signed_in? %>
-    <% if current_user.id != user.id %>
-        <% if current_user.following?(user) %>
-            <%= link_to 'フォロー解除', unfollow_path(user.id), method: :post, remote: true %>
-        <% else %>
-            <%= link_to 'フォロー', follow_path(user.id), method: :post, remote: true %>
+<div class="follow">
+    <div class="follow-count">
+        <div class="follow-container">
+            <span class="follow-label">フォロー</span><br>
+            <%= user.follower.count %>
+        </div>
+        <div class="follower-container">
+            <span class="follow-label">フォロワー</span><br>
+            <%= user.followed.count %>
+        </div>
+    </div>
+    <div class="follow-link">
+        <% if user_signed_in? %>
+            <% if current_user.id != user.id %>
+                <% if current_user.following?(user) %>
+                    <%= link_to 'フォロー中', unfollow_path(user.id), method: :post, remote: true, class: "unfollow-btn" %>
+                <% else %>
+                    <%= link_to 'フォロー', follow_path(user.id), method: :post, remote: true, class: "follow-btn" %>
+                <% end %>
+            <% end %>
         <% end %>
-    <% end %>
-<% end %>
-    <p>
-        フォロー数：<%= user.follower.count %>
-        <br>
-        フォロワー数：<%= user.followed.count %>
-    </p>
+    </div>
 </div>

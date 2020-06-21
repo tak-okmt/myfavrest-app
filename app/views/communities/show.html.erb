@@ -1,32 +1,49 @@
 <div class="container community-show">
     <div class="row">
-        <div class="communitydtl col-3">
+        <div class="communitydtl col-lg-3 col-xs-12 mb-2">
             <% if @community.image.attached? %>
                 <%= image_tag @community.image, class:"community-img" %>
             <% else %>
                 <%= image_tag ("no_image.png"), class:"community-img" %>
             <% end %>
             <div class="community-linkbtn">
-                <div class="community-edit">
+                <div class="community-edit-btn">
                 <% if @community.create_user == current_user %>
                     <%= link_to "編集",edit_community_path(@community), class:"mini-green-link-btn font-bold text-line-none" %>
                 <% end %>
                 </div>
-                <div class="community-delete">
+                <div class="community-delete-btn">
                 <% if @community.create_user == current_user %>
                     <%= link_to "削除", community_path(@community), method: :delete, data:{ confirm: "コミュニティ「#{@community.name}」を削除します。よろしいですか？" } ,class:"mini-red-link-btn font-bold text-line-none" %>
                 <% end %>
                 </div>
             </div>
-            <div>
+            <div class="mb-5">
                 <p><%= @community.name %></p>
-                <p><%= @community.name %></p>
+                <p><%= @community.description %></p>
             </div>
-            <div>
-
+            <!-- 所属メンバー一覧 START -->
+            <p>所属ユーザ一覧</p>
+            <div class="container">
+                <div class="row">
+                    <% @belongings.each do |belonging| %>
+                        <div class="col-xs-2 col-sm-3 col-lg-4">
+                            <% if belonging.user.image.attached? %>
+                                <%= link_to belonging.user.image, user_path(belonging.user), class:"user-icon" %>
+                            <% else %>
+                                <%= link_to user_path(belonging.user) do %>
+                                    <%= image_tag ("no_image.png"), class:"user-icon" %>
+                                <% end %>
+                            <% end %>
+                            <br>
+                            <span class="belong-username"><%= belonging.user.username %></span>
+                        </div>
+                    <% end %>
+                </div>
             </div>
+            <!-- 所属メンバー一覧 END -->
         </div>
-        <div class="communityindex col-9">
+        <div class="communityindex col-lg-9 col-sm-12">
             <!-- 店一覧 START -->
             <div class="container shops">
                 <div class="row">

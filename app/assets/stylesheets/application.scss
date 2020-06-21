@@ -5,6 +5,10 @@
 
 @import "home.scss";
 
+@import "./shared/follow";
+
+@import "./users/show";
+
 @import "./posts/index";
 @import "./posts/new";
 @import "./posts/show";
@@ -14,7 +18,9 @@
 @import "./comments/show";
 @import "./comments/edit";
 
+@import "./communities/new";
 @import "./communities/show";
+@import "./communities/edit";
 
 @import 'font_awesome5_webfont';
 @import 'font_awesome5.css';

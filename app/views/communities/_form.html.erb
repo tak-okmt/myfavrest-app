@@ -1,0 +1,35 @@
+<% if community.errors.present? %>
+    <ul id="error_explanation">
+        <% community.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+        <% end %>
+    </ul>
+<% end %>
+<%= form_with(model: community, local:true) do |f| %>
+    <div class="form-group">
+        <%= f.label "写真のアップロード" %><br>
+        <%= f.file_field :image %>
+    </div>
+    <div class="form-group">
+        <%= f.label "コミュニティの名前" %>
+        <%= f.text_field :name, class:'form-control', id: 'community_name' %>
+    </div>
+    <div class="form-group">
+        <%= f.label "コミュニティの説明" %>
+        <%= f.text_area :description, row:5, class: 'form-control', id:'community_description' %>
+    </div>
+    <div class="form-group">
+        <label class="control-label">公開/非公開の選択</label>
+        <div class="form-check">
+            <%= f.radio_button :publish_flg, 0, class: "form-check-input" %>
+            <%= f.label :publish_flg, "公開", class: "form-check-label" %>
+        </div>
+        <div class="form-check">
+            <%= f.radio_button :publish_flg, 1, class: "form-check-input" %>
+            <%= f.label :publish_flg, "非公開", class: "form-check-label" %>
+        </div>
+    </div>
+    <%= f.hidden_field :create_user_id, value: current_user.id %>
+    <%= f.submit "更新する", class:'btn btn-primary' %>
+    <%= link_to '戻る', communities_path, class:'btn' %>
+<% end %>

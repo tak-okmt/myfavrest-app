@@ -21,6 +21,46 @@
 /******ボタン関連*********/
 /////////////////////////
 
+/* フォローするボタン */
+.follow-btn{
+  width: 80px;
+  height: 30px;
+  line-height: 28px;
+  text-align: center;
+  border-radius: 22px;
+  cursor: pointer;
+  display: inline-block;
+  color: #039be5;
+  background-color: white;
+  border:1px solid #039be5;
+  font-size: 12px;
+  &:hover{
+    text-decoration: none;
+    background-color: #039be5;
+    color: white;
+  }
+}
+
+/* フォロー外すボタン */
+.unfollow-btn{
+  width: 80px;
+  height: 30px;
+  line-height: 28px;
+  text-align: center;
+  border-radius: 22px;
+  cursor: pointer;
+  display: inline-block;
+  color: white;
+  background-color: #039be5;
+  border:1px solid #039be5;
+  font-size: 12px;
+  &:hover{
+    text-decoration: none;
+    background-color: white;
+    color: #039be5;
+  }
+}
+
 /* 新規登録ボタン */
 .new-btn {
   position: fixed;
@@ -77,5 +117,16 @@
   border:1px solid #e59703;
   color: #fff;
   font-size: 12px;
+}
+
+
+/////////////////////////
+/******画像関連*******/
+/////////////////////////
+.user-icon{
+  margin-bottom: 10px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
 }
 

@@ -1,0 +1,30 @@
+@media screen and (min-width:992px) {
+    .userwrapper{
+        width: 70%;
+    }
+}
+
+.userwrapper{
+    h3{
+        margin-bottom: 30px;
+    }
+    .userinfo{
+        border: solid 1px #d3d3d3;
+        box-shadow: 3px 3px 5px rgba(0,0,0,0.25);
+        padding: 40px;
+
+        .userinfo-left{
+            .user-age-gender{
+                margin-bottom: 10px;                
+            }
+
+            .user-work-info{
+                margin-bottom: 10px;
+            }
+        }
+
+    }
+
+}
+
+
