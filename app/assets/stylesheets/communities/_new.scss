@@ -1,0 +1,25 @@
+.community-new{
+    margin: 0 auto;
+
+    label{
+        font-size: 0.7em;
+    }
+}
+
+@media screen and (min-width:992px) {
+    .community-new{
+        width: 40%;
+    }
+}
+
+@media screen and (max-width:991px) {
+    .community-new{
+        width: 50%;
+    }
+}
+
+@media screen and (max-width:767px) {
+    .community-new{
+        width: 80%;
+    }
+}

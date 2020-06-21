@@ -1,0 +1,23 @@
+.follow{
+    display: flex;
+    
+    .follow-count{
+        display: flex;
+        margin-right: 10px;
+        
+        :nth-child(1){
+            margin-right: 5px;
+        }
+        .follow-label{
+            color: #a9a9a9;
+            font-size: 0.8em;
+        }
+        *{
+            text-align: center;
+        }
+    }
+    .follow-link{
+        margin: auto 0;
+    }
+}
+

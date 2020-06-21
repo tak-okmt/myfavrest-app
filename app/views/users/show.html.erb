@@ -1,54 +1,42 @@
-<h1>ユーザ情報</h1>
-<table class="table table-hover">
-    <tbody>
-        <tr>
-            <th><%= User.human_attribute_name(:username) %></th>
-            <td><%= @user.username %></td>
-        </tr>
-        <tr>
-            <th>アイコン画像</th>
-            <td><%= image_tag @user.image.variant(
-                        combine_options: {   
-                            resize: "200^",   
-                            gravity: "Center",   
-                            crop: "500x500+0+0",   
-                            auto_orient: true    
-                        }
-                    ),alt: "shop image" if @user.image.attached? %></td>
-        </tr>
-        <tr>
-            <th><%= User.human_attribute_name(:email) %></th>
-            <td><%= @user.email %></td>
-        </tr>
-        <tr>
-            <th><%= User.human_attribute_name(:age) %></th>
-            <td>
+<div class="container userwrapper">
+    <h3><i class="fas fa-user"></i> ユーザ情報</h3>
+    <div class="row userinfo">
+        <div class="col-lg-6 userinfo-left">
+            <div class="user-image-name">
+                <% if @user.image.attached? %>
+                    <%= image_tag @user.image, class:"user-icon" %>
+                <% else %>
+                    <%= image_tag ("no_image.png"), class:"user-icon" %>
+                <% end %>
+                &nbsp<%= @user.username %>
+                <br>
+            </div>
+            <div class="user-age-gender">
                 <% begin %>
-                    <%= (Date.today.strftime("%Y%m%d").to_i - @user.birth_ym.strftime("%Y%m%d").to_i) / 10000 %>
-                    歳
+                    <%= (Date.today.strftime("%Y%m%d").to_i - @user.birth_ym.strftime("%Y%m%d").to_i) / 10000 %>歳
                 <% rescue %>
                     <%= %>
                 <% end %>
-            </td>
-        </tr>
-        <tr>
-            <th><%= User.human_attribute_name(:work_idt) %></th>
-            <td><%= @user.work_idt %></td>
-        </tr>
-        <tr>
-            <th><%= User.human_attribute_name(:work_comp) %></th>
-            <td><%= @user.work_comp %></td>
-        </tr>
-        <tr>
-            <th><%= User.human_attribute_name(:work_ocpn) %></th>
-            <td><%= @user.work_ocpn %></td>
-        </tr>
-        <tr>
-            <th><%= User.human_attribute_name(:gender) %></th>
-            <td><%= @user.gender %></td>
-        </tr>
-    </tbody>
-</table>
-<p>
-    <%= render partial: 'shared/follow', locals: {user: @user} %>
-</p>
+                <%= @user.gender %>
+                <br>
+            </div>
+            <div class="user-work-info">
+                勤務先業界：<%= @user.work_idt %><br>
+                職種：<%= @user.work_ocpn %>
+            </div>
+            <!-- follow -->
+            <%= render partial: 'shared/follow', locals: {user: @user} %>
+        </div>
+        <div class="col-lg-6 userinfo-right">
+            <!-- グラフ -->
+        </div>
+    </div>
+        <div class="col-12">
+            <!-- 最近の口コミ -->
+        </div>
+        <div class="col-12">
+            <!-- 所属コミュニティ -->
+        </div>
+</div>
+
+

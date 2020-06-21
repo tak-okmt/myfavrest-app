@@ -1,0 +1,26 @@
+.community-show{
+    .communitydtl{
+        text-align: center;
+
+        .community-img{
+            margin-top: 10px;
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+        }
+        .community-linkbtn{
+            display: flex;
+            justify-content: center;
+            margin: 10px 0px;
+        
+            .community-delete-btn{
+                margin-left: 10px;
+            }
+        }
+
+        .belong-username{
+            font-size: 0.7em;
+        }
+
+    }
+}
