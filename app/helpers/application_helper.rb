@@ -12,4 +12,15 @@ module ApplicationHelper
         link_to name, path + '?comment_order=' + order, class: class_name
     end
 
+    # 年代計算
+    def age_calc(birth_ym)
+        age = (Date.today.strftime("%Y%m%d").to_i - birth_ym.strftime("%Y%m%d").to_i)
+        if age < 10
+            return "10代未満"
+        elsif
+            disp_ages = age / 10
+            return "#{disp_ages}0代"
+        end
+    end
+
 end

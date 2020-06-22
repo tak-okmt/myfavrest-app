@@ -13,7 +13,7 @@
             </div>
             <div class="user-age-gender">
                 <% begin %>
-                    <%= (Date.today.strftime("%Y%m%d").to_i - @user.birth_ym.strftime("%Y%m%d").to_i) / 10000 %>歳
+                    <%= age_calc(@user.birth_ym) %>
                 <% rescue %>
                     <%= %>
                 <% end %>
@@ -31,12 +31,38 @@
             <!-- グラフ -->
         </div>
     </div>
-        <div class="col-12">
-            <!-- 最近の口コミ -->
-        </div>
-        <div class="col-12">
-            <!-- 所属コミュニティ -->
-        </div>
+    <br>
+    <h3>最近の口コミ</h3>
+    <div class="row mt-5">
+        <!-- 最近の口コミ -->
+        <% @comments.each do |c| %>
+            <div class="current-cmnt col-6">
+                <div class="current-cmnt-user">
+                    <% if c.user.image.attached? %>
+                        <%= image_tag c.user.image, class:"current-cmnt-img" %>
+                    <% else %>
+                        <%= image_tag ("no_image.png"), class:"current-cmnt-img" %>
+                    <% end %>
+                </div>
+                <div class="current-cmnt-ttl">
+                    <%= c.updated_at.strftime("%Y-%m-%d") %><br>
+                    <%= c.score %><br>
+                    <%= link_to c.title, community_post_comment_path(c.post.community,c.post,c), class: "current-cmnt-link" %>
+                    <br>
+                </div>                
+            </div>
+        <% end %>
+    </div>
+    <br>
+    <h3>所属コミュニティ</h3>
+    <div class="row mt-2">
+        <!-- 所属コミュニティ -->
+        <% @belongings.each do |b| %>
+            <% if b.community.publish_flg = 0 %>
+                <div class="current-cmnt col-6">
+                    <%= link_to b.community.name, community_path(b.community) %><br>
+                </div>
+            <% end %>
+        <% end %> 
+    </div>
 </div>
-
-
