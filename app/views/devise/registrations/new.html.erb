@@ -1,61 +1,61 @@
-<h2>ユーザ登録</h2>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+<div class="container">
+  <div class="user-new">
+    <h3><i class="fas fa-user"></i> ユーザを新規登録する</h3>
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autocomplete: "email" %>
-  </div>
-  <div class="field">
-    <%= f.label :username %><br />
-    <%= f.text_field :username, autocomplete: "username" %>
-  </div>
-  <div class="field">
-    <%= f.label "アイコン画像を選択" %><br />
-    <%= f.file_field :image %>
-  </div>
-  <div class="field">
-    <%= f.label :birth_ym %>（他ユーザには、計算された年齢のみ表示され生まれた年と月は表示されません）<br />
-    <%= raw sprintf(f.date_select(:birth_ym, include_blank: true, discard_day: true, use_month_numbers: true, start_year: 1930, end_year: (Time.now.year - 1), date_separator: '%s'), '年 ')+ '月 ' %>
-  </div>
-  <div class="field">
-    <%= f.label :work_idt %><br />
-    <%= f.collection_select :work_idt, Code.where(code_id: "6"), :code, :name, include_blank: '勤務先業界を選択してください' %>
-  </div>
-  <div class="field">
-    <%= f.label :work_comp %><br />
-    <%= f.text_field :work_comp %>
-  </div>
-  <div class="field">
-    <%= f.label :work_ocpn %><br />
-    <%= f.collection_select :work_ocpn, Code.where(code_id: "7"), :code, :name, include_blank: '職種を選択してください' %>
-  </div>
-  <div class="field">
-    <%= f.label :gender %><br />
-    <%= f.radio_button :gender, "男性" %>
-    <%= f.label :gender, "男性" %>
-    <%= f.radio_button :gender, "女性" %>
-    <%= f.label :gender, "女性" %>
-    <%= f.radio_button :gender, "その他" %>
-    <%= f.label :gender, "その他" %>
-  </div>
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %>文字以上)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
+      <div class="form-group">
+        <%= f.label "アイコン画像を選択" %><br />
+        <%= f.file_field :image %>
+      </div>
+      <div class="form-group">
+        <%= f.label :email %><br />
+        <%= f.email_field :email, autocomplete: "email", class:'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= f.label :username %><br />
+        <%= f.text_field :username, autocomplete: "username", class:'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= f.label "生まれ年と月" %><br />
+        <%= raw sprintf(f.date_select(:birth_ym, include_blank: true, discard_day: true, use_month_numbers: true, start_year: 1930, end_year: (Time.now.year - 1), date_separator: '%s'), '年 ')+ '月 ' %>
+      </div>
+      <div class="form-group">
+        <%= f.label :work_idt %><br />
+        <%= f.collection_select :work_idt, Code.where(code_id: "6"), :code, :name, include_blank: '勤務先業界を選択してください', class:'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= f.label :work_ocpn %><br />
+        <%= f.collection_select :work_ocpn, Code.where(code_id: "7"), :code, :name, include_blank: '職種を選択してください' %>
+      </div>
+      <div class="form-group">
+        <%= f.label :gender %><br />
+        <%= f.radio_button :gender, "男性" %>
+        <%= f.label :gender, "男性" %>
+        <%= f.radio_button :gender, "女性" %>
+        <%= f.label :gender, "女性" %>
+        <%= f.radio_button :gender, "その他" %>
+        <%= f.label :gender, "その他" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :password %>
+        <% if @minimum_password_length %>
+          <em>(<%= @minimum_password_length %>文字以上)</em>
+        <% end %><br />
+        <%= f.password_field :password, autocomplete: "new-password", class:'form-control' %>
+      </div>
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
+      <div class="form-group">
+        <%= f.label :password_confirmation %><br />
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", class:'form-control' %>
+      </div>
 
-  <div class="actions">
-    <%= f.submit "登録" %>
+      <div class="actions">
+        <%= f.submit "登録" %>
+      </div>
+    <% end %>
+  <%= render "devise/shared/links" %>
   </div>
-<% end %>
+</div>
 
-<%= render "devise/shared/links" %>

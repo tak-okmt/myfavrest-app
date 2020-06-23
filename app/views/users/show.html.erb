@@ -8,21 +8,26 @@
                 <% else %>
                     <%= image_tag ("no_image.png"), class:"user-icon" %>
                 <% end %>
-                &nbsp<%= @user.username %>
-                <br>
-            </div>
-            <div class="user-age-gender">
-                <% begin %>
-                    <%= age_calc(@user.birth_ym) %>
-                <% rescue %>
-                    <%= %>
+                &nbsp<%= @user.username %>&nbsp
+                <% if @user == current_user %>
+                    <%= link_to "編集", edit_user_registration_path, class:"mini-green-link-btn font-bold text-line-none" %>
                 <% end %>
+            </div>
+            <br>
+            <div class="user-age-gender">
+                <!-- 誕生日から年齢計算 -->
+                <% unless @user.birth_ym.nil? then %>
+                    <%= age_calc(@user.birth_ym) %>
+                <% else %>
+                    <%= "年齢非公開" %>
+                <% end %>
+                <%  %>
                 <%= @user.gender %>
                 <br>
             </div>
             <div class="user-work-info">
-                勤務先業界：<%= @user.work_idt %><br>
-                職種：<%= @user.work_ocpn %>
+                勤務先業界：<%= user_code_name("6",@user.work_idt) %><br>
+                職種：<%= user_code_name("7",@user.work_ocpn) %>
             </div>
             <!-- follow -->
             <%= render partial: 'shared/follow', locals: {user: @user} %>
