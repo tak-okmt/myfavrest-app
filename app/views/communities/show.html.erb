@@ -28,6 +28,11 @@
                 <div class="row">
                     <% @belongings.each do |belonging| %>
                         <div class="col-xs-2 col-sm-3 col-lg-4">
+                            <% if belonging.admin_flg == 1 %>
+                                <span class="admin"><i class="fas fa-shield-alt"></i>管理者</span>
+                            <% else %>
+                                <p></p>
+                            <% end %>
                             <% if belonging.user.image.attached? %>
                                 <%= link_to belonging.user.image, user_path(belonging.user), class:"user-icon" %>
                             <% else %>
@@ -35,7 +40,6 @@
                                     <%= image_tag ("no_image.png"), class:"user-icon" %>
                                 <% end %>
                             <% end %>
-                            <br>
                             <span class="belong-username"><%= belonging.user.username %></span>
                         </div>
                     <% end %>

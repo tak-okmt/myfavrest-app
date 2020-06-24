@@ -1,1 +1,1 @@
-$(".follow").html("<%= escape_javascript(render "shared/follow", user: @user) %>");
+$('#follow-<%= @user.id %>').html("<%= escape_javascript(render "shared/follow", user: @user) %>");
