@@ -7,9 +7,11 @@
 
 @import "./shared/follow";
 
-@import "./users/new";
 @import "./users/show";
-@import "./users/edit";
+
+@import "./devise/registrations/new";
+@import "./devise/registrations/edit";
+@import "./devise/sessions/new";
 
 @import "./posts/index";
 @import "./posts/new";
