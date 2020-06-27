@@ -1,0 +1,29 @@
+.mymenu-tabs{
+    height: 40px;
+    width: 100%;
+    border: 1px solid #35357d;
+
+    .my-commutnity{
+        background-color: #35357d;
+        color: white;
+        text-align: center;
+        height: 100%;
+        &:hover{
+            text-decoration: none;
+        }
+    }
+    .public-commutnity{
+        background-color:white;
+        color: #35357d;
+        text-align: center;
+        height: 100%;
+        &:hover{
+            text-decoration: none;
+        }
+    }
+    .mymenu-text{
+        vertical-align: middle;
+        line-height: 40px;
+    }
+
+}

@@ -1,0 +1,30 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 col-sm-12 mb-5">
+            <% if @user.image.attached? %>
+                <%= image_tag @user.image, class:"user-icon" %>
+            <% else %>
+                <%= image_tag ("no_image.png"), class:"user-icon" %>
+            <% end %>
+            &nbsp<%= @user.username %>&nbsp
+            <% if @user == current_user %>
+                <%= link_to "編集", edit_user_registration_path, class:"mini-green-link-btn font-bold text-line-none" %>
+            <% end %>
+            <br>
+            <div class="user-age-gender">
+                <!-- 誕生日から年齢計算 -->
+                生年月：<%= @user.birth_ym %>
+                <br>
+                性別：<%= @user.gender %>
+                <br>
+            </div>
+            <div class="user-work-info">
+                勤務先業界：<%= user_code_name("6",@user.work_idt) unless @user.work_idt.nil? %><br>
+                職種：<%= user_code_name("7",@user.work_ocpn) unless @user.work_ocpn.nil? %>
+            </div>
+        </div>
+        <div class="col-md-8 col-sm-12">
+            <%= render partial:'mymenu', locals:{user: @user} %>
+        </div>
+    </div>
+</div>
