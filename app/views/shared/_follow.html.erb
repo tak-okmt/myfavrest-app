@@ -2,11 +2,11 @@
     <div class="follow-count">
         <div class="follow-container">
             <span class="follow-label">フォロー</span><br>
-            <%= user.follower.count %>
+            <%= link_to user.follower.count, follower_user_path(user), class: "follow-count-link" %>
         </div>
         <div class="follower-container">
             <span class="follow-label">フォロワー</span><br>
-            <%= user.followed.count %>
+            <%= link_to user.followed.count, followed_user_path(user), class: "follow-count-link" %>
         </div>
     </div>
     <div class="follow-link">

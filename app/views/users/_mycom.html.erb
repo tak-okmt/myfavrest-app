@@ -1,19 +1,30 @@
-<% belongings.each do |b| %>
-    <div class = "col-sm-12 col-md-12 col-lg-4 mb-5">
-        <!-- カード START -->
-        <div class="card">
-            <% if b.community.image.attached? %>
-                <%= image_tag b.community.image, class:"card-img-top" %>
-            <% else %>
-                <%= image_tag ("no_image.png"), class:"card-img-top" %>
-            <% end %>
-            <div class="card-body">
-                <p class="card-title"><%= b.community.name %></p>
-                <div class="card-text">
-                    <span><%= link_to "詳細", community_path(b.community), class: "card-link" %></span><br>
+<div class='mymenu-tabs row'>
+    <%= link_to user_path(user, tab_id: 1), class: "col-6 tab-on" do %>
+        <span class="mymenu-text">所属コミュニティ</span>
+    <% end %>
+    <%= link_to user_path(user, tab_id: 2), class: "col-6 tab-off" do %>
+        <span class="mymenu-text">誰でもコミュニティ</span>
+    <% end %>
+</div>
+<br>
+<div class="myuser-community row">
+    <% belongings.each do |b| %>
+        <div class = "col-sm-12 col-md-12 col-lg-4 mb-5">
+            <!-- カード START -->
+            <div class="card">
+                <% if b.community.image.attached? %>
+                    <%= image_tag b.community.image, class:"card-img-top" %>
+                <% else %>
+                    <%= image_tag ("no_image.png"), class:"card-img-top" %>
+                <% end %>
+                <div class="card-body">
+                    <p class="card-title"><%= b.community.name %></p>
+                    <div class="card-text">
+                        <span><%= link_to "詳細", community_path(b.community), class: "card-link" %></span><br>
+                    </div>
                 </div>
             </div>
+            <!-- カード END -->
         </div>
-        <!-- カード END -->
-    </div>
-<% end %>
+    <% end %>
+</div>
