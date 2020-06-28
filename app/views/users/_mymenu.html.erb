@@ -1,0 +1,7 @@
+<div class="container mymenu-wrapper">
+    <% if @tab && @tab == '2' %>
+        <%= render(partial: 'users/pubcom', locals: {user: @user, community: @community}) %>
+    <% else %>
+        <%= render(partial: 'users/mycom', locals: {user: @user, belongings: @belongings}) %>
+    <% end %>
+</div>

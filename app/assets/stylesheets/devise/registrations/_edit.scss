@@ -1,0 +1,25 @@
+.user-edit{
+    margin: 0 auto;
+
+    label{
+        font-size: 0.7em;
+    }
+}
+
+@media screen and (min-width:992px) {
+    .user-edit{
+        width: 40%;
+    }
+}
+
+@media screen and (max-width:991px) {
+    .user-edit{
+        width: 50%;
+    }
+}
+
+@media screen and (max-width:767px) {
+    .user-edit{
+        width: 80%;
+    }
+}

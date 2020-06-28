@@ -8,6 +8,11 @@
 @import "./shared/follow";
 
 @import "./users/show";
+@import "./users/mymenu";
+
+@import "./devise/registrations/new";
+@import "./devise/registrations/edit";
+@import "./devise/sessions/new";
 
 @import "./posts/index";
 @import "./posts/new";

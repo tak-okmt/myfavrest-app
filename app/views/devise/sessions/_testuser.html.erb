@@ -3,5 +3,5 @@
         <%= f.email_field :email, value: "test@example.com", type: "hidden" %>
         <%= f.password_field :password, value: "testtest", type: "hidden" %>
     </div>
-    <%= link_to '簡単ログイン', users_guest_sign_in_path, method: :post %>
+    <%= link_to '簡単ログイン', users_guest_sign_in_path, method: :post, class: "btn btn-danger" %>
 <% end %>

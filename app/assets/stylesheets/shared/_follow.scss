@@ -12,6 +12,14 @@
             color: #a9a9a9;
             font-size: 0.8em;
         }
+        .follow-count-link{
+            text-decoration: none;
+            color: black;
+            &:hover, &:visited{
+                text-decoration: none;
+                color: black;
+            }
+        }
         *{
             text-align: center;
         }

@@ -8,21 +8,26 @@
                 <% else %>
                     <%= image_tag ("no_image.png"), class:"user-icon" %>
                 <% end %>
-                &nbsp<%= @user.username %>
-                <br>
-            </div>
-            <div class="user-age-gender">
-                <% begin %>
-                    <%= (Date.today.strftime("%Y%m%d").to_i - @user.birth_ym.strftime("%Y%m%d").to_i) / 10000 %>歳
-                <% rescue %>
-                    <%= %>
+                &nbsp<%= @user.username %>&nbsp
+                <% if @user == current_user %>
+                    <%= link_to "編集", edit_user_registration_path, class:"mini-green-link-btn font-bold text-line-none" %>
                 <% end %>
+            </div>
+            <br>
+            <div class="user-age-gender">
+                <!-- 誕生日から年齢計算 -->
+                <% unless @user.birth_ym.nil? then %>
+                    <%= age_calc(@user.birth_ym) %>
+                <% else %>
+                    <%= "年齢非公開" %>
+                <% end %>
+                <%  %>
                 <%= @user.gender %>
                 <br>
             </div>
             <div class="user-work-info">
-                勤務先業界：<%= @user.work_idt %><br>
-                職種：<%= @user.work_ocpn %>
+                勤務先業界：<%= user_code_name("6",@user.work_idt) unless @user.work_idt.nil? %><br>
+                職種：<%= user_code_name("7",@user.work_ocpn) unless @user.work_ocpn.nil? %>
             </div>
             <!-- follow -->
             <%= render partial: 'shared/follow', locals: {user: @user} %>
@@ -31,12 +36,38 @@
             <!-- グラフ -->
         </div>
     </div>
-        <div class="col-12">
-            <!-- 最近の口コミ -->
-        </div>
-        <div class="col-12">
-            <!-- 所属コミュニティ -->
-        </div>
+    <br>
+    <h3>最近の口コミ</h3>
+    <div class="row mt-5">
+        <!-- 最近の口コミ -->
+        <% @comments.each do |c| %>
+            <div class="current-cmnt col-6">
+                <div class="current-cmnt-user">
+                    <% if c.user.image.attached? %>
+                        <%= image_tag c.user.image, class:"current-cmnt-img" %>
+                    <% else %>
+                        <%= image_tag ("no_image.png"), class:"current-cmnt-img" %>
+                    <% end %>
+                </div>
+                <div class="current-cmnt-ttl">
+                    <%= c.updated_at.strftime("%Y-%m-%d") %><br>
+                    <%= c.score %><br>
+                    <%= link_to c.title, community_post_comment_path(c.post.community,c.post,c), class: "current-cmnt-link" %>
+                    <br>
+                </div>                
+            </div>
+        <% end %>
+    </div>
+    <br>
+    <h3>所属コミュニティ</h3>
+    <div class="row mt-2">
+        <!-- 所属コミュニティ -->
+        <% @belongings.each do |b| %>
+            <% if b.community.publish_flg = 0 %>
+                <div class="current-cmnt col-6">
+                    <%= link_to b.community.name, community_path(b.community) %><br>
+                </div>
+            <% end %>
+        <% end %> 
+    </div>
 </div>
-
-
