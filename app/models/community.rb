@@ -6,4 +6,11 @@ class Community < ApplicationRecord
     has_many :applies, dependent: :destroy
     has_one_attached :image
 
+    has_many :users, through: :belongings # コミュニティに所属しているユーザ
+
+    # ユーザがコミュニティに所属していればtrueを返す
+    def user_belonging?(user)
+      users.include?(user)
+    end
+
 end

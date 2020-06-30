@@ -18,6 +18,7 @@ Rails.application.routes.draw do
       resources :likes, only: %i[create destroy]
       resources :comments
     end
+    resources :applies, only: %i[index create destroy]
   end
 
   resources :users, only: [:index, :show] do
