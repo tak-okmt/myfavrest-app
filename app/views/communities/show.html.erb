@@ -17,8 +17,12 @@
                     <%= link_to "削除", community_path(@community), method: :delete, data:{ confirm: "コミュニティ「#{@community.name}」を削除します。よろしいですか？" } ,class:"mini-red-link-btn font-bold text-line-none" %>
                 <% end %>
                 </div>
-                <% unless @community.user_belonging?(current_user)  %>
-                    <%= link_to '加入申請', community_applies_path(@community), method: :post, class: "mini-green-link-btn font-bold text-line-none" %>
+                <% unless @community.user_belonging?(current_user) %>
+                    <% if @apply %>
+                        <%= link_to '申請取消', community_apply_path(@community, @apply), method: :post, class: "mini-red-link-btn font-bold text-line-none" %>
+                    <% else %>
+                        <%= link_to '加入申請', community_applies_path(@community), method: :post, class: "mini-green-link-btn font-bold text-line-none" %>
+                    <% end %>
                 <% end %>
             </div>
             <div class="mb-5">

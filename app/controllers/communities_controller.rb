@@ -12,6 +12,7 @@ class CommunitiesController < ApplicationController
         @belongings = Belonging.where(community_id: @community.id)
         @posts = Post.where(community_id: @community.id)
         @posts = @posts.page(params[:page])
+        @apply = Apply.find_by(community_id: @community.id, user_id: current_user.id) if current_user
     end
 
     def new
