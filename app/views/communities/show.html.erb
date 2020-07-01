@@ -19,10 +19,12 @@
                 </div>
                 <% unless @community.user_belonging?(current_user) %>
                     <% if @apply %>
-                        <%= link_to '申請取消', community_apply_path(@community, @apply), method: :post, class: "mini-red-link-btn font-bold text-line-none" %>
+                        <%= link_to '申請取消', community_apply_path(@community, @apply), method: :delete, class: "mini-red-link-btn font-bold text-line-none" %>
                     <% else %>
                         <%= link_to '加入申請', community_applies_path(@community), method: :post, class: "mini-green-link-btn font-bold text-line-none" %>
                     <% end %>
+                <% else %>
+                    <p>加入中</p>
                 <% end %>
             </div>
             <div class="mb-5">
@@ -51,6 +53,9 @@
                         </div>
                     <% end %>
                 </div>
+                <% if user_admin_flg(current_user,@community) == 1 %>
+                    <%= link_to "承認待ち一覧", community_applies_path(@community), class:"btn btn-primary" %>
+                <% end %>
             </div>
             <!-- 所属メンバー一覧 END -->
         </div>

@@ -28,4 +28,10 @@ module ApplicationHelper
         name = Code.find_by(code_id: id,code: code).name
     end
 
+    # ユーザのコミュニティにおける権限を取得
+    def user_admin_flg(user, community)
+        flg = Belonging.find_by(user_id:user.id,community_id:community.id)
+        flg.admin_flg  if flg
+    end
+
 end
