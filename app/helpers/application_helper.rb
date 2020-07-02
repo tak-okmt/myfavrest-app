@@ -30,7 +30,7 @@ module ApplicationHelper
 
     # ユーザのコミュニティにおける権限を取得
     def user_admin_flg(user, community)
-        flg = Belonging.find_by(user_id:user.id,community_id:community.id)
+        flg = Belonging.find_by(user_id:user.id,community_id:community.id) if user
         flg.admin_flg  if flg
     end
 
