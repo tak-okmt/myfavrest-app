@@ -1,0 +1,21 @@
+<div class="container applicant-wrapper">
+    <h3><i class="fas fa-user"></i> 承認待ちユーザ一覧</h3>
+    <div class="row">
+        <% @applies.each do |app| %>
+        <div class="col-6">
+            <% if app.user.image.attached? %>
+                <%= link_to app.user.image, user_path(app.user), class:"user-icon" %>
+            <% else %>
+                <%= link_to user_path(app.user) do %>
+                    <%= image_tag ("no_image.png"), class:"user-icon" %>
+                <% end %>
+            <% end %>
+            &nbsp<%= app.user.username %><br>
+            <%= link_to "承認", community_belongings_path(app.community, user_id: app.user.id, apply_id: app.id), method: :post, class:"mini-green-link-btn font-bold text-line-none" %>
+            <%= link_to "却下", community_apply_path(app.community, app), method: :delete, class:"mini-red-link-btn font-bold text-line-none" %>
+            <br>
+        </div>
+        <% end %>
+    </div>
+</div>
+

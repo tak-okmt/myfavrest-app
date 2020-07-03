@@ -1,0 +1,24 @@
+.applicant-wrapper{
+    margin: 0 auto;
+    h3{
+        margin-bottom: 30px;
+    }
+}
+
+@media screen and (min-width:992px) {
+    .applicant-wrapper{
+        width: 40%;
+    }
+}
+
+@media screen and (max-width:991px) {
+    .applicant-wrapper{
+        width: 50%;
+    }
+}
+
+@media screen and (max-width:767px) {
+    .applicant-wrapper{
+        width: 80%;
+    }
+}

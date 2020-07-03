@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get 'applies/create'
+  get 'applies/destroy'
+  get 'applies/index'
   root 'home#index'
 
   devise_for :users, :controllers => {
@@ -15,6 +18,8 @@ Rails.application.routes.draw do
       resources :likes, only: %i[create destroy]
       resources :comments
     end
+    resources :applies, only: %i[index create destroy]
+    resources :belongings, only: %i[index create destroy]
   end
 
   resources :users, only: [:index, :show] do
@@ -25,7 +30,5 @@ Rails.application.routes.draw do
 
   post 'follow/:id' => 'relationships#create', as: 'follow' # フォローする
   post 'unfollow/:id' => 'relationships#destroy', as: 'unfollow' # フォロー外す
-
-  resources :belongings, only: %i[index create destroy]
 
 end
