@@ -12,7 +12,10 @@ class CommunitiesController < ApplicationController
         @belongings = Belonging.where(community_id: @community.id)
         @posts = Post.where(community_id: @community.id)
         @posts = @posts.page(params[:page])
-        @apply = Apply.find_by(community_id: @community.id, user_id: current_user.id) if current_user
+        if current_user
+            @belonging = Belonging.find_by(community_id: @community.id, user_id: current_user.id)
+            @apply = Apply.find_by(community_id: @community.id, user_id: current_user.id)
+        end
     end
 
     def new
@@ -29,7 +32,7 @@ class CommunitiesController < ApplicationController
         @community = current_user.communities.build(community_params)
         
         if @community.save
-          redirect_to communities_url, notice:"投稿「#{@community.name}」を登録しました。"
+          redirect_to communities_url, notice:"コミュニティ「#{@community.name}」を登録しました。"
         else
           render :new
         end
@@ -38,13 +41,13 @@ class CommunitiesController < ApplicationController
     def update
         community = current_user.communities.find(params[:id])
         community.update!(community_params)
-        redirect_to community_url(community), notice:"投稿「#{community.name}」を更新しました。"
+        redirect_to community_url(community), notice:"コミュニティ「#{community.name}」を更新しました。"
     end
 
     def destroy
         community = current_user.communities.find(params[:id])
         community.destroy
-        redirect_to communities_url, notice: "投稿「#{community.name}」を削除しました。"
+        redirect_to communities_url, notice: "コミュニティ「#{community.name}」を削除しました。"
     end
 
     private
