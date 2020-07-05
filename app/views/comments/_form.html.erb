@@ -5,7 +5,7 @@
         <% end %>
     </ul>
 <% end %>
-<%= form_with(model: [post.community,post,comment], local: true) do |f| %>
+<%= form_with(model: [community, post, comment], local: true) do |f| %>
     <div class="form-group">
         <%= f.label "写真のアップロード" %>
         <%= f.file_field :image, class:'form-control-file' %>
@@ -35,6 +35,6 @@
         <%= f.collection_select :people, code.where(code_id: "4"), :code, :name, {include_blank: '利用人数を選択'}, {class: "form-control"} %>
     </div>
     <%= f.hidden_field :post_id, value: post.id %>
-    <%= f.hidden_field :community_id, value: post.community.id %>
+    <%= f.hidden_field :community_id, value: community.id %>
     <%= f.submit "口コミを登録する" %>
 <% end %>

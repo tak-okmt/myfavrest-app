@@ -7,6 +7,7 @@ class UsersController < ApplicationController
       @search = User.ransack(params[:q])
       #検索結果
       @users = @search.result
+      @code  = Code.all
     end
 
     def show

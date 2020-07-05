@@ -18,13 +18,15 @@ class CommentsController < ApplicationController
   end
 
   def new
-    @post = Post.find_by(params[:post_id])
+    @post = Post.find(params[:post_id])
+    @community = Community.find(params[:community_id])
     @comment = Comment.new
     @code = Code.all
   end
 
   def edit
-    @post = Post.find_by(params[:post_id])
+    @post = Post.find(params[:post_id])
+    @community = Community.find(params[:community_id])
     @comment = current_user.comments.find(params[:id])
     @code = Code.all
   end
@@ -37,4 +39,5 @@ class CommentsController < ApplicationController
     def comment_params
       params.require(:comment).permit(:image,:title,:score,:visitday,:content,:scene,:people, :post_id)
     end
+
 end

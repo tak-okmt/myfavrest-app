@@ -62,6 +62,32 @@
             <!-- 所属メンバー一覧 END -->
         </div>
         <div class="communityindex col-lg-9 col-sm-12">
+            <!-- 検索フォーム -->
+            <div class="searchform container">
+                <%= search_form_for @search, url: community_path(@community) do |f| %>
+                    <div class="row">
+                        <div class="form-group cond1 col-sm-4">
+                            <%= f.search_field :title_or_user_username_cont, class:"form-control" ,placeholder: "店名またはユーザー名"  %>
+                        </div>
+                        <div class="form-group cond2 col-sm-3">
+                            <%= f.collection_select( :prefecture_code_eq_any, JpPrefecture::Prefecture.all, :code, :name, {include_blank: '都道府県'}, {class: "form-control"}) %>
+                        </div>
+                        <div class="form-group cond2 col-sm-3">
+                            <%= f.collection_select( :area_eq_any, @code.where(code_id: "1"), :code, :name, {include_blank: 'エリア'}, {class: "form-control"}) %>
+                        </div>
+                        <div class="form-group cond2 col-sm-3">
+                            <%= f.collection_select( :prefecture_code_eq_any, @code.where(code_id: "2"), :code, :name, {include_blank: '料理ジャンル'}, {class: "form-control"}) %>
+                        </div>
+                        <div class="form-group cond3 col-sm-3">
+                            <%= f.select( :sorts, {'並び替え': 'updated_at desc', 'いいねの多い順': 'likes_count desc', 'コメントの多い順': 'comments_count desc', '更新日の新しい順': 'updated_at desc', '更新日の古い順': 'updated_at asc' }, {},{class: "form-control"}) %>
+                        </div>
+                        <%= f.hidden_field :community_id, value: @community.id %>
+                        <div class="form-group cond_sbtn col-sm-2 mt-2">
+                            <%= f.submit "検索", class: 'sbtn' %>
+                        </div>
+                    </div>
+                <% end %>
+            </div>
             <!-- 店一覧 START -->
             <div class="container shops">
                 <div class="row">

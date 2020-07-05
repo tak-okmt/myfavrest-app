@@ -5,7 +5,7 @@
         <% end %>
     </ul>
 <% end %>
-<%= form_with(model: post, url: [community,post] ,local:true) do |f| %>
+<%= form_with(model: [community,post] ,local: true) do |f| %>
     <div class="form-group">
         <%= f.label "写真のアップロード" %>
         <%= f.file_field :image %>

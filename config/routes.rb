@@ -1,7 +1,4 @@
 Rails.application.routes.draw do
-  get 'applies/create'
-  get 'applies/destroy'
-  get 'applies/index'
   root 'home#index'
 
   devise_for :users, :controllers => {
