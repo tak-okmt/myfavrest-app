@@ -4,6 +4,6 @@ class Like < ApplicationRecord
     validates :user_id, presence: true
     validates :post_id, presence: true
 
-    validates :user_id, uniqueness: { scope: :post_id}
-    validates :post_id, uniqueness: { scope: :user_id}
+    validates :user_id, uniqueness: { scope: :post_id }
+    validates :post_id, uniqueness: { scope: :user_id }
 end
