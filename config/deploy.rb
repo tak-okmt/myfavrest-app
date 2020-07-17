@@ -1,32 +1,24 @@
 # config valid only for current version of Capistrano
 lock "3.7.0"
 
-set :application, "myrest-app"
+# Capistranoのログの表示に利用する
+set :application, "myfavrest-app"
+
+# どのリポジトリからアプリをpullするかを指定する
 set :repo_url, "git@github.com:gcp632dsh/myfavrest-app.git"
 
-# deploy先のディレクトリ。 
-set :deploy_to, '/var/myapp'
+# デプロイ先
+set :deploy_to, "/var/www/myapp/myfavrest-app"
 
-namespace :deploy do
-    desc "Make sure local git is in sync with remote."
-    task :confirm do
-      on roles(:app) do
-        puts "This stage is '#{fetch(:stage)}'. Deploying branch is '#{fetch(:branch)}'."
-        puts 'Are you sure? [y/n]'
-        ask :answer, 'n'
-        if fetch(:answer) != 'y'
-          puts 'deploy stopped'
-          exit
-        end
-      end
-    end
-  
-    desc 'Initial Deploy'
-    task :initial do
-      on roles(:app) do
-        invoke 'deploy'
-      end
-    end
-  
-    before :starting, :confirm
-  end
+# Capistranoがrbenvを認識
+set :rbenv_type, :system
+set :rbenv_ruby, File.read('.ruby-version').strip
+set :rbenv_prefix, "RBENV_ROOT=#{fetch(:rbenv_path)} #{fetch(:rbenv_path)}/bin/rbenv exec"
+
+# アプリケーションで使用するgemはリリース間で共有
+# ここに追加したディレクトリは shared ディレクトリ下に配置され、各リリースからはシンボリックリンクで参照される。
+append :linked_dirs, '.bundle'
+
+# railsがリリース間で共有するリソースを定義
+append :linked_files, "config/master.key"
+append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets"
