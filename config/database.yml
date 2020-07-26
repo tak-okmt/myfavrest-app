@@ -16,6 +16,7 @@ default: &default
   username: mydev
   password: myportfolio123rubyonrails5@mysqldb
   socket: /var/run/mysqld/mysqld.sock
+  # socket: /var/lib/mysql/mysql.sock
 
 development:
   <<: *default
@@ -52,5 +53,5 @@ test:
 production:
   <<: *default
   database: myfavrest-app_production
-  username: mydev
-  password: myportfolio123rubyonrails5@mysqldb
+  username: root
+  password: password
