@@ -11,7 +11,9 @@ set :repo_url, "git@github.com:gcp632dsh/myfavrest-app.git"
 set :deploy_to, "/var/www/apps/myapp"
 
 # Rubyをrbenv経由で使う
-set :rbenv_type, :system
+# rbenv のインストール先はデプロイ先ユーザーのホームディレクトリ
+set :rbenv_type, :user
+# .ruby_version を使用して rbenv のバージョンを指定している
 set :rbenv_ruby, File.read('.ruby-version').strip
 set :rbenv_prefix, "RBENV_ROOT=#{fetch(:rbenv_path)} #{fetch(:rbenv_path)}/bin/rbenv exec"
 
