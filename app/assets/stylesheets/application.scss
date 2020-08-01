@@ -42,16 +42,17 @@ body{
 
 header {
     .loginstauts{
+        width: 100%;
         .loginuser-name{
             color: white;
         }
         a:link,a:visited{
-                color: #afafb0;
-            }
-            a:hover{
-                color: white;
-                font-weight: bold;
-            }
+            color: #afafb0;
+        }
+        a:hover{
+            color: white;
+            font-weight: bold;
+        }
     }
 }
 

@@ -12,6 +12,9 @@
         <% end %>
             | <%= link_to "コミュニティ一覧", communities_path %>
             | <%= link_to "ユーザ一覧", users_path %>
+        <% if user_signed_in? %>
+            | <%= link_to "マイページ", user_path(current_user), class:"myuser_head_link" %>
+        <% end %>
         </div>
     </nav>
 </header>

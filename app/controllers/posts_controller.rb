@@ -11,6 +11,7 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
+    @avg_score = avg_score(@post)
     if @post.prefecture_code.present?
       @pref_name = @post.prefecture.name
     else
@@ -63,6 +64,7 @@ class PostsController < ApplicationController
       params.require(:post).permit(:title, :description, :image, :area, :prefecture_code, :rest_type, :address, :community_id)
     end
 
+    # コメントの並び替え
     def set_comment_order(comments, cmnt_order)
       order_key = 'updated_at'
       case cmnt_order
@@ -74,6 +76,16 @@ class PostsController < ApplicationController
         order_key = 'visitday'
       end
       comments.order(order_key)
+    end
+
+    # 店舗の評価平均
+    def avg_score(post)
+      ttl_score = 0
+      post.comments.each do |c|
+        c.score = 0 if c.score.nil?
+        ttl_score += c.score
+      end
+      avg = ttl_score.fdiv(post.comments.length).round(1)
     end
 
 end
