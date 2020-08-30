@@ -3,6 +3,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.6.5'
 
+gem 'seed-fu'
 gem 'materialize-sass'
 gem 'material_icons'
 gem 'rails-i18n'

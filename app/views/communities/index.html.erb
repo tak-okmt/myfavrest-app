@@ -1,38 +1,23 @@
 <div class="container">
     <div class="row">
-        <div class="communitydtl col-2">
-            <div>
-            </div>
-        </div>
-        <div class="communityindex col-10">
+        <div class="communityindex col-12">
             <!-- 店一覧 START -->
             <div class="container shops">
                 <div class="row">
-                    <% @posts.each do |post| %>
+                    <% @communities.each do |com| %>
                         <div class = "col-sm-12 col-md-12 col-lg-4 mb-5">
                             <!-- カード START -->
                             <div class="card">
-                                <div class="category-tag m-0"><% post.rest_type %>居酒屋</div>
-                                <% if post.image.attached? %>
-                                    <%= image_tag post.image, class:"card-img-top" %>
+                                <% if com.image.attached? %>
+                                    <%= image_tag com.image, class:"card-img-top" %>
                                 <% else %>
                                     <%= image_tag ("no_image.png"), class:"card-img-top" %>
                                 <% end %>
                                 <div class="card-body">
-                                    <p class="card-title"><%= post.title %></p>
+                                    <p class="card-title"><%= com.name %></p>
                                     <div class="card-text">
-                                        <span>
-                                            <% if post.prefecture_code.present? %>
-                                                <%= post.prefecture.name %>
-                                            <% end %>
-                                        </span><br>
-                                        <span><%= post.area %></span>
-                                        <span><%= link_to "詳細", community_post_path(post.community,post), class: "card-link" %></span><br>
-                                        <span><%= post.updated_at.strftime("%Y/%m/%d") %></span><br>
-                                        <span><i class="fas fa-comment-alt"></i> <%= post.comments.count %></span>
-                                    </div>
-                                    <div class="text-right" id="likes_buttons_<%= post.id %>">
-                                        <%= render partial: 'shared/like', locals: {community: post.community, post: post} %>
+                                        <span><%= link_to "詳細", community_path(com), class: "card-link" %></span><br>
+                                        <span><%= com.created_at.strftime("%Y/%m/%d") %></span><br>
                                     </div>
                                 </div>
                             </div>
@@ -45,12 +30,11 @@
                 </div>
             </div>
             <!-- 店一覧 END -->
-            <div>
-                <% @communities.each do |com| %>
-                    <%= link_to "コミュニティ-#{com.name}", community_path(com) %><br>
+            <div class="d-none d-md-block">
+                <%= link_to new_community_path, class: 'new-btn' do %>
+                    グループ<br>新規作成
                 <% end %>
-            </div>
-            <%= link_to "コミュニティ新規作成", new_community_path %><br>
+            </div>            
         </div>
     </div>
 </div>
