@@ -11,7 +11,6 @@
 
 ## 使用言語  
 * Ruby 2.6.5  Rails 5.2.4.2  
-* （現在未使用：今後Vue.js使用予定）  
 
 ## 開発背景（想い）
 他の飲食店投稿アプリは数多くあります。  
@@ -43,9 +42,6 @@ Facebookのコミュニティのような形で飲食店の情報を共有し合
 　　　　CircleCI、Capistrano  
   
 ## やってきたこと
-* 2019/12/21～2020/1  HTML/CSS/jQueryを用いたWebサイト模写（3サイト）  
-* 2020/2  Progate、ドットインストール（Linuxコマンド、JavaScript、Ruby、Git）、  
-          Linux標準教科書にてLinux学習、UdemyにてGit/GitHub学習  
 * 2020/3～2020/4/18  RailsチュートリアルにてRuby on Rails学習、UdemyにてAWS学習（VPC、EC2、Route53）  
 * 2020/4/19～　ポートフォリオ作成開始   
 **以下は、実施済みの内容を、実施順に記載しています**  
