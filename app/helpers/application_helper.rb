@@ -23,15 +23,29 @@ module ApplicationHelper
         end
     end
 
-    # ユーザ情報に関するコードのIDから名称を表示する
+    # コードのIDからコード名称を表示する
     def user_code_name(id, code)
         name = Code.find_by(code_id: id,code: code).name
     end
 
-    # ユーザのコミュニティにおける権限を取得
+    # ユーザのグループにおける権限を取得
     def user_admin_flg(user, community)
         flg = Belonging.find_by(user_id:user.id,community_id:community.id) if user
         flg.admin_flg  if flg
+    end
+
+    # 各グループの所属人数を算出
+    def community_member_calc(community)
+        num = Belonging.where(community_id:community.id).count
+    end
+
+    # 各グループ内の口コミ総件数を算出
+    def community_comment_calc(community)
+        num = 0
+        community.posts.each do |post|
+            num = num + post.comments.count
+        end
+        return num
     end
 
 end

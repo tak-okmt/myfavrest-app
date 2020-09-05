@@ -19,10 +19,10 @@
                 </div>
             </div>
             <!-- ログインユーザが当該コミュニティに所属している場合 -->
-            <% if @community.user_belonging?(current_user) %>
+            <% if @community.user_belonging?(current_user) and @community.id != 1 %>
                 <%= link_to '退会する', community_belonging_path(@community, @belonging), method: :delete, data:{ confirm: "コミュニティ「#{@community.name}」を退会します。よろしいですか？" } ,class:"mini-red-link-btn font-bold text-line-none" %>
             <!-- 当該コミュニティには所属していないが、ログインはしている場合 -->
-            <% elsif current_user %>
+            <% elsif current_user and @community.id != 1 %>
                 <% if @apply %>
                     <%= link_to '申請取消', community_apply_path(@community, @apply), method: :delete, class: "mini-red-link-btn font-bold text-line-none" %>
                 <% else %>

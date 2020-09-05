@@ -18,9 +18,24 @@ Community.seed do |s|
     s.description = 'デフォルトで全ユーザー参加している、皆様のためのコミュニティです。'
 end
 
+Post.seed do |s|
+    s.title = 'テスト店舗'
+    s.description = 'テスト用の店舗です。'
+    s.user_id = '1'
+    s.prefecture_code = '13'
+    s.community_id = '1'
+end
+
 Belonging.seed do |s|
     s.id = 1
     s.user_id = '1'
     s.community_id = '1'
     s.admin_flg = '1'
+end
+
+Belonging.seed do |s|
+    s.id = 2
+    s.user_id = '2'
+    s.community_id = '1'
+    s.admin_flg = '0'
 end

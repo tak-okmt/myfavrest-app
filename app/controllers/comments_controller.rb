@@ -10,6 +10,12 @@ class CommentsController < ApplicationController
     end
   end
 
+  def update
+    comment = Comment.find(params[:id])
+    comment.update!(comment_params)
+    redirect_to community_post_url(comment.post.community,comment.post), notice: "「#{comment.post.title}」の口コミを更新しました。"
+  end
+
   def destroy
     @comment = Comment.find(params[:id])
     if @comment.destroy
@@ -36,6 +42,7 @@ class CommentsController < ApplicationController
   end
     
   private
+
     def comment_params
       params.require(:comment).permit(:image,:title,:score,:visitday,:content,:scene,:people, :post_id)
     end

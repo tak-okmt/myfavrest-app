@@ -20,8 +20,8 @@ default: &default
 
 development:
   <<: *default
-  # host: db
-  host: ip-172-31-13-102
+  host: db
+  # host: ip-172-31-13-102
   database: myfavrest-app_development
 
 # Warning: The database defined as "test" will be erased and

@@ -1,8 +1,8 @@
 <div class="container">
     <div class="row">
         <div class="communityindex col-12">
-            <!-- 店一覧 START -->
-            <div class="container shops">
+            <!-- グループ一覧 START -->
+            <div class="container communities">
                 <div class="row">
                     <% @communities.each do |com| %>
                         <div class = "col-sm-12 col-md-12 col-lg-4 mb-5">
@@ -11,13 +11,17 @@
                                 <% if com.image.attached? %>
                                     <%= image_tag com.image, class:"card-img-top" %>
                                 <% else %>
-                                    <%= image_tag ("no_image.png"), class:"card-img-top" %>
+                                    <%= link_to community_path(com) do %>
+                                        <%= image_tag ("no_image.png"), class:"card-img-top" %>
+                                    <% end %>
                                 <% end %>
                                 <div class="card-body">
-                                    <p class="card-title"><%= com.name %></p>
+                                    <p class="card-title"><%= link_to com.name, community_path(com) %></p>
                                     <div class="card-text">
-                                        <span><%= link_to "詳細", community_path(com), class: "card-link" %></span><br>
-                                        <span><%= com.created_at.strftime("%Y/%m/%d") %></span><br>
+                                        <i class="fas fa-users"></i>&nbsp<%= community_member_calc(com) %>人
+                                        &nbsp&nbsp<i class="fas fa-utensils"></i>&nbsp<%= com.posts.count %>店舗
+                                        &nbsp&nbsp<i class="fas fa-comments"></i>&nbsp<%= community_comment_calc(com) %>件<br>
+                                        <span><%= User.find(com.create_user_id).username %></span>
                                     </div>
                                 </div>
                             </div>
@@ -26,10 +30,10 @@
                     <% end %>
                 </div>
                 <div class="center">
-                    <%= paginate @posts %>
+                    <%= paginate @communities %>
                 </div>
             </div>
-            <!-- 店一覧 END -->
+            <!-- グループ一覧 END -->
             <div class="d-none d-md-block">
                 <%= link_to new_community_path, class: 'new-btn' do %>
                     グループ<br>新規作成

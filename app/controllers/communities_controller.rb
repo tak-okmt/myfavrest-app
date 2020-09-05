@@ -4,7 +4,7 @@ class CommunitiesController < ApplicationController
     def index
         @communities = Community.where(publish_flg: 0)
         @posts = Post.where(community_id: @communities.ids)
-        @posts = @posts.page(params[:page])
+        @communities = @communities.page(params[:page])
     end
 
     def show
@@ -37,9 +37,10 @@ class CommunitiesController < ApplicationController
         @community = current_user.communities.build(community_params)
         
         if @community.save
-          redirect_to communities_url, notice:"コミュニティ「#{@community.name}」を登録しました。"
+            Belonging.create!(community_id: @community.id, user_id: current_user.id, admin_flg: '1')
+            redirect_to communities_url, notice:"コミュニティ「#{@community.name}」を登録しました。"
         else
-          render :new
+            render :new
         end
     end
 
@@ -50,7 +51,7 @@ class CommunitiesController < ApplicationController
     end
 
     def destroy
-        community = current_user.communities.find(params[:id])
+        community = Community.find(params[:id])
         community.destroy
         redirect_to communities_url, notice: "コミュニティ「#{community.name}」を削除しました。"
     end
