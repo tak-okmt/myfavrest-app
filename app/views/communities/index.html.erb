@@ -3,16 +3,20 @@
         <div class="communityindex col-12">
             <!-- グループ一覧 START -->
             <div class="container communities">
+                <!-- タイトル START -->
+                <!-- タイトル END -->
+                <!-- 検索 START -->
+                <!-- 検索 END -->
                 <div class="row">
                     <% @communities.each do |com| %>
-                        <div class = "col-sm-12 col-md-12 col-lg-4 mb-5">
+                        <div class = "col-sm-6 col-md-4 col-lg-3 mb-5">
                             <!-- カード START -->
                             <div class="card">
                                 <% if com.image.attached? %>
-                                    <%= image_tag com.image, class:"card-img-top" %>
+                                    <%= image_tag com.image, class:"community-img" %>
                                 <% else %>
                                     <%= link_to community_path(com) do %>
-                                        <%= image_tag ("no_image.png"), class:"card-img-top" %>
+                                        <%= image_tag ("no_image.png"), class:"community-img" %>
                                     <% end %>
                                 <% end %>
                                 <div class="card-body">
@@ -21,7 +25,15 @@
                                         <i class="fas fa-users"></i>&nbsp<%= community_member_calc(com) %>人
                                         &nbsp&nbsp<i class="fas fa-utensils"></i>&nbsp<%= com.posts.count %>店舗
                                         &nbsp&nbsp<i class="fas fa-comments"></i>&nbsp<%= community_comment_calc(com) %>件<br>
-                                        <span><%= User.find(com.create_user_id).username %></span>
+                                        <div class="create-user-info">
+                                            <% user = get_create_user(com) %>
+                                            <% if user.image.attached? %>
+                                                <%= image_tag user.image, class:"user-icon" %>
+                                            <% else %>
+                                                <%= image_tag ("no_image.png"), class:"user-icon" %>
+                                            <% end %>
+                                            <span class="create-user font-size-mini">作成：<%= get_create_user(com).username %></span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

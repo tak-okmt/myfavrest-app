@@ -48,4 +48,9 @@ module ApplicationHelper
         return num
     end
 
+    # グループの作成者ユーザオブジェクト取得
+    def get_create_user(community)
+        User.find(community.create_user_id)
+    end
+
 end

@@ -7,6 +7,11 @@
     text-decoration: none;
   }
 
+  .right{
+    margin: 0 0 0 auto;
+    width: 60px;
+  }
+
 /////////////////////////
 /******フォント関連*******/
 /////////////////////////
@@ -14,6 +19,11 @@
   /* 太字 */
   .font-bold{
     font-weight: 600;
+  }
+
+  /* フォントサイズ：0.75em */
+  .font-size-mini{
+    font-size: 0.5em;
   }
 
 
