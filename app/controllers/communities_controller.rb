@@ -1,14 +1,18 @@
 class CommunitiesController < ApplicationController
     skip_before_action :authenticate_user!, only: [:index, :show]
+    impressionist :actions=> [:show] # 各詳細画面のアクセス数の計測
 
     def index
-        @communities = Community.where(publish_flg: 0)
-        @posts = Post.where(community_id: @communities.ids)
+        #検索オブジェクト
+        @search = Community.ransack(params[:q])
+        #検索結果
+        @communities = @search.result.where(publish_flg: 0)
         @communities = @communities.page(params[:page])
     end
 
     def show
         @community = Community.find(params[:id])
+        impressionist(@community) # アクセス数の計測
         @belongings = Belonging.where(community_id: @community.id)
         @code = Code.all
         #検索オブジェクト

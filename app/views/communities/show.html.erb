@@ -1,3 +1,4 @@
+<% provide(:title, "グループ詳細") %>
 <div class="container community-show">
     <div class="row">
         <div class="communitydtl col-lg-3 col-xs-12 mb-2">
@@ -58,6 +59,7 @@
                 <% if user_admin_flg(current_user,@community) == 1 %>
                     <%= link_to "承認待ち一覧", community_applies_path(@community), class:"btn btn-primary" %>
                 <% end %>
+                <%= @community.impressionist_count %>
             </div>
             <!-- 所属メンバー一覧 END -->
         </div>

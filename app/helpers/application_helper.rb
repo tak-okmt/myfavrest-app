@@ -1,5 +1,15 @@
 module ApplicationHelper
 
+    # ページごとの完全なタイトルを返す
+    def full_title(page_title = '')
+        base_title = "グルコミュ"
+        if page_title.empty?
+            base_title
+        else
+            page_title + " | " + base_title
+        end
+    end
+
     # リンクの動的制御
     def order_link_active(name, path, order)
         class_name = if params[:comment_order].nil? && order == 'updated_at'
@@ -51,6 +61,20 @@ module ApplicationHelper
     # グループの作成者ユーザオブジェクト取得
     def get_create_user(community)
         User.find(community.create_user_id)
+    end
+
+    # グループ内の店における一番多いタイプを取得
+    def post_type_most(community, type)
+        num = []
+        community.posts.each do |p|
+            num << p.area if type == '1' and !p.area.blank?  # エリア
+            num << p.rest_type if type == '2' and !p.rest_type.blank? # 店タイプ
+        end
+        unless num.empty?
+            most = num.max_by { |v| num.count(v) }
+            most_name = user_code_name(type, most) # コードから名称を取得
+        end
+        return most_name
     end
 
 end

@@ -131,6 +131,8 @@ GEM
       activesupport (>= 4.2.0)
     i18n (1.8.2)
       concurrent-ruby (~> 1.0)
+    impressionist (1.6.1)
+      nokogiri (~> 1)
     jaro_winkler (1.5.4)
     jbuilder (2.10.0)
       activesupport (>= 5.0.0)
@@ -363,6 +365,7 @@ DEPENDENCIES
   dotenv-rails
   factory_bot_rails
   font_awesome5_rails
+  impressionist (~> 1.6.1)
   jbuilder (~> 2.5)
   jp_prefecture
   jquery-rails
