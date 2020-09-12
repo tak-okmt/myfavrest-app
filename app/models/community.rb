@@ -8,8 +8,6 @@ class Community < ApplicationRecord
 
     has_many :users, through: :belongings # コミュニティに所属しているユーザ
 
-    is_impressionable # アクセス数の計測
-
     # ユーザがコミュニティに所属していればtrueを返す
     def user_belonging?(user)
       users.include?(user)

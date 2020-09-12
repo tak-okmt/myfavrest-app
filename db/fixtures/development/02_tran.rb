@@ -1,6 +1,5 @@
 # トランザクション系の初期データ
 User.seed do |s|
-    s.id = 2
     s.email = "test1@example.com"
     s.password  = 'password'
     s.username  = "テスト1"
@@ -12,10 +11,10 @@ end
 
 Community.seed do |s|
     s.id = 1
-    s.name = '公開誰でもコミュニティ'
+    s.name = '公開誰でもグループ'
     s.create_user_id = '2'
     s.publish_flg = '0'
-    s.description = 'デフォルトで全ユーザー参加している、皆様のためのコミュニティです。'
+    s.description = 'デフォルトで全ユーザーが参加している、皆様のためのグループです。'
 end
 
 Post.seed do |s|

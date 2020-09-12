@@ -35,7 +35,7 @@ module ApplicationHelper
 
     # コードのIDからコード名称を表示する
     def user_code_name(id, code)
-        name = Code.find_by(code_id: id,code: code).name
+        name = Code.find_by(code_id: id,code: code)&.name
     end
 
     # ユーザのグループにおける権限を取得

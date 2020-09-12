@@ -43,7 +43,7 @@
                             <% if belonging.admin_flg == 1 %>
                                 <span class="admin"><i class="fas fa-shield-alt"></i>管理者</span>
                             <% else %>
-                                <p></p>
+                                <span class="admin">&nbsp</span>
                             <% end %>
                             <% if belonging.user.image.attached? %>
                                 <%= link_to belonging.user.image, user_path(belonging.user), class:"user-icon" %>
@@ -59,7 +59,6 @@
                 <% if user_admin_flg(current_user,@community) == 1 %>
                     <%= link_to "承認待ち一覧", community_applies_path(@community), class:"btn btn-primary" %>
                 <% end %>
-                <%= @community.impressionist_count %>
             </div>
             <!-- 所属メンバー一覧 END -->
         </div>
@@ -78,7 +77,7 @@
                             <%= f.collection_select( :area_eq_any, @code.where(code_id: "1"), :code, :name, {include_blank: 'エリア'}, {class: "form-control"}) %>
                         </div>
                         <div class="form-group cond2 col-sm-3">
-                            <%= f.collection_select( :prefecture_code_eq_any, @code.where(code_id: "2"), :code, :name, {include_blank: '料理ジャンル'}, {class: "form-control"}) %>
+                            <%= f.collection_select( :rest_type_eq_any, @code.where(code_id: "2"), :code, :name, {include_blank: '料理ジャンル'}, {class: "form-control"}) %>
                         </div>
                         <div class="form-group cond3 col-sm-3">
                             <%= f.select( :sorts, {'並び替え': 'updated_at desc', 'いいねの多い順': 'likes_count desc', 'コメントの多い順': 'comments_count desc', '更新日の新しい順': 'updated_at desc', '更新日の古い順': 'updated_at asc' }, {},{class: "form-control"}) %>

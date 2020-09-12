@@ -1,6 +1,26 @@
-
 // 店一覧 START
 .communities{
+    .commulst-title{
+        margin-bottom: 20px;
+    }
+
+    // 検索フォーム START
+    .searchform{
+        border: solid 1px #d3d3d3;
+        box-shadow: 0 0 8px gray;
+        margin-bottom: 20px;
+        padding: 10px 10px;
+    
+        .sbtn{
+        cursor: pointer;
+        font-family: FontAwesome;
+        background: #3879D9;
+        color: white;
+        width: 80px;
+        }
+    }
+    // 検索フォーム END
+
     .card{
         box-shadow: 5px 10px 20px rgba(0,0,0,0.25);
         height: 350px;
@@ -41,4 +61,4 @@
     }
 
 }
-  // 店一覧 END
+// 店一覧 END
