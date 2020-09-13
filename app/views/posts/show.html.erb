@@ -1,3 +1,4 @@
+<% provide(:title, "店舗詳細") %>
 <div class="container shopwrapper">
     <h3 class="shoptitle"><i class="fas fa-utensils"></i> <%= @post.title %></h3>
     <div class="shop-linkbtn">
@@ -32,7 +33,7 @@
                     </div>&nbsp&nbsp
                     <div class="category-tag"><%= user_code_name("2",@post.rest_type) %></div>
                 </div>
-                <span class="shopupd"><%= @post.updated_at.strftime("%Y-%m-%d") %></span><br>
+                <span class="shopupd">更新日：<%= @post.updated_at.strftime("%Y-%m-%d") %></span><br>
                 <span class="shopadr"><%= @post.address %></span><br>
                 <%= simple_format(h(@post.description), {}, sanitize: false, wrapper_tag:"div") %>
             </div>
