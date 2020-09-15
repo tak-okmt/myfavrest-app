@@ -1,5 +1,6 @@
 # トランザクション系の初期データ
 User.seed do |s|
+    s.id = 1
     s.email = "test1@example.com"
     s.password  = 'password'
     s.username  = "テスト1"
@@ -17,13 +18,15 @@ Community.seed do |s|
     s.description = 'デフォルトで全ユーザーが参加している、皆様のためのグループです。'
 end
 
-Post.seed do |s|
-    s.title = 'テスト店舗'
-    s.description = 'テスト用の店舗です。'
-    s.user_id = '1'
-    s.prefecture_code = '13'
-    s.community_id = '1'
-end
+20.times {
+    Post.seed do |s|
+        s.title = Faker::Restaurant.name
+        s.description = Faker::Restaurant.description
+        s.user_id = '1'
+        s.prefecture_code = '13'
+        s.community_id = '1'
+    end
+}
 
 Belonging.seed do |s|
     s.id = 1

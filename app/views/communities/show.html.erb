@@ -91,6 +91,9 @@
             </div>
             <!-- 店一覧 START -->
             <div class="container shops">
+                <div class="center">
+                    <%= paginate @posts %>
+                </div>
                 <div class="row">
                     <% @posts.each do |post| %>
                         <div class = "col-12 col-sm-6 col-lg-4 mb-5">
