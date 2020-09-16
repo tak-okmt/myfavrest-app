@@ -6,7 +6,7 @@ class CommunitiesController < ApplicationController
         @search = Community.ransack(params[:q])
         #検索結果
         @communities = @search.result.where(publish_flg: 0)
-        @communities = @communities.page(params[:page]).per(10)
+        @communities = @communities.page(params[:page]).per(12)
     end
 
     def show

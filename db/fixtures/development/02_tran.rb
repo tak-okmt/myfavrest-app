@@ -10,6 +10,18 @@ User.seed do |s|
     s.work_ocpn = '1'
 end
 
+20.times {
+    User.seed do |s|
+        s.email = Faker::Internet.email
+        s.password  = 'password'
+        s.username  = Faker::Internet.user_name
+        s.birth_ym  = '1995-01-01'
+        s.work_idt  = SecureRandom.random_number(1..4)
+        s.work_comp = Faker::Company.name
+        s.work_ocpn = SecureRandom.random_number(1..4)
+    end
+}
+
 Community.seed do |s|
     s.id = 1
     s.name = '公開誰でもグループ'
@@ -17,6 +29,15 @@ Community.seed do |s|
     s.publish_flg = '0'
     s.description = 'デフォルトで全ユーザーが参加している、皆様のためのグループです。'
 end
+
+20.times {
+    Community.seed do |s|
+        s.name = Faker::Company.name
+        s.create_user_id = '1'
+        s.publish_flg = '0'
+        s.description = 'テスト登録用グループです。'
+    end
+}
 
 20.times {
     Post.seed do |s|

@@ -19,9 +19,12 @@
         </div>
         <% end %>
     </div>
+    <div class="center">
+        <%= paginate @users %>
+    </div>
     <div class="row userindex">
         <% @users.each do |user| %>
-        <div class="col-4">
+        <div class="user-info col-4">
             <% if user.image.attached? %>
                 <%= link_to user.image, user_path(user), class:"user-icon" %>
             <% else %>
@@ -34,5 +37,8 @@
             <br>
         </div>
         <% end %>
+    </div>
+    <div class="center">
+        <%= paginate @users %>
     </div>
 </div>

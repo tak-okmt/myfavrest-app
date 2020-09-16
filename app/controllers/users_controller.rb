@@ -1,12 +1,13 @@
 class UsersController < ApplicationController
   before_action :set_user, only: %i[show follower followed]
-  skip_before_action :authenticate_user!, only: %i[index show]
+  skip_before_action :authenticate_user!, only: %i[index]
 
     def index
       #検索オブジェクト
       @search = User.ransack(params[:q])
       #検索結果
       @users = @search.result
+      @users = @users.page(params[:page]).per(15)
       @code  = Code.all
     end
 
