@@ -23,7 +23,7 @@
             <% end %>
             </div>
             <div class="col-sm-12 col-md-6">
-                評価：<%= @post.score %>
+                評価：<%= @score %>
                 <div class="shopinfo-header">
                     <div class="post-<%= @post.id %> shopinfo-like">
                         <%= render partial: 'shared/like', locals: {community: @post.community, post: @post} %>
