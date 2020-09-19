@@ -7,4 +7,4 @@ function copy() {
     }else{
         alert('文字が入力されていません');
     }
-  }
+}
