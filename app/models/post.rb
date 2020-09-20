@@ -2,8 +2,6 @@ class Post < ApplicationRecord
     validates :title, presence: true, length: { maximum:30 }
     validate :validate_title_not_including_comma
     has_one_attached :image
-    geocoded_by :address
-    after_validation :geocode, if: :address_changed?
 
     belongs_to :user
     belongs_to :community
