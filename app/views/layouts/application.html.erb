@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>グルコミュ</title>
+    <title><%= full_title(yield(:title)) %></title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -17,7 +17,7 @@
       <% elsif flash[:alert].present? %>
           <div class="alert alert-success"><%= flash[:alert] %></div>
       <% else %>
-        <br>
+          <br>
       <% end %>
         <%= yield %>
 

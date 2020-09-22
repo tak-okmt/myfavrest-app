@@ -1,3 +1,7 @@
+<% provide(:title, "店舗詳細") %>
+<% breadcrumb :post_show, @post.community, @post %>
+<%= breadcrumbs separator: " &rsaquo; " %>
+<br>
 <div class="container shopwrapper">
     <h3 class="shoptitle"><i class="fas fa-utensils"></i> <%= @post.title %></h3>
     <div class="shop-linkbtn">
@@ -22,7 +26,7 @@
             <% end %>
             </div>
             <div class="col-sm-12 col-md-6">
-                評価：<%= @post.score %>
+                評価：<%= @score %>
                 <div class="shopinfo-header">
                     <div class="post-<%= @post.id %> shopinfo-like">
                         <%= render partial: 'shared/like', locals: {community: @post.community, post: @post} %>
@@ -30,13 +34,12 @@
                     <div id="comments_area">
                         <i class="fas fa-comments"></i> <%= @comments.count %>
                     </div>&nbsp&nbsp
-                    <div class="category-tag"><% @post.rest_type %>居酒屋</div>
+                    <div class="category-tag"><%= user_code_name("2",@post.rest_type) %></div>
                 </div>
-                <span class="shopupd"><%= @post.updated_at.strftime("%Y-%m-%d") %></span><br>
+                <span class="shopupd">更新日：<%= @post.updated_at.strftime("%Y/%m/%d") %></span><br>
                 <span class="shopadr"><%= @post.address %></span><br>
                 <%= simple_format(h(@post.description), {}, sanitize: false, wrapper_tag:"div") %>
             </div>
-            <div class="col-sm-12 mapdetail">地図</div>
         </div>
     </div>
     <div class="col-sm-12 commentlist">
@@ -48,25 +51,26 @@
         </div>
         <div id="comments_area">
             <% @comments.each do |c| %>
-                <div class="cmnt">
-                    <div class="row">
-                        <div class="col-sm-12 col-md-5 cmntuser">
-                            <% if c.user.image.attached? %>
-                                <%= image_tag c.user.image, class:"card-img-top" %>
+                <%= link_to community_post_comment_path(@post.community,@post,c), class: "cmnt-link" do %>
+                    <div class="cmnt">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-5 cmntuser">
+                            <% if c.image.attached? %>
+                                <%= image_tag c.image, class:"cmt-img" %>
                             <% else %>
-                                <p>写真</p>
+                                <%= image_tag ("no_image.png"), class:"cmt-img" %>
                             <% end %>
-                            <%= link_to "#{c.user.username}さん", user_path(c.user.id) %><br>
-                        </div>
-                        <div class="col-sm-12 col-md-7 cmntttl">
-                            <%= c.updated_at.strftime("%Y-%m-%d") %><br>
-                            <%= c.score %><br>
-                            <%= c.title %>
-                            <%= link_to "口コミの詳細を見る", community_post_comment_path(@post.community,@post,c), class: "cmnt-link" %>
-                            <br>
+                            </div>
+                            <div class="col-sm-12 col-md-7 cmntttl">
+                                評価：<%= c.score %><br>
+                                訪問日：<%= c.visitday.strftime("%Y/%m/%d") %><br>
+                                <%= c.title %><br>
+                                更新日：<%= c.updated_at.strftime("%Y/%m/%d") %>
+                                <br>
+                            </div>
                         </div>
                     </div>
-                </div>
+                <% end %>
             <% end %>
         </div>
     </div>

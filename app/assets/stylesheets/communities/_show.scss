@@ -18,13 +18,29 @@
             }
         }
 
+        .comm-name{
+            border-bottom: solid 1px black;
+        }
+
+        .comm-desc{
+            font-size: 0.7em;
+        }
+
+        .user-index{
+            border-bottom: solid 1px black;
+        }
+
         .admin{
+            overflow: hidden;
+            width: 60px;
             font-size: 0.7em;
             color: red;
         }
 
         .belong-username{
-            font-size: 0.7em;
+            font-size: 0.6em;
+            height: 15px;
+            overflow: hidden;
         }
 
     }

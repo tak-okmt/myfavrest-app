@@ -1,5 +1,5 @@
 class Post < ApplicationRecord
-    validates :title, presence: true, length: { maximum:30 }, uniqueness: { scope: :user_id }
+    validates :title, presence: true, length: { maximum:30 }
     validate :validate_title_not_including_comma
     has_one_attached :image
 

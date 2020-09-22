@@ -1,6 +1,10 @@
+<% provide(:title, "口コミ詳細") %>
+<% breadcrumb :comment_show, @comment.post.community, @comment.post, @comment %>
+<%= breadcrumbs separator: " &rsaquo; " %>
+<br>
 <div class="container comment-wrapper">
     <h3>口コミの詳細</h3>
-    <h3 class="comment-title"><%= @comment.title %>仮タイトル</h3>
+    <h3 class="comment-title"><%= @comment.title %></h3>
     <div class="comment-linkbtn">
         <% if @comment.user == current_user %>
             <div class="comment-edit">

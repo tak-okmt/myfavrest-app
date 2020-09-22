@@ -2,9 +2,11 @@ class CommunitiesController < ApplicationController
     skip_before_action :authenticate_user!, only: [:index, :show]
 
     def index
-        @communities = Community.where(publish_flg: 0)
-        @posts = Post.where(community_id: @communities.ids)
-        @communities = @communities.page(params[:page])
+        #検索オブジェクト
+        @search = Community.ransack(params[:q])
+        #検索結果
+        @communities = @search.result.where(publish_flg: 0)
+        @communities = @communities.page(params[:page]).per(12)
     end
 
     def show
@@ -16,7 +18,7 @@ class CommunitiesController < ApplicationController
         #検索結果
         @posts = @search.result
         @posts = @posts.where(community_id: @community.id)
-        @posts = @posts.page(params[:page])
+        @posts = @posts.page(params[:page]).per(9)
         if current_user
             @belonging = Belonging.find_by(community_id: @community.id, user_id: current_user.id)
             @apply = Apply.find_by(community_id: @community.id, user_id: current_user.id)

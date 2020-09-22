@@ -1,6 +1,9 @@
+<% provide(:title, "グループ編集") %>
+<% breadcrumb :community_edit, @community %>
+<%= breadcrumbs separator: " &rsaquo; " %>
 <div class="container">
     <div class="community-edit">
-        <h3><i class="fas fa-users"></i> コミュニティ情報を編集する</h3><br>
+        <h3><i class="fas fa-users"></i> グループ情報を編集する</h3><br>
         <div class="community-form">
             <%= render partial:'form', locals:{community: @community, code: @code} %>
         </div>

@@ -1,12 +1,32 @@
+<% provide(:title, "グループ一覧") %>
 <div class="container">
     <div class="row">
         <div class="communityindex col-12">
             <!-- グループ一覧 START -->
             <div class="container communities">
                 <!-- タイトル START -->
+                <h3 class="commulst-title"><i class="fas fa-users"></i>&nbsp公開グループ一覧</h3>
                 <!-- タイトル END -->
                 <!-- 検索 START -->
+                <div class="searchform container">
+                    <%= search_form_for @search do |f| %>
+                        <div class="row">
+                            <div class="form-group cond1 col-sm-7 m-0">
+                                <%= f.search_field :name_cont, class:"form-control" ,placeholder: "グループ名で探す "  %>
+                            </div>
+                            <div class="form-group cond3 col-sm-3 m-0">
+                                <%= f.select( :sorts, {'並び替え': 'id asc', '作成日の新しい順': 'created_at desc', '作成日の古い順': 'created_at asc' }, {},{class: "form-control"}) %>
+                            </div>
+                            <div class="form-group cond_sbtn col-sm-2">
+                                <%= f.submit "検索", class: 'sbtn' %>
+                            </div>
+                        </div>
+                    <% end %>
+                </div>
                 <!-- 検索 END -->
+                <div class="center">
+                    <%= paginate @communities %>
+                </div>
                 <div class="row">
                     <% @communities.each do |com| %>
                         <div class = "col-sm-6 col-md-4 col-lg-3 mb-5">
@@ -22,18 +42,13 @@
                                 <div class="card-body">
                                     <p class="card-title"><%= link_to com.name, community_path(com) %></p>
                                     <div class="card-text">
-                                        <i class="fas fa-users"></i>&nbsp<%= community_member_calc(com) %>人
-                                        &nbsp&nbsp<i class="fas fa-utensils"></i>&nbsp<%= com.posts.count %>店舗
+                                        <i class="fas fa-users"></i>&nbsp<%= com.users.size %>人
+                                        &nbsp&nbsp<i class="fas fa-utensils"></i>&nbsp<%= com.posts.size %>店舗
                                         &nbsp&nbsp<i class="fas fa-comments"></i>&nbsp<%= community_comment_calc(com) %>件<br>
-                                        <div class="create-user-info">
-                                            <% user = get_create_user(com) %>
-                                            <% if user.image.attached? %>
-                                                <%= image_tag user.image, class:"user-icon" %>
-                                            <% else %>
-                                                <%= image_tag ("no_image.png"), class:"user-icon" %>
-                                            <% end %>
-                                            <span class="create-user font-size-mini">作成：<%= get_create_user(com).username %></span>
-                                        </div>
+                                        <span class="font-size-mini">
+                                            投稿が多いエリア：<%= post_type_most(com, '1') %><br> <!-- エリア -->
+                                            投稿が多い店ジャンル：<%= post_type_most(com, '2') %><!-- 店タイプ -->
+                                        </span>
                                     </div>
                                 </div>
                             </div>
@@ -48,7 +63,7 @@
             <!-- グループ一覧 END -->
             <div class="d-none d-md-block">
                 <%= link_to new_community_path, class: 'new-btn' do %>
-                    グループ<br>新規作成
+                    新規作成
                 <% end %>
             </div>            
         </div>
