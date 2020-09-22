@@ -10,11 +10,11 @@
         <%= f.file_field :image %>
       </div>
       <div class="form-group">
-        <%= f.label :email %><br />
+        <span class="must">必須</span><%= f.label :email %><br />
         <%= f.email_field :email, autocomplete: "email", class:'form-control' %>
       </div>
       <div class="form-group">
-        <%= f.label :username %><br />
+        <span class="must">必須</span><%= f.label :username %><br />
         <%= f.text_field :username, autocomplete: "username", class:'form-control' %>
       </div>
       <div class="form-group">
@@ -39,7 +39,7 @@
         <%= f.label :gender, "その他" %>
       </div>
       <div class="form-group">
-        <%= f.label :password %>
+        <span class="must">必須</span><%= f.label :password %>
         <% if @minimum_password_length %>
           <em>(<%= @minimum_password_length %>文字以上)</em>
         <% end %><br />
@@ -47,7 +47,7 @@
       </div>
 
       <div class="form-group">
-        <%= f.label :password_confirmation %><br />
+        <span class="must">必須</span><%= f.label :password_confirmation %><br />
         <%= f.password_field :password_confirmation, autocomplete: "new-password", class:'form-control' %>
       </div>
 

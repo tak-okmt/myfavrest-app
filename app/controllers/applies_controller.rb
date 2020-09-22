@@ -14,6 +14,7 @@ class AppliesController < ApplicationController
   end
 
   def index
+    @comminity = Community.find(params[:community_id])
     @applies = Apply.where(community_id: params[:community_id])
   end
 

@@ -11,7 +11,7 @@
         <%= f.file_field :image %>
     </div>
     <div class="form-group">
-        <%= f.label "コミュニティの名前" %>
+        <span class="must">必須</span><%= f.label "コミュニティの名前" %>
         <%= f.text_field :name, class:'form-control', id: 'community_name' %>
     </div>
     <div class="form-group">

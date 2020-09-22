@@ -10,11 +10,11 @@
         <%= f.file_field :image %>
       </div>
       <div class="form-group">
-        <%= f.label :email %><br />
+        <span class="must">必須</span><%= f.label :email %><br />
         <%= f.email_field :email, autocomplete: "email", class:'form-control' %>
       </div>
       <div class="form-group">
-        <%= f.label :username %><br />
+        <span class="must">必須</span><%= f.label :username %><br />
         <%= f.text_field :username, autocomplete: "username", class:'form-control' %>
       </div>
       <div class="form-group">
@@ -39,17 +39,13 @@
         <%= f.label :gender, "その他" %>
       </div>
 
-      <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-        <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-      <% end %>
-
       <div class="form-group">
-        <%= f.label :current_password %>
+        <span class="must">必須</span><%= f.label :current_password %>
         <%= f.password_field :current_password, autocomplete: "current-password", class:'form-control' %>
       </div>
 
       <div class="form-group">
-        <%= f.label "パスワード(パスワードを変更しない場合は、空白のままにして下さい)" %><br />
+        <%= f.label "新しいパスワード(パスワードを変更しない場合は、空白のままにして下さい)" %><br />
         <%= f.password_field :password, autocomplete: "new-password", class:'form-control' %>
         <% if @minimum_password_length %>
           <em><%= @minimum_password_length %>文字以上でご入力下さい</em>

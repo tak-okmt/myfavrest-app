@@ -1,4 +1,7 @@
 <% provide(:title, "ユーザ詳細") %>
+<% breadcrumb :user_show, @user %>
+<%= breadcrumbs separator: " &rsaquo; " %>
+<br>
 <div class="container userwrapper">
     <h3><i class="fas fa-user"></i> ユーザ情報</h3>
     <div class="row userinfo">
