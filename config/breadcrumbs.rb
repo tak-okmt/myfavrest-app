@@ -9,7 +9,7 @@ crumb :community do
 end
 
 crumb :community_show do |community|
-  link "グループ情報", community_path(community)
+  link "グループ詳細", community_path(community)
   parent :community
 end
 

@@ -29,7 +29,6 @@
     .shop-delete{
         margin-left: 10px;
     }
-
 }
 
 .shopinfo{
@@ -55,13 +54,13 @@
     .order-link{
         text-align: center;
     }
-    .cmnt-link a:link, a:visited, a:hover{
+    .cmnt-link{
         text-decoration: none;
         color: black;
     }
     .cmnt{
         border: solid 1px #d3d3d3;
-        box-shadow: 5px 5px 5px rgba(0,0,0,0.07);
+        box-shadow: 5px 5px 5px rgba(0,0,0,0.05);
         text-align: center;
         border-radius: 60px;
         height: 120px;
@@ -73,7 +72,7 @@
             max-height: 100px; 
         }
         &:hover{
-            box-shadow: 5px 5px 5px rgba(0,0,0,0.25);
+            box-shadow: 5px 5px 5px rgba(0,0,0,0.3);
         }
     }
 }
