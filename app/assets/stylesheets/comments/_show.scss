@@ -14,20 +14,12 @@
     }
 }    
 
-.rating-title{
-    @include height_width(200px, 200px);
-    padding: 5px 20px;
-    background-color: #039be5;
-    color: #fff;
-    border-radius: 20px;
-}
-
 .cmnt-info{
     width: 80%;
 }
 .content-box{
     padding: 0.5em 1em;
-    margin: 2em 0;
+    margin: 1em 0;
     border: double 5px #ffe4b1;
     height: 300px;
 }

@@ -26,7 +26,7 @@
             <% end %>
             </div>
             <div class="col-sm-12 col-md-6">
-                評価：<%= @score %>
+                <span class="rating-title">評価</span>&nbsp;<%= @score %>/5
                 <div class="shopinfo-header">
                     <div class="post-<%= @post.id %> shopinfo-like">
                         <%= render partial: 'shared/like', locals: {community: @post.community, post: @post} %>
@@ -36,7 +36,7 @@
                     </div>&nbsp&nbsp
                     <div class="category-tag"><%= user_code_name("2",@post.rest_type) %></div>
                 </div>
-                <span class="shopupd">更新日：<%= @post.updated_at.strftime("%Y/%m/%d") %></span><br>
+                <span class="mini-item-name-gray">更新日：<%= @post.updated_at.strftime("%Y/%m/%d") %></span><br>
                 <span class="shopadr"><%= @post.address %></span><br>
                 <%= simple_format(h(@post.description), {}, sanitize: false, wrapper_tag:"div") %>
             </div>
@@ -45,7 +45,7 @@
     <div class="col-sm-12 commentlist">
         <h3 class="cmntlst-title"><i class="fas fa-comments"></i><br>口コミ一覧</h3>
         <div class="order-link">
-            <%= order_link_active('更新日順', community_post_path(@post.community), 'updated_at') %>
+            <%= order_link_active('投稿日順', community_post_path(@post.community), 'updated_at') %>
             <%= order_link_active('評価順', community_post_path(@post.community), 'score') %>
             <%= order_link_active('訪問日順', community_post_path(@post.community), 'visitday') %>
         </div>
@@ -62,10 +62,9 @@
                             <% end %>
                             </div>
                             <div class="col-sm-12 col-md-7 cmntttl">
-                                評価：<%= c.score %><br>
-                                訪問日：<%= c.visitday.strftime("%Y/%m/%d") %><br>
-                                <%= c.content %><br>
-                                更新日：<%= c.updated_at.strftime("%Y/%m/%d") %>
+                                <span class="rating-title">評価</span>&nbsp;<%= c.score %><br>
+                                <span class="mini-item-name-gray">訪問日：</span><span class="font-size-mid"><%= c.visitday.strftime("%Y/%m/%d") %></span><br>
+                                <%= c.content.truncate(30) %>
                                 <br>
                             </div>
                         </div>

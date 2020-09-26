@@ -15,11 +15,11 @@
         <%= f.text_field :title, class:'form-control', id: 'title_name' %>
     </div>
     <div class="form-group">
-        <%= f.label "お店の説明" %>
+        <span class="must">必須</span><%= f.label "お店の説明" %>
         <%= f.text_area :description, row:5, class: 'form-control', id:'post_description' %>
     </div>
     <div class="form-group">
-        <%= f.label "都道府県" %><br>
+        <span class="must">必須</span><%= f.label "都道府県" %><br>
         <%= f.collection_select :prefecture_code, JpPrefecture::Prefecture.all, :code, :name, {include_blank: '都道府県を選択してください'}, {class: "form-control"} %>
     </div>
     <div class="form-group">
@@ -31,7 +31,7 @@
         <%= f.text_field :address, class: 'form-control', id:'post_address', placeholder: "住所" %>
     </div>
     <div class="form-group">
-        <%= f.label "料理ジャンル" %><br>
+        <span class="must">必須</span><%= f.label "料理ジャンル" %><br>
         <%= f.collection_select :rest_type, code.where(code_id: "2"), :code, :name, {include_blank: '料理ジャンルを選択してください'}, {class: "form-control"} %>
     </div>
     <%= f.hidden_field :community_id, value: community.id %>

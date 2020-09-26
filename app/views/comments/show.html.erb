@@ -21,15 +21,29 @@
         <% end %>
         </div>
         <div class="col-sm-12 col-md-6">
-            <span class="rating-title">評価</span>&emsp;<%= @comment.score %>&nbsp;点
-            <div class="cmnt-info">
-                <div class="scene-tag"><%= @comment.scene %></div>
-                <div class="people-tag"><%= @comment.people %></div>
+            <div class="row">
+                <div class="col-6">
+                    <span class="rating-title">評価</span>&emsp;<%= @comment.score %>
+                    <div class="cmnt-info mt-1">
+                        <div class="scene-tag"><span class="mini-item-name-gray">利用シーン：</span><%= user_code_name("3",@comment.scene) %></div>
+                        <div class="people-tag"><span class="mini-item-name-gray">利用人数：</span><%= user_code_name("4",@comment.people) %></div>
+                        <div><span class="mini-item-name-gray">訪問日：</span><%= @comment.visitday.strftime("%Y/%m/%d") %></div>
+                    </div>
+                </div>
+                <div class="col-6 m-auto0">
+                    <%= link_to user_path(@comment.user), class:"text-line-none" do %>
+                        <% if @comment.user.image.attached? %>
+                            <span class="user-icon"><%= @comment.user.image %></span>
+                        <% else %>
+                            <%= image_tag ("no_image.png"), class:"user-icon" %>
+                        <% end %>
+                            <span class="font-size-mid"><%= @comment.user.username %></span>
+                    <% end %>
+                </div>
             </div>
             <div class="content-box">
                 <%= simple_format(h(@comment.content), {}, sanitize: false, wrapper_tag:"div") %>
             </div>
-            <span class="shopupd"><%= @comment.updated_at.strftime("%Y-%m-%d") %></span><br>
         </div>
     </div>
 </div>
