@@ -30,8 +30,8 @@
                 <br>
             </div>
             <div class="user-work-info">
-                勤務先業界：<%= user_code_name("6",@user.work_idt) unless @user.work_idt.nil? %><br>
-                職種：<%= user_code_name("7",@user.work_ocpn) unless @user.work_ocpn.nil? %>
+                勤務先業界：<%= user_code_name("6",@user.work_idt) %><br>
+                職種：<%= user_code_name("7",@user.work_ocpn) %>
             </div>
             <!-- follow -->
             <%= render partial: 'shared/follow', locals: {user: @user} %>

@@ -2,30 +2,34 @@
 <div class="container">
     <div class="row">
         <div class="col-md-4 col-sm-12 mb-5">
-            <% if @user.image.attached? %>
-                <%= image_tag @user.image, class:"user-icon" %>
-            <% else %>
-                <%= image_tag ("no_image.png"), class:"user-icon" %>
-            <% end %>
-            &nbsp<%= @user.username %>&nbsp
-            <% if @user == current_user %>
-                <%= link_to "編集", edit_user_registration_path, class:"mini-green-link-btn font-bold text-line-none" %>
-            <% end %>
-            <br>
-            <div class="user-age-gender">
-                <!-- 誕生日から年齢計算 -->
-                生年月：<%= @user.birth_ym %>
+            <div class="my-detail">
+                <% if @user.image.attached? %>
+                    <%= image_tag @user.image, class:"user-icon" %>
+                <% else %>
+                    <%= image_tag ("no_image.png"), class:"user-icon" %>
+                <% end %>
+                &nbsp<%= @user.username %>&nbsp
+                <% if @user == current_user %>
+                    <%= link_to "編集", edit_user_registration_path, class:"mini-green-link-btn font-bold text-line-none" %>
+                <% end %>
                 <br>
-                性別：<%= @user.gender %>
-                <br>
-            </div>
-            <div class="user-work-info">
-                勤務先業界：<%= user_code_name("6",@user.work_idt) unless @user.work_idt.nil? %><br>
-                職種：<%= user_code_name("7",@user.work_ocpn) unless @user.work_ocpn.nil? %>
+                <div class="user-age-gender">
+                    <!-- 誕生日から年齢計算 -->
+                    <i class="fas fa-birthday-cake"></i><%= @user.birth_ym %>&nbsp;<%= @user.gender %>
+                    <br>
+                </div>
+                <div class="user-work-info">
+                    <span class="mini-item-name-gray">勤務先業界：</span><%= user_code_name("6",@user.work_idt) %><br>
+                    <span class="mini-item-name-gray">職種：</span><%= user_code_name("7",@user.work_ocpn) %>
+                </div>
+                <div class="t-center mt-3">
+                    <%= render partial: 'shared/follow', locals: {user: @user} %>
+                </div>
             </div>
         </div>
         <div class="col-md-8 col-sm-12">
             <%= render partial:'mymenu', locals:{user: @user} %>
         </div>
     </div>
+    <div>投稿一覧</div>
 </div>
