@@ -1,0 +1,31 @@
+<div class="row users-detail">
+    <% users.each do |user| %>
+    <div class="user-info col-5 row">
+        <div class="col-7">
+            <% if user.image.attached? %>
+                <%= link_to user.image, user_path(user), class:"user-icon" %>
+            <% else %>
+                <%= link_to user_path(user) do %>
+                    <%= image_tag ("no_image.png"), class:"user-icon" %>
+                <% end %>
+            <% end %>
+            &nbsp<%= user.username %>
+            <%= render partial: 'shared/follow', locals: {user: user} %>
+        </div>
+        <div class="user-work-detail col-5">
+            <div>
+                <% unless user.birth_ym.nil? then %>
+                    <%= age_calc(user.birth_ym) %>
+                <% else %>
+                    <%= "年齢非公開" %>
+                <% end %>
+                <%  %>
+                <%= user.gender %>
+            </div>
+            <div><span class="mini-item-name-gray">業界：</span><%= user_code_name("6",user.work_idt) %></div>
+            <div><span class="mini-item-name-gray">職種：</span><%= user_code_name("7",user.work_ocpn) %></div>
+            <div><span class="mini-item-name-gray">口コミ投稿数：</span><%= user.comments.count %></div>
+        </div>
+    </div>
+    <% end %>
+</div>

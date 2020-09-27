@@ -1,5 +1,12 @@
-<%= "#{@user.username}さんがフォローしているユーザ" %>
+<% provide(:title, "フォロー一覧") %>
+<% breadcrumb :follower, @user %>
+<%= breadcrumbs separator: " &rsaquo; " %>
 <br>
-<% @users.each do |user| %>
-    <%= user.username %><br>
-<% end %>
+<div class="container">
+    <%= @user.username %>さんをフォローしているユーザー
+    <% if @users.empty? %>
+        <h4>まだいません。</h4>
+    <% else %>
+        <%= render partial: 'users', locals: {users: @users} %>
+    <% end %>
+</div>

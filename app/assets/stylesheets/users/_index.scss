@@ -1,5 +1,22 @@
-.userwrapper{
-    
+.userswrapper{
+
+    // 検索フォーム START
+    .user-search{
+        border: solid 1px #d3d3d3;
+        box-shadow: 0 0 8px gray;
+        margin-bottom: 20px;
+        padding: 10px 10px;
+
+        .sbtn{
+        cursor: pointer;
+        font-family: FontAwesome;
+        background: #3879D9;
+        color: white;
+        width: 80px;
+        }
+    }
+    // 検索フォーム END
+
     .user-info{
         margin-bottom: 15px;
     }

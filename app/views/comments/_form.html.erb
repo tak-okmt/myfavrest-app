@@ -11,20 +11,16 @@
         <%= f.file_field :image, class:'form-control-file' %>
     </div>
     <div class="form-group">
-        <span class="must">必須</span><%= f.label "口コミタイトル" %>
-        <%= f.text_field :title, class:'form-control', id: 'title_name' %>
-    </div>
-    <div class="form-group">
         <span class="must">必須</span><%= f.label "評価" %><br>
         <%= f.collection_select :score, code.where(code_id: "5"), :code, :name, {include_blank: '評価を選択'}, {class: "form-control"} %>
     </div>
     <div class="form-group">
-        <%= f.label "訪問日" %><br>
-        <%= f.date_field :visitday, class:'form-control' %>
+        <span class="must">必須</span><%= f.label "口コミ内容" %>
+        <%= f.text_area :content, row:5, class: 'form-control', id:'comment-content' %>
     </div>
     <div class="form-group">
-        <%= f.label "口コミ詳細" %>
-        <%= f.text_area :content, row:5, class: 'form-control', id:'comment-content' %>
+        <span class="must">必須</span><%= f.label "訪問日" %><br>
+        <%= f.date_field :visitday, class:'form-control' %>
     </div>
     <div class="form-group">
         <%= f.label "利用シーン" %><br>

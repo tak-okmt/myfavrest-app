@@ -5,27 +5,53 @@
 /* アンダーラインなし */
 .text-line-none{
     text-decoration: none;
-  }
+    &:hover{
+      text-decoration: none;
+    }
+}
 
-  .right{
-    margin: 0 0 0 auto;
-    width: 60px;
-  }
+.right{
+  margin: 0 0 0 auto;
+  width: 60px;
+}
 
 /////////////////////////
 /******フォント関連*******/
 /////////////////////////
 
-  /* 太字 */
-  .font-bold{
-    font-weight: 600;
-  }
+/* 太字 */
+.font-bold{
+  font-weight: 600;
+}
 
-  /* フォントサイズ：0.75em */
-  .font-size-mini{
-    font-size: 0.5em;
-  }
+/* フォントサイズ：0.75em */
+.font-size-mid{
+  font-size: 0.75em;
+}
 
+/* フォントサイズ：0.5em */
+.font-size-mini{
+  font-size: 0.5em;
+}
+
+/* 項目名縮小：0.75em グレー */
+.mini-item-name-gray{
+  font-size: 0.75em;
+  color: #808080;
+}
+
+/////////////////////////
+/******位置関連*********/
+/////////////////////////
+/* 縦位置が中央 */
+.m-auto0{
+  margin: auto 0;
+}
+
+/* 中央寄せ */
+.t-center{
+  text-align: center;
+}
 
 /////////////////////////
 /******ボタン関連*********/
@@ -51,7 +77,7 @@
   }
 }
 
-/* フォロー外すボタン */
+/* フォロー中ボタン */
 .unfollow-btn{
   width: 80px;
   height: 30px;
@@ -140,13 +166,24 @@
 	letter-spacing: 0.2em;
 }
 
+/* 評価マーク */
+.rating-title{
+  @include height_width(200px, 200px);
+  padding: 5px 15px;
+  background-color: #039be5;
+  color: #fff;
+  border-radius: 20px;
+}
+
 /////////////////////////
 /******画像関連*******/
 /////////////////////////
+/* ユーザアイコン */
 .user-icon{
   margin-bottom: 10px;
   width: 50px;
   height: 50px;
   border-radius: 50%;
 }
+
 

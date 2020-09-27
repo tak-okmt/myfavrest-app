@@ -4,49 +4,24 @@
     }
 }
 
-.comment-wrapper{
-    .comment-title{
-        position: relative;
-        padding: 0.6em;
-        background: -webkit-repeating-linear-gradient(-45deg, #fff5df, #fff5df 4px,#ffe4b1 3px, #ffe4b1 8px);
-        background: repeating-linear-gradient(-45deg, #fff5df, #fff5df 4px,#ffe4b1 3px, #ffe4b1 8px);
-        border-radius: 7px;
-          
-        &:after {
-            position: absolute;
-            content: '';
-            top: 100%;
-            left: 30px;
-            border: 15px solid transparent;
-            border-top: 15px solid #ffebbe;
-            width: 0;
-            height: 0;
-        }
-    }
-    .cmnt-userandshop{
-        width: 80%;
-        margin: 40px auto;
-        text-align: center;
-    }
-    .cmnt-info{
-        margin: 30px auto;
-        width: 80%;
-        text-align: center;
-    }
-    .content-box{
-        padding: 0.5em 1em;
-        margin: 2em 0;
-        border: double 5px #ffe4b1;
-        height: 300px;
-    }
-    .comment-linkbtn{
-        display: flex;
-        justify-content: flex-end;
-        margin-top: 10px;
-        
-        .comment-delete{
-            margin-left: 10px;
-        }
-    }
 
+.comment-linkbtn{
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 10px;
+    .cmt-edit{
+        margin-right: 10px;
+    }
+}    
+
+.cmnt-info{
+    width: 80%;
 }
+.content-box{
+    padding: 0.5em 1em;
+    margin: 1em 0;
+    border: double 5px #ffe4b1;
+    height: 300px;
+}
+
+
