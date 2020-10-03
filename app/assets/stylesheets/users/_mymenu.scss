@@ -1,35 +1,41 @@
-.my-detail{
-    border: solid 1px #d3d3d3;
-    box-shadow: 5px 5px 5px rgba(0,0,0,0.05);
-    padding: 10px;
-}
+.mypage-wrapper{
 
-.mymenu-tabs{
-    height: 40px;
-    width: 100%;
-    border: 1px solid #35357d;
+    width: 70%;
 
-    .tab-on{
-        background-color: #35357d;
-        color: white;
-        text-align: center;
-        height: 100%;
-        &:hover{
-            text-decoration: none;
-        }
+    .my-detail{
+        border: solid 1px #d3d3d3;
+        box-shadow: 5px 5px 5px rgba(0,0,0,0.05);
+        padding: 10px;
     }
-    .tab-off{
-        background-color:white;
-        color: #35357d;
-        text-align: center;
-        height: 100%;
-        &:hover{
-            text-decoration: none;
+    
+    .mymenu-tabs{
+        height: 40px;
+        width: 100%;
+        border: 1px solid #35357d;
+    
+        .tab-on{
+            background-color: #35357d;
+            color: white;
+            text-align: center;
+            height: 100%;
+            &:hover{
+                text-decoration: none;
+            }
         }
-    }
-    .mymenu-text{
-        vertical-align: middle;
-        line-height: 40px;
+        .tab-off{
+            background-color:white;
+            color: #35357d;
+            text-align: center;
+            height: 100%;
+            &:hover{
+                text-decoration: none;
+            }
+        }
+        .mymenu-text{
+            vertical-align: middle;
+            line-height: 40px;
+        }
+    
     }
 
 }
