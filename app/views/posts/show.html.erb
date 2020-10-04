@@ -54,29 +54,9 @@
             <%= order_link_active('評価順', community_post_path(@post.community), 'score') %>
             <%= order_link_active('訪問日順', community_post_path(@post.community), 'visitday') %>
         </div>
-        <div id="comments_area">
-            <% @comments.each do |c| %>
-                <%= link_to community_post_comment_path(@post.community,@post,c), class: "cmnt-link" do %>
-                    <div class="cmnt">
-                        <div class="row">
-                            <div class="col-sm-12 col-md-5 cmntuser">
-                            <% if c.image.attached? %>
-                                <%= image_tag c.image, class:"cmt-img" %>
-                            <% else %>
-                                <%= image_tag ("no_image.png"), class:"cmt-img" %>
-                            <% end %>
-                            </div>
-                            <div class="col-sm-12 col-md-7 cmntttl">
-                                <span class="rating-title">評価</span>&nbsp;<%= c.score %><br>
-                                <span class="mini-item-name-gray">訪問日：</span><span class="font-size-mid"><%= c.visitday.strftime("%Y/%m/%d") %></span><br>
-                                <%= c.content.truncate(30) %>
-                                <br>
-                            </div>
-                        </div>
-                    </div>
-                <% end %>
-            <% end %>
-        </div>
+        <!-- 口コミ一覧 START -->
+        <%= render partial:'shared/comments', locals:{post: @post, comments: @comments } %>
+        <!-- 口コミ一覧 END -->
     </div>
 </div>
 <%= link_to '口コミ登録', new_community_post_comment_path(@post.community,@post), class: 'new-btn' %>
