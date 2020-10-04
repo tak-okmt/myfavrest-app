@@ -1,35 +1,145 @@
 <% provide(:title, "マイページ") %>
-<div class="container">
+<div class="container mypage-wrapper">
     <div class="row">
-        <div class="col-md-4 col-sm-12 mb-5">
+        <div class="col-12 mb-5">
             <div class="my-detail">
-                <% if @user.image.attached? %>
-                    <%= image_tag @user.image, class:"user-icon" %>
-                <% else %>
-                    <%= image_tag ("no_image.png"), class:"user-icon" %>
-                <% end %>
-                &nbsp<%= @user.username %>&nbsp
-                <% if @user == current_user %>
-                    <%= link_to "編集", edit_user_registration_path, class:"mini-green-link-btn font-bold text-line-none" %>
-                <% end %>
-                <br>
-                <div class="user-age-gender">
-                    <!-- 誕生日から年齢計算 -->
-                    <i class="fas fa-birthday-cake"></i><%= @user.birth_ym %>&nbsp;<%= @user.gender %>
-                    <br>
-                </div>
-                <div class="user-work-info">
-                    <span class="mini-item-name-gray">勤務先業界：</span><%= user_code_name("6",@user.work_idt) %><br>
-                    <span class="mini-item-name-gray">職種：</span><%= user_code_name("7",@user.work_ocpn) %>
-                </div>
-                <div class="t-center mt-3">
-                    <%= render partial: 'shared/follow', locals: {user: @user} %>
+                <div class="row">
+                    <div class="col-6">
+                        <div class="ml-3">
+                            <% if @user.image.attached? %>
+                                <%= image_tag @user.image, class:"my-user-icon" %>
+                            <% else %>
+                                <%= image_tag ("no_image.png"), class:"my-user-icon" %>
+                            <% end %>
+                        </div>
+                        <div>
+                            <%= @user.username %>
+                            <% if @user == current_user %>
+                                <%= link_to "編集", edit_user_registration_path, class:"mini-green-link-btn font-bold text-line-none" %>
+                            <% end %>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="t-center mt-3 mb-5">
+                            <%= render partial: 'shared/follow', locals: {user: @user} %>
+                        </div>
+                        <div class="user-age-gender mb-1">
+                            <i class="fas fa-birthday-cake"></i><%= @user.birth_ym %>&nbsp;<%= @user.gender %>
+                        </div>
+                        <div class="user-work-info">
+                            <span class="mini-item-name-gray">勤務先業界：</span><%= user_code_name("6",@user.work_idt) %><br>
+                            <span class="mini-item-name-gray">職種：</span><%= user_code_name("7",@user.work_ocpn) %>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="col-md-8 col-sm-12">
-            <%= render partial:'mymenu', locals:{user: @user} %>
+    </div>
+
+    <ul class="nav nav-tabs mb-2">
+        <li class="nav-item">
+            <a class="nav-link active" data-toggle="tab" href="#item1">
+            <div class="user-status">
+                <span class="status-name">お店タイムライン</span>
+            </div>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#item2">
+            <div class="user-status">
+                <span class="status-name">口コミタイムライン</span>
+            </div>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#item2">
+            <div class="user-status">
+                <span class="status-name">所属グループ（<%= @user.posts.count %>）</span>
+            </div>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#item3">
+            <div class="user-status">
+                <span class="status-name">投稿（<%= @user.posts.count %>）</span>
+            </div>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#item4">
+            <div class="user-status">
+                <span class="status-name">いいね（<%= @user.posts.count %>）</span>
+            </div>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#item5">
+            <div class="user-status">
+                <span class="status-name">口コミ（<%= @user.posts.count %>）</span>
+            </div>
+            </a>
+        </li>
+    </ul>
+
+    <div class="tab-content">
+        <!-- お店タイムライン（フォローしているユーザの投稿） -->
+        <div class="tab-pane fade show active" id="item1">
+            <% if @follow_posts.any? %>
+            <div id="show-posts">
+                <%= render partial:'shared/posts', locals:{posts: @follow_posts} %>
+            </div>
+            <% else %>
+            <div class="no-contents d-flex justify-content-center align-items-center">
+                投稿がありません
+            </div>
+            <% end %>
+        </div>
+        <!-- 口コミタイムライン（フォローしているユーザの口コミ） -->
+        <div class="tab-pane fade" id="item2">
+            <% if @follow_comments.any? %>
+            <div id="show-comments">
+                <%= render partial:'shared/comments', locals:{comments: @follow_comments } %>
+            </div>
+            <% else %>
+            <div class="no-contents d-flex justify-content-center align-items-center">
+                いいね！ した投稿がありません
+            </div>
+            <% end %>
+        </div>
+        <!-- 所属グループ -->
+        <div class="tab-pane fade" id="item3">
+            <% if @user.posts.any? %>
+            <div id="show-likes">
+                <%= render partial:'shared/posts', locals:{posts: @user.posts} %>
+            </div>
+            <% else %>
+            <div class="no-contents d-flex justify-content-center align-items-center">
+                いいね！ した投稿がありません
+            </div>
+            <% end %>
+        </div>
+        <!--  -->
+        <div class="tab-pane fade" id="item4">
+            <% if @user.posts.any? %>
+            <div id="show-likes">
+                <%= render partial:'shared/posts', locals:{posts: @user.posts} %>
+            </div>
+            <% else %>
+            <div class="no-contents d-flex justify-content-center align-items-center">
+                いいね！ した投稿がありません
+            </div>
+            <% end %>
+        </div>
+        <div class="tab-pane fade" id="item5">
+            <% if @user.posts.any? %>
+            <div id="show-likes">
+                
+            </div>
+            <% else %>
+            <div class="no-contents d-flex justify-content-center align-items-center">
+                投稿した口コミがありません
+            </div>
+            <% end %>
         </div>
     </div>
-    <div>投稿一覧</div>
 </div>

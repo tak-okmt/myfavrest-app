@@ -1,0 +1,23 @@
+<div id="comments_area">
+    <% comments.each do |c| %>
+        <%= link_to community_post_comment_path(c.post.community,c.post,c), class: "cmnt-link" do %>
+            <div class="cmnt">
+                <div class="row">
+                    <div class="col-sm-12 col-md-5 cmntuser">
+                    <% if c.image.attached? %>
+                        <%= image_tag c.image, class:"cmt-img" %>
+                    <% else %>
+                        <%= image_tag ("no_image.png"), class:"cmt-img" %>
+                    <% end %>
+                    </div>
+                    <div class="col-sm-12 col-md-7 cmntttl">
+                        <span class="rating-title">評価</span>&nbsp;<%= c.score %><br>
+                        <span class="mini-item-name-gray">訪問日：</span><span class="font-size-mid"><%= c.visitday.strftime("%Y/%m/%d") %></span><br>
+                        <%= c.content.truncate(30) %>
+                        <br>
+                    </div>
+                </div>
+            </div>
+        <% end %>
+    <% end %>
+</div>
