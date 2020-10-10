@@ -9,12 +9,20 @@
                     <% else %>
                         <%= image_tag ("no_image.png"), class:"cmt-img" %>
                     <% end %>
+                    <span class="font-size-mini"><%= c.post.title if request.fullpath.include?('users/') %></span> 
                     </div>
-                    <div class="col-sm-12 col-md-7 cmntttl">
+                    <div class="col-sm-12 col-md-4 cmntttl">
                         <span class="rating-title">評価</span>&nbsp;<%= c.score %><br>
                         <span class="mini-item-name-gray">訪問日：</span><span class="font-size-mid"><%= c.visitday.strftime("%Y/%m/%d") %></span><br>
-                        <%= c.content.truncate(30) %>
-                        <br>
+                        <span class="font-size-mid"><%= c.content.truncate(30) %></span>
+                    </div>
+                    <div class="col-sm-12 col-md-3">
+                        <% if c.user.image.attached? %>
+                            <%= image_tag c.user.image, class:"user-icon" %>
+                        <% else %>
+                            <%= image_tag ("no_image.png"), class:"user-icon" %>
+                        <% end %>
+                        <div class="font-size-mid"><%= c.user.username %></div>
                     </div>
                 </div>
             </div>

@@ -13,24 +13,22 @@ class UsersController < ApplicationController
 
     def show
       if @user == current_user
-        # 選択したユーザがログインユーザの場合、自ユーザ画面へ遷移
-        @belongings = @user.belongings
-        @community = Community.find(1) # 誰でもコミュニティ
         @available_communities = Community.where(publish_flg: 0).or(Community.where(id: @user.communities))
-        # フォロー中のユーザの投稿を表示（所属していない非公開グループを除く）
-        @follow_posts = Post.where(user_id: @user.following_user, community_id: @available_communities).order('updated_at DESC')
-        # フォロー中のユーザの口コミを表示
-        comments = Comment.where(user_id: @user.following_user).order('updated_at DESC')
-        @follow_comments = []
-        comments.each do |n| # 口コミがavaliableに含まれるか判定
-          @follow_comments << n if n.post.community.in?(@available_communities)
-        end
-        render template: "users/myusershow"
-      else
-        # ログインユーザ以外のユーザの場合、ユーザ詳細画面へ遷移
-        @comments = @user.comments.order('updated_at DESC')
-        @belongings = @user.belongings
+        # １．フォロー中のユーザの投稿を表示（所属していない非公開グループを除く）
+          @follow_posts = Post.where(user_id: @user.following_user, community_id: @available_communities).order('updated_at DESC').page(params[:follow_posts]).per(6)
+        # ２．フォロー中のユーザの口コミを表示
+          comments = Comment.where(user_id: @user.following_user).order('updated_at DESC')
+          @follow_comments = []
+          comments.each do |n| # 口コミがavaliableに含まれるか判定
+            @follow_comments << n if n.post.community.in?(@available_communities)
+          end
+          @follow_comments = Kaminari.paginate_array(@follow_comments).page(params[:follow_comments]).per(10)
       end
+      @belongings = @user.belongings.page(params[:belong_community]).per(6)
+      @comments   = @user.comments.order('updated_at DESC')
+      # ３．いいね！した投稿を表示
+      @like_posts = @user.likes.order('updated_at DESC').map{ |n| n.post }
+      @like_posts = Kaminari.paginate_array(@like_posts).page(params[:like_posts]).per(6)
     end
 
     def follower

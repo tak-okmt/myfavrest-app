@@ -3,7 +3,7 @@
 <%= breadcrumbs separator: " &rsaquo; " %>
 <br>
 <div class="container comment-wrapper">
-    <h3><i class="fas fa-comment"></i> 口コミの詳細</h3>
+    <h3><i class="fas fa-comment"></i> 口コミの詳細  （<%= @comment.post.title %>）</h3>
     <div class="comment-linkbtn">
         <% if @comment.user == current_user %>
             <%= link_to "編集",edit_community_post_comment_path(@comment.post.community,@comment.post,@comment), class:"mini-green-link-btn font-bold text-line-none cmt-edit" %>

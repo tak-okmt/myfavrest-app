@@ -5,7 +5,7 @@
 <div class="container">
     <%= @user.username %>さんがフォローされているユーザー
     <% if @users.empty? %>
-        <h4>まだいません。</h4>
+        <h4 class="mt-5">まだいません。</h4>
     <% else %>
         <%= render partial: 'users', locals: {users: @users} %>
     <% end %>
