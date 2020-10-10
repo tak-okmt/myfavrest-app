@@ -31,6 +31,6 @@
         <%= f.collection_select :people, code.where(code_id: "4"), :code, :name, {include_blank: '利用人数を選択'}, {class: "form-control"} %>
     </div>
     <%= f.hidden_field :post_id, value: post.id %>
-    <%= f.hidden_field :community_id, value: community.id %>
-    <%= f.submit "口コミを登録する" %>
+    <%= f.submit "口コミを登録する", class:'btn btn-primary' %>
+    &nbsp;<%= link_to "戻る", :back %>
 <% end %>

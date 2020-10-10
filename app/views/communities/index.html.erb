@@ -30,29 +30,7 @@
                 <div class="row">
                     <% @communities.each do |com| %>
                         <div class = "col-sm-6 col-md-4 col-lg-3 mb-5">
-                            <!-- カード START -->
-                            <div class="card">
-                                <% if com.image.attached? %>
-                                    <%= image_tag com.image, class:"community-img" %>
-                                <% else %>
-                                    <%= link_to community_path(com) do %>
-                                        <%= image_tag ("no_image.png"), class:"community-img" %>
-                                    <% end %>
-                                <% end %>
-                                <div class="card-body">
-                                    <p class="card-title"><%= link_to com.name, community_path(com) %></p>
-                                    <div class="card-text">
-                                        <i class="fas fa-users"></i>&nbsp<%= com.users.size %>人
-                                        &nbsp&nbsp<i class="fas fa-utensils"></i>&nbsp<%= com.posts.size %>店舗
-                                        &nbsp&nbsp<i class="fas fa-comments"></i>&nbsp<%= community_comment_calc(com) %>件<br>
-                                        <span class="font-size-mini">
-                                            投稿が多いエリア：<%= post_type_most(com, '1') %><br> <!-- エリア -->
-                                            投稿が多い店ジャンル：<%= post_type_most(com, '2') %><!-- 店タイプ -->
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- カード END -->
+                            <%= render partial:'shared/communities', locals:{community: com} %>
                         </div>
                     <% end %>
                 </div>

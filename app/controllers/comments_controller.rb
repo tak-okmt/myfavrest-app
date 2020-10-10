@@ -2,6 +2,10 @@ class CommentsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:show]
 
   def create
+    @post = Post.find(params[:post_id])
+    @community = Community.find(params[:community_id])
+    @code = Code.all
+
     @comment = current_user.comments.build(comment_params)
     if @comment.save
       redirect_to community_post_url(@comment.post.community,@comment.post), notice:"「#{@comment.post.title}」の口コミを登録しました。"
@@ -44,7 +48,7 @@ class CommentsController < ApplicationController
   private
 
     def comment_params
-      params.require(:comment).permit(:image,:title,:score,:visitday,:content,:scene,:people, :post_id)
+      params.require(:comment).permit(:image,:score,:visitday,:content,:scene,:people, :post_id)
     end
 
 end

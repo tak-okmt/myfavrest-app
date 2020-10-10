@@ -23,7 +23,7 @@
         <%= f.collection_select :prefecture_code, JpPrefecture::Prefecture.all, :code, :name, {include_blank: '都道府県を選択してください'}, {class: "form-control"} %>
     </div>
     <div class="form-group">
-        <%= f.label "エリア" %><br>
+        <span class="must">必須</span><%= f.label "エリア" %><br>
         <%= f.collection_select :area, code.where(code_id: "1"), :code, :name, {include_blank: 'エリアを選択してください'}, {class: "form-control"} %>
     </div>
     <div class="form-group">
