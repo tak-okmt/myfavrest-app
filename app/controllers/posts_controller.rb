@@ -1,5 +1,7 @@
 class PostsController < ApplicationController
-  skip_before_action :authenticate_user!, only: [:index, :show]
+  skip_before_action :authenticate_user!, only: %i[index show]
+  before_action :validate_post, only: %i[edit update destroy]
+  before_action :new_post_limited, only: [:new]
 
   def index
     #検索オブジェクト
@@ -23,14 +25,12 @@ class PostsController < ApplicationController
   end
 
   def new
-    @community = Community.find_by(params[:community_id])
     @post = Post.new
     @code = Code.all
   end
 
   def edit
     @community = Community.find_by(params[:community_id])
-    @post = current_user.posts.find(params[:id])
     @code = Code.all
   end
 
@@ -75,6 +75,16 @@ class PostsController < ApplicationController
         order_key = 'visitday'
       end
       comments.order(order_key)
+    end
+
+    def validate_post
+      @post = Post.find(params[:id])
+      redirect_to community_post_path(@post.community,@post), alert: "作成ユーザのみ変更操作ができます" if @post.user_id != current_user.id
+    end
+
+    def new_post_limited
+      @community = Community.find(params[:community_id])
+      redirect_to community_path(@community), alert: "所属ユーザのみ新規作成ができます" unless @community.user_belonging?(current_user)
     end
 
 end

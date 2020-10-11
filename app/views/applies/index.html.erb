@@ -15,8 +15,8 @@
                 <% end %>
             <% end %>
             &nbsp<%= app.user.username %><br>
-            <%= link_to "承認", community_belongings_path(app.community, user_id: app.user.id, apply_id: app.id), method: :post, class:"mini-green-link-btn font-bold text-line-none" %>
-            <%= link_to "却下", community_apply_path(app.community, app), method: :delete, class:"mini-red-link-btn font-bold text-line-none" %>
+            <%= link_to "承認", community_belongings_path(app.community, user_id: app.user.id, apply_id: app.id), method: :post, data:{ confirm: "#{app.user.username}さんの加入申請を承認します。よろしいですか？" }, class:"mini-green-link-btn font-bold text-line-none" %>
+            <%= link_to "却下", community_apply_path(app.community, app), method: :delete, data:{ confirm: "#{app.user.username}さんの加入申請を却下します。よろしいですか？" },class:"mini-red-link-btn font-bold text-line-none" %>
             <br>
         </div>
         <% end %>

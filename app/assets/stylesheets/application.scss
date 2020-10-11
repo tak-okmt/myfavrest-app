@@ -1,4 +1,5 @@
 @import "bootstrap";
+@import "toastr";
 
 @import "./modules/mixin";
 @import "./modules/common";
@@ -8,6 +9,7 @@
 @import "./shared/follow";
 @import "./shared/comments";
 @import "./shared/communities";
+@import "./shared/error_explanation";
 
 @import "./users/index";
 @import "./users/show";

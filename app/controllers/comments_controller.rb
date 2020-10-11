@@ -1,5 +1,7 @@
 class CommentsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:show]
+  before_action :validate_comment, only: %i[edit update destroy]
+  before_action :new_comment_limited, only: [:new]
 
   def create
     @post = Post.find(params[:post_id])
@@ -21,7 +23,6 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    @comment = Comment.find(params[:id])
     if @comment.destroy
       redirect_to community_post_url(@comment.post.community,@comment.post), notice: "「#{@comment.post.title}」の口コミを削除しました。"
     end
@@ -29,7 +30,6 @@ class CommentsController < ApplicationController
 
   def new
     @post = Post.find(params[:post_id])
-    @community = Community.find(params[:community_id])
     @comment = Comment.new
     @code = Code.all
   end
@@ -37,7 +37,6 @@ class CommentsController < ApplicationController
   def edit
     @post = Post.find(params[:post_id])
     @community = Community.find(params[:community_id])
-    @comment = current_user.comments.find(params[:id])
     @code = Code.all
   end
 
@@ -51,4 +50,14 @@ class CommentsController < ApplicationController
       params.require(:comment).permit(:image,:score,:visitday,:content,:scene,:people, :post_id)
     end
 
+    def validate_comment
+      @comment = Comment.find(params[:id])
+      redirect_to community_post_path(@comment.post.community,@comment.post) if @comment.user_id != current_user.id
+    end
+
+    def new_comment_limited
+      @community = Community.find(params[:community_id])
+      redirect_to community_post_path(@community,@community.post), alert: "所属ユーザのみ口コミができます" unless @community.user_belonging?(current_user)
+    end
+    
 end
