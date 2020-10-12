@@ -22,6 +22,9 @@
                 投稿が多いエリア：<%= post_type_most(community, '1') %><br> <!-- エリア -->
                 投稿が多い店ジャンル：<%= post_type_most(community, '2') %><br><!-- 店タイプ -->
             </span>
+            <% if current_user and current_user.applies.find_by(community_id: community).present? %>
+                <span class="green-btn font-bold mt-2">加入申請中</span>
+            <% end %>
         </div>
     </div>
 </div>

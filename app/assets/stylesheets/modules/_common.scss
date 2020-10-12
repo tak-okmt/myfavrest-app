@@ -119,7 +119,18 @@
   }
 }
 
-/* ミニ緑色リンクボタン */
+/* 緑色ボタン */
+.green-btn{
+    @include btn-set(80px, 30px);
+    display: inline-block;
+    color: white;
+    background-color: #4ba53a;
+    border:1px solid #4ba53a;
+    font-size: 12px;
+    cursor: default;
+  }
+
+  /* ミニ緑色リンクボタン */
 .mini-green-link-btn{
     @include btn-set(60px, 20px);
     display: inline-block;
