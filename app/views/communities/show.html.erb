@@ -18,28 +18,39 @@
                 </div>
                 <div class="community-delete-btn">
                 <% if @community.create_user == current_user %>
-                    <%= link_to "削除", community_path(@community), method: :delete, data:{ confirm: "コミュニティ「#{@community.name}」を削除します。よろしいですか？" } ,class:"mini-red-link-btn font-bold text-line-none" %>
+                    <%= link_to "削除", community_path(@community), method: :delete, data:{ confirm: "グループ「#{@community.name}」を削除します。よろしいですか？" } ,class:"mini-red-link-btn font-bold text-line-none" %>
                 <% end %>
                 </div>
             </div>
-            <!-- ログインユーザが当該コミュニティに所属している場合 -->
+            <!-- ログインユーザが当該グループに所属している場合 -->
             <% if @community.user_belonging?(current_user) and @community.id != 1 %>
-                <%= link_to '退会する', community_belonging_path(@community, @belonging), method: :delete, data:{ confirm: "コミュニティ「#{@community.name}」を退会します。よろしいですか？" } ,class:"mini-red-link-btn font-bold text-line-none" %>
-            <!-- 当該コミュニティには所属していないが、ログインはしている場合 -->
+                <%= link_to '退会する', community_belonging_path(@community, @belonging), method: :delete, data:{ confirm: "グループ「#{@community.name}」を退会します。よろしいですか？" } ,class:"mini-red-link-btn font-bold text-line-none" %>
+            <!-- 当該グループには所属していないが、ログインはしている場合 -->
             <% elsif current_user and @community.id != 1 %>
                 <% if @apply %>
-                    <%= link_to '申請取消', community_apply_path(@community, @apply), method: :delete, class: "mini-red-link-btn font-bold text-line-none" %>
+                    <%= link_to '申請取消', community_apply_path(@community, @apply), method: :delete, data:{ confirm: "加入申請を取り消します。よろしいですか？" }, class: "mini-red-link-btn font-bold text-line-none" %>
                 <% else %>
-                    <%= link_to '加入申請', community_applies_path(@community), method: :post, class: "mini-green-link-btn font-bold text-line-none" %>
+                    <%= link_to '加入申請', community_applies_path(@community), method: :post, data:{ confirm: "加入申請を行います。よろしいですか？" }, class: "mini-green-link-btn font-bold text-line-none" %>
                 <% end %>
             <% end %>
             <div class="my-3">
-                <p class="comm-name"><%= @community.name %></p>
+                <p class="comm-name">
+                    <%= @community.name %>
+                    <% if @community.publish_flg == 1 %>
+                        <i class="fas fa-lock"></i>
+                    <% end %>
+                </p>
+            <!-- 所属しているor公開グループのみ表示 START -->
+            <% if @community.user_belonging?(current_user) or @community.publish_flg == 0 %>
                 <p class="comm-desc"><%= @community.description %></p>
                 <% if user_admin_flg(current_user,@community) == 1 %>
                     <%= link_to "承認待ち一覧", community_applies_path(@community), class:"btn btn-primary" %>
                 <% end %>
+            <% end %>
+            <!-- 所属しているor公開グループのみ表示 END -->
             </div>
+        <!-- 所属しているor公開グループのみ表示 START -->
+        <% if @community.user_belonging?(current_user) or @community.publish_flg == 0 %>
             <!-- 所属メンバー一覧 START -->
             <p class="user-index">所属ユーザ一覧</p>
             <div class="container">
@@ -64,8 +75,12 @@
                 </div>
             </div>
             <!-- 所属メンバー一覧 END -->
+        <% end %>
+        <!-- 所属しているor公開グループのみ表示 END -->
         </div>
         <div class="communityindex col-lg-9 col-sm-12">
+        <!-- 所属しているor公開グループのみ表示 START -->
+        <% if @community.user_belonging?(current_user) or @community.publish_flg == 0 %>
             <!-- 検索フォーム -->
             <div class="searchform container">
                 <%= search_form_for @search, url: community_path(@community) do |f| %>
@@ -103,6 +118,8 @@
                 </div>
             </div>
             <!-- 店一覧 END -->
+        <% end %>
+        <!-- 所属しているor公開グループのみ表示 END -->
         </div>
     </div>
 </div>

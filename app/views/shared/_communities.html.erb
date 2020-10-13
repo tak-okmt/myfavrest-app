@@ -1,22 +1,30 @@
 <!-- カード START -->
 <div class="card">
-    <% if community.image.attached? %>
-        <%= image_tag community.image, class:"community-img" %>
-    <% else %>
-        <%= link_to community_path(community) do %>
+    <%= link_to community_path(community) do %>
+        <% if community.image.attached? %>
+            <%= image_tag community.image, class:"community-img" %>
+        <% else %>
             <%= image_tag ("no_image.png"), class:"community-img" %>
         <% end %>
     <% end %>
     <div class="card-body">
-        <p class="card-title"><%= link_to community.name, community_path(community) %></p>
+        <p class="card-title">
+            <%= link_to community.name, community_path(community) %>
+            <% if community.publish_flg == 1 %>
+                <i class="fas fa-lock"></i>
+            <% end %>
+        </p>
         <div class="card-text">
             <i class="fas fa-users"></i>&nbsp<%= community.users.size %>人
             &nbsp&nbsp<i class="fas fa-utensils"></i>&nbsp<%= community.posts.size %>店舗
             &nbsp&nbsp<i class="fas fa-comments"></i>&nbsp<%= community_comment_calc(community) %>件<br>
             <span class="font-size-mini">
                 投稿が多いエリア：<%= post_type_most(community, '1') %><br> <!-- エリア -->
-                投稿が多い店ジャンル：<%= post_type_most(community, '2') %><!-- 店タイプ -->
+                投稿が多い店ジャンル：<%= post_type_most(community, '2') %><br><!-- 店タイプ -->
             </span>
+            <% if current_user and current_user.applies.find_by(community_id: community).present? %>
+                <span class="green-btn font-bold mt-2">加入申請中</span>
+            <% end %>
         </div>
     </div>
 </div>

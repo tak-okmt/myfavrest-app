@@ -7,14 +7,26 @@ ja:
           has_one: "%{record}が存在しているので削除できません"
           has_many: "%{record}が存在しているので削除できません"
     models:
-      post: 投稿
+      community: グループ
+      post: 店舗
       user: ユーザ
+      comment: 口コミ
     attributes:
+      community:
+        id: ID
+        name: グループ名
+        description: グループ説明
+        publish_flg: 公開/非公開
       post:
         id: ID
         username: ユーザ名
-        title: 店名
-        description: 口コミ
+        title: 店舗名
+        description: お店の説明
+        prefecture_code: 都道府県
+        address: 住所
+        area: エリア
+        rest_type: 料理ジャンル
+        objective: 用途
         created_at: 登録日時
         updated_at: 更新日時
         image: 画像
@@ -29,6 +41,14 @@ ja:
         work_comp: 勤務先会社名
         work_ocpn: 職種
         gender: 性別
+        image: 画像
+      comment:
+        id: ID
+        content: 口コミ内容
+        visitday: 訪問日
+        scene: 利用シーン
+        people: 利用人数
+        score: 評価
         image: 画像
   date:
     formats:

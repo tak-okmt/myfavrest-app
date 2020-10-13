@@ -1,9 +1,5 @@
 <% if post.errors.present? %>
-    <ul id="error_explanation">
-        <% post.errors.full_messages.each do |message| %>
-            <li><%= message %></li>
-        <% end %>
-    </ul>
+    <%= render partial:'shared/error_explanation', locals:{object: post} %>
 <% end %>
 <%= form_with(model: [community,post] ,local: true) do |f| %>
     <div class="form-group">

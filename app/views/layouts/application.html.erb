@@ -11,16 +11,16 @@
 
   <body>
       <%= render "shared/header" %>
-
-      <% if flash[:notice].present? %>
-          <div class="alert alert-success"><%= flash[:notice] %></div>
-      <% elsif flash[:alert].present? %>
-          <div class="alert alert-success"><%= flash[:alert] %></div>
-      <% else %>
-          <br>
-      <% end %>
-        <%= yield %>
-
+      <br>
+      <%= yield %>
       <%= render "shared/footer" %>
+
+    <script type="text/javascript">
+      <% flash.each do |name, msg| %>
+        <% name = "success" if name == "notice" %>
+        <% name = "error" if name == "alert" %>
+        toastr['<%= name %>']('<%= msg %>');
+      <% end %>
+    </script>
   </body>
 </html>
