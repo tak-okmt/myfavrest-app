@@ -10,6 +10,7 @@
 @import "./shared/comments";
 @import "./shared/communities";
 @import "./shared/error_explanation";
+@import "./shared/footer";
 
 @import "./users/index";
 @import "./users/show";
@@ -59,12 +60,5 @@ header {
                 color: white;
                 font-weight: bold;
             }
-    }
-}
-
-footer{
-    margin-top: auto;
-    .cpright{
-        font-size: 10px;
     }
 }

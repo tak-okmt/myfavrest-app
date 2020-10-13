@@ -1,0 +1,17 @@
+footer{
+    margin-top: 80px;
+    text-align: center;
+    .main{
+        background-color: #404040;
+        height: 160px;    
+        .logo{
+            font-size: 28px;
+            color: #666;
+            padding-top: 50px;
+        }
+        .text{
+            font-size: 7px;
+            color: #666;
+        }
+    }
+}
