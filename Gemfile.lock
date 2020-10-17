@@ -60,6 +60,9 @@ GEM
       autoprefixer-rails (>= 9.1.0)
       popper_js (>= 1.14.3, < 2)
       sassc-rails (>= 2.0.0)
+    bootstrap-tooltip-rails (0.1)
+      rails (>= 3.1)
+      thor
     builder (3.2.4)
     byebug (11.1.3)
     capistrano (3.7.0)
@@ -356,6 +359,7 @@ PLATFORMS
 DEPENDENCIES
   bootsnap (>= 1.1.0)
   bootstrap
+  bootstrap-tooltip-rails
   byebug
   capistrano (= 3.7.0)
   capistrano-bundler

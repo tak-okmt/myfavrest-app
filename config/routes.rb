@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root 'home#index'
+  root 'communities#index'
 
   devise_for :users, :controllers => {
     :registrations => 'users/registrations',
@@ -19,7 +19,7 @@ Rails.application.routes.draw do
     resources :belongings, only: %i[index create destroy]
   end
 
-  resources :users, only: [:index, :show] do
+  resources :users, only: %i[index show] do
     member do
       get :follower, :followed
     end
