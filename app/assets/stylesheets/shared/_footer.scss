@@ -1,6 +1,10 @@
 footer{
     margin-top: 80px;
     text-align: center;
+    width: 100%;
+    position: absolute;/*②絶対位置*/
+    bottom: 0; /*下に固定*/
+    margin-bottom: -200px;
     .main{
         background-color: #404040;
         height: 160px;    

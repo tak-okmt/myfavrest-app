@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_05_080100) do
+ActiveRecord::Schema.define(version: 2020_10_18_052942) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -66,7 +66,6 @@ ActiveRecord::Schema.define(version: 2020_07_05_080100) do
     t.bigint "post_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "title"
     t.integer "score"
     t.string "scene"
     t.string "people"
@@ -107,12 +106,6 @@ ActiveRecord::Schema.define(version: 2020_07_05_080100) do
     t.string "address"
     t.string "area"
     t.string "rest_type"
-    t.string "objective"
-    t.text "features"
-    t.string "people"
-    t.integer "score"
-    t.float "latitude"
-    t.float "longitude"
     t.bigint "community_id", null: false
     t.integer "comments_count", default: 0, null: false
     t.index ["community_id"], name: "index_posts_on_community_id"
@@ -135,10 +128,8 @@ ActiveRecord::Schema.define(version: 2020_07_05_080100) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "username"
-    t.integer "age"
     t.date "birth_ym"
     t.string "work_idt"
-    t.string "work_comp"
     t.string "work_ocpn"
     t.string "gender"
     t.string "image"
