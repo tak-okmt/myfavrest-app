@@ -21,7 +21,6 @@ class PostsController < ApplicationController
     @comments = @post.comments
     @comments = set_comment_order(@comments, params[:comment_order])
     @score = @comments.average(:score)&.round(1) # 口コミの評価平均
-    # @comment = Comment.new
   end
 
   def new

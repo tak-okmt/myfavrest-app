@@ -11,6 +11,7 @@ class CommunitiesController < ApplicationController
     end
 
     def show
+        @search_params = community_params
         @community = Community.find(params[:id])
         @belongings = Belonging.where(community_id: @community.id)
         @code = Code.all
@@ -59,10 +60,14 @@ class CommunitiesController < ApplicationController
         redirect_to communities_url, notice: "グループ「#{community.name}」を削除しました。"
     end
 
+    def area_select
+        render partial: 'area', locals: { prefecture_id: params[:prefecture_id] } if request.xhr?
+    end
+
     private
 
         def community_params
-            params.require(:community).permit(:name,:create_user_id,:publish_flg, :description)
+            params.require(:community).permit(:name,:create_user_id,:publish_flg, :description, :prefecture_code_eq_any)
         end
 
         def validate_community
