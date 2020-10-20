@@ -92,7 +92,7 @@
                             <%= f.collection_select( :prefecture_code_eq_any, JpPrefecture::Prefecture.all, :code, :name, {include_blank: '都道府県'}, {class: "form-control"}) %>
                         </div>
                         <div class="form-group cond2 col-sm-3">
-                            <%= f.collection_select( :area_eq_any, @code.where(code_id: "1", sub_id: @search_params[:prefecture_code_eq_any]), :code, :name, {include_blank: 'エリア' }, {class: "form-control"}) %>
+                            <%= f.collection_select( :area_eq_any, @code.where(code_id: "1", sub_id: @search_params), :code, :name, {include_blank: 'エリア' }, {class: "form-control"}) %>
                         </div>
                         <div class="form-group cond2 col-sm-3">
                             <%= f.collection_select( :rest_type_eq_any, @code.where(code_id: "2"), :code, :name, {include_blank: '料理ジャンル'}, {class: "form-control"}) %>
