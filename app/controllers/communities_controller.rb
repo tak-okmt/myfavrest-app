@@ -11,7 +11,6 @@ class CommunitiesController < ApplicationController
     end
 
     def show
-        @search_params = search_params[:prefecture_code_eq_any]
         @community = Community.find(params[:id])
         @belongings = Belonging.where(community_id: @community.id)
         @code = Code.all
@@ -61,17 +60,13 @@ class CommunitiesController < ApplicationController
     end
 
     def area_select
-        render partial: 'area', locals: { prefecture_id: params[:prefecture_id] } if request.xhr?
+        render partial: 'communities/area', locals: { prefecture_id: params[:prefecture_code_eq_any] } if request.xhr?
     end
 
     private
 
         def community_params
-            params.require(:community).permit(:name,:create_user_id,:publish_flg, :description, q:[:prefecture_code_eq_any])
-        end
-
-        def search_params
-            params.require(:q).permit(:title_or_user_username_cont,:prefecture_code_eq_any,:area_eq_any,:rest_type_eq_any,:sorts,:community_id)
+            params.require(:community).permit(:name,:create_user_id,:publish_flg, :description)
         end
 
         def validate_community

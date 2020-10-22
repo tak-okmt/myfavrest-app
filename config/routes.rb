@@ -15,7 +15,7 @@ Rails.application.routes.draw do
       resources :likes, only: %i[create destroy]
       resources :comments
     end
-    collection do
+    member do
       get :area_select
     end
     resources :applies, only: %i[index create destroy]
