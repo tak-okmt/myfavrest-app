@@ -62,7 +62,7 @@ class CommunitiesController < ApplicationController
     private
 
         def community_params
-            params.require(:community).permit(:name,:create_user_id,:publish_flg, :description)
+            params.require(:community).permit(:name,:create_user_id,:publish_flg, :description, :image)
         end
 
         def validate_community

@@ -13,6 +13,7 @@ class UsersController < ApplicationController
 
     def show
       if @user == current_user
+        Belonging.create!(community_id: 1, user_id: current_user.id) unless Belonging.find_by(community_id: 1, user_id: current_user.id)
         @available_communities = Community.where(publish_flg: 0).or(Community.where(id: @user.communities))
         # １．フォロー中のユーザの投稿を表示（所属していない非公開グループを除く）
           @follow_posts = Post.where(user_id: @user.following_user, community_id: @available_communities).order('updated_at DESC').page(params[:follow_posts]).per(6)

@@ -19,10 +19,6 @@
         <%= f.collection_select :prefecture_code, JpPrefecture::Prefecture.all, :code, :name, {include_blank: '都道府県を選択してください'}, {class: "form-control"} %>
     </div>
     <div class="form-group">
-        <span class="must">必須</span><%= f.label "エリア" %><br>
-        <%= f.collection_select :area, code.where(code_id: "1"), :code, :name, {include_blank: 'エリアを選択してください'}, {class: "form-control"} %>
-    </div>
-    <div class="form-group">
         <label for="post_住所">住所（<a href="#gmapnew">住所検索</a>から貼り付け可能）</label>
         <%= f.text_field :address, class: 'form-control', id:'post_address', placeholder: "住所" %>
     </div>
@@ -30,7 +26,6 @@
         <span class="must">必須</span><%= f.label "料理ジャンル" %><br>
         <%= f.collection_select :rest_type, code.where(code_id: "2"), :code, :name, {include_blank: '料理ジャンルを選択してください'}, {class: "form-control"} %>
     </div>
-    <%= f.hidden_field :community_id, value: community.id %>
     <%= f.submit "更新する", class:'btn btn-primary' %>
     <%= link_to '戻る', community_posts_path(community), class:'btn' %>
 <% end %>

@@ -10,17 +10,20 @@
   </head>
 
   <body>
+    <div class="wrapper">
       <%= render "shared/header" %>
       <br>
       <%= yield %>
+      <div class="push"></div>
       <%= render "shared/footer" %>
 
-    <script type="text/javascript">
-      <% flash.each do |name, msg| %>
-        <% name = "success" if name == "notice" %>
-        <% name = "error" if name == "alert" %>
-        toastr['<%= name %>']('<%= msg %>');
-      <% end %>
-    </script>
+      <script type="text/javascript">
+        <% flash.each do |name, msg| %>
+          <% name = "success" if name == "notice" %>
+          <% name = "error" if name == "alert" %>
+          toastr['<%= name %>']('<%= msg %>');
+        <% end %>
+      </script>
+    </div>
   </body>
 </html>

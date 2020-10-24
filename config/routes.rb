@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   end
 
   resources :communities do
-    resources :posts do
+    resources :posts, only: %i[show new edit create update destroy] do
       resources :likes, only: %i[create destroy]
       resources :comments
     end
@@ -19,7 +19,7 @@ Rails.application.routes.draw do
     resources :belongings, only: %i[index create destroy]
   end
 
-  resources :users, only: [:index, :show] do
+  resources :users, only: %i[index show] do
     member do
       get :follower, :followed
     end

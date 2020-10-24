@@ -1,11 +1,10 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  # :confirmable, :lockable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-          :recoverable, :rememberable, :validatable, authentication_keys: [:email]
+          :recoverable, :rememberable, :validatable, :timeoutable, authentication_keys: [:email]
   validates :email, presence: true, uniqueness: true
   validates :username, length: { maximum: 30 }
-  validate :image_type, if: :was_attached?
   has_one_attached :image
 
   has_many :posts, dependent: :destroy
@@ -44,12 +43,6 @@ class User < ApplicationRecord
   end
 
   private
-
-    def image_type
-      if !image.content_type.in?(%('image/jpec image/png'))
-          errors.add(:image, 'JPEGまたはPNG形式の画像のみアップロードできます')
-      end
-    end
 
     # not to do the validation of image_type when the registered post don't have the image.
     def was_attached?

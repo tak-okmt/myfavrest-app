@@ -2,7 +2,6 @@ class Post < ApplicationRecord
     validates :title, presence: true, length: { maximum:30 }
     validates :description, presence: true, length: { maximum:200 }
     validates :prefecture_code, presence: true
-    validates :area, presence: true
     validates :rest_type, presence: true
     validate :validate_title_not_including_comma
     has_one_attached :image

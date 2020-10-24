@@ -81,4 +81,3 @@ crumb :apply do |community|
   link "承認待ちユーザ一覧", community_applies_path(community)
   parent :community_show, community
 end
-
