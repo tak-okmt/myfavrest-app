@@ -2,10 +2,10 @@
     <% users.each do |user| %>
     <div class="user-info col-5 row">
         <div class="col-7">
-            <% if user.image.attached? %>
-                <%= link_to user.image, user_path(user), class:"user-icon" %>
-            <% else %>
-                <%= link_to user_path(user) do %>
+            <%= link_to user_path(user) do %>
+                <% if user.image.attached? %>
+                    <%= image_tag user.image, class:"user-icon" %>
+                <% else %>
                     <%= image_tag ("no_image.png"), class:"user-icon" %>
                 <% end %>
             <% end %>

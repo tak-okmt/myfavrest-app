@@ -40,6 +40,10 @@
   color: #808080;
 }
 
+.text-color-white{
+  color: white;
+}
+
 /////////////////////////
 /******位置関連*********/
 /////////////////////////
@@ -184,6 +188,25 @@
   background-color: #039be5;
   color: #fff;
   border-radius: 20px;
+}
+
+/////////////////////////
+/******料理ジャンル*******/
+/////////////////////////
+
+/* 居酒屋 */
+.rest-type-1{
+  background-color: orange;
+}
+
+/* 洋食 */
+.rest-type-2{
+  background-color: green;
+}
+
+/* イタリアン */
+.rest-type-3{
+  background-color: blue;
 }
 
 /////////////////////////

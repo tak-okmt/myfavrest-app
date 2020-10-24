@@ -20,9 +20,9 @@
             <%= image_tag ("no_image.png"), class:"card-img-top" %>
         <% end %>
         </div>
-        <div class="col-sm-12 col-md-6">
-            <div class="row">
-                <div class="col-6">
+        <div class="col-sm-12 col-md-6 cmt-info-wrapper">
+            <div class="row cmt-info1">
+                <div class="col-6 cmt">
                     <span class="rating-title">評価</span>&emsp;<%= @comment.score %>
                     <div class="cmnt-info mt-1">
                         <div class="scene-tag"><span class="mini-item-name-gray">利用シーン：</span><%= user_code_name("3",@comment.scene) %></div>
@@ -33,7 +33,7 @@
                 <div class="col-6 m-auto0">
                     <%= link_to user_path(@comment.user), class:"text-line-none" do %>
                         <% if @comment.user.image.attached? %>
-                            <span class="user-icon"><%= @comment.user.image %></span>
+                            <%= image_tag @comment.user.image, class:"user-icon" %>
                         <% else %>
                             <%= image_tag ("no_image.png"), class:"user-icon" %>
                         <% end %>

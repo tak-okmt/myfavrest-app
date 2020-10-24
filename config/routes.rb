@@ -11,12 +11,9 @@ Rails.application.routes.draw do
   end
 
   resources :communities do
-    resources :posts do
+    resources :posts, only: %i[show new edit create update destroy] do
       resources :likes, only: %i[create destroy]
       resources :comments
-    end
-    member do
-      get :area_select
     end
     resources :applies, only: %i[index create destroy]
     resources :belongings, only: %i[index create destroy]

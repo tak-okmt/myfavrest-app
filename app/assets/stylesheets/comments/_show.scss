@@ -4,7 +4,6 @@
     }
 }
 
-
 .comment-linkbtn{
     display: flex;
     justify-content: flex-end;
@@ -14,14 +13,25 @@
     }
 }    
 
-.cmnt-info{
-    width: 80%;
+.cmnt-main{
+    height: 320px;
+    .card-img-top{
+        width: 400px;
+        height: 320px;
+    }
+    .cmt-info-wrapper{
+        height: 100%;
+        .cmnt-info1{
+            height: 30%;
+            .cmnt-info{
+                width: 80%;
+            }
+        }
+        .content-box{
+            padding: 0.5em 1em;
+            margin: 1em 0;
+            border: double 5px #ffe4b1;
+            height: 70%;
+        }
+    }
 }
-.content-box{
-    padding: 0.5em 1em;
-    margin: 1em 0;
-    border: double 5px #ffe4b1;
-    height: 300px;
-}
-
-

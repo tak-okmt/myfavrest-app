@@ -7,10 +7,10 @@
     <div class="row">
         <% @applies.each do |app| %>
         <div class="col-6">
-            <% if app.user.image.attached? %>
-                <%= link_to app.user.image, user_path(app.user), class:"user-icon" %>
-            <% else %>
-                <%= link_to user_path(app.user) do %>
+            <%= link_to user_path(app.user) do %>
+                <% if app.user.image.attached? %>
+                    <%= image_tag app.user.image, class:"user-icon" %>
+                <% else %>
                     <%= image_tag ("no_image.png"), class:"user-icon" %>
                 <% end %>
             <% end %>

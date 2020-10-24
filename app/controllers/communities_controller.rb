@@ -59,14 +59,10 @@ class CommunitiesController < ApplicationController
         redirect_to communities_url, notice: "グループ「#{community.name}」を削除しました。"
     end
 
-    def area_select
-        render partial: 'communities/area', locals: { prefecture_id: params[:prefecture_code_eq_any] } if request.xhr?
-    end
-
     private
 
         def community_params
-            params.require(:community).permit(:name,:create_user_id,:publish_flg, :description)
+            params.require(:community).permit(:name,:create_user_id,:publish_flg, :description, :image)
         end
 
         def validate_community

@@ -77,4 +77,18 @@ module ApplicationHelper
         return most_name
     end
 
+    # 店舗ジャンルのclassを返す
+    def rest_type_class(id)
+        case id
+        when "1" then
+            return "rest-type-1"
+        when "2" then
+            return "rest-type-2"
+        when "3" then
+            return "rest-type-3"
+        else
+            return "rest-type-null"
+        end
+    end
+
 end

@@ -1,8 +1,8 @@
-<div class="row">
+<div class="row post-index">
     <% posts.each do |post| %>
         <div class = "col-12 col-sm-6 col-lg-4 mb-5">
             <!-- カード START -->
-            <div class="card">
+            <div class="card card-post">
                 <%= link_to community_post_path(post.community,post) do %>
                     <% if post.image.attached? %>
                         <%= image_tag post.image, class:"card-img-top" %>
@@ -12,17 +12,11 @@
                 <% end %>
                 <div class="card-body">
                     <p class="card-title"><%= post.title %></p>
-                    <p><% post.rest_type %></p>
                     <div class="card-text">
-                        <span>
-                            <% if post.prefecture_code.present? %>
-                                <%= post.prefecture.name %>
-                            <% end %>
-                        </span><br>
-                        <span><%= post.area %></span>
-                        <span><%= link_to "詳細", community_post_path(post.community,post), class: "card-link" %></span><br>
-                        <span class="mini-item-name-gray">更新日：</span><%= post.updated_at.strftime("%Y/%m/%d") %><br>
-                        <span><i class="fas fa-comments"></i> <%= post.comments.count %></span>
+                        <div><%= post.prefecture.name if post.prefecture_code.present? %></div>
+                        <div><span class="mini-item-name-gray">更新日：</span><%= post.updated_at.strftime("%Y/%m/%d") %></div>
+                        <div><i class="fas fa-comments"></i> <%= post.comments.count %></div>
+                        <span class="<%= rest_type_class(post.rest_type) %> font-size-mid text-color-white mt-2 p-1"><%= user_code_name("2", post.rest_type) %></span>
                     </div>
                     <div class="text-right" id="likes_buttons_<%= post.id %>">
                         <%= render partial: 'shared/like', locals: {community: post.community, post: post} %>
