@@ -42,11 +42,4 @@ class User < ApplicationRecord
     end
   end
 
-  private
-
-    # not to do the validation of image_type when the registered post don't have the image.
-    def was_attached?
-        image.attached?
-    end
-
 end

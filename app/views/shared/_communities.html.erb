@@ -19,7 +19,7 @@
             &nbsp&nbsp<i class="fas fa-utensils"></i>&nbsp<%= community.posts.size %>店舗
             &nbsp&nbsp<i class="fas fa-comments"></i>&nbsp<%= community_comment_calc(community) %>件<br>
             <span class="font-size-mini">
-                投稿が多いエリア：<%= post_type_most(community, '1') %><br> <!-- エリア -->
+                投稿が多い都道府県：<%= post_type_most(community, '1') %><br> <!-- 都道府県 -->
                 投稿が多い店ジャンル：<%= post_type_most(community, '2') %><br><!-- 店タイプ -->
             </span>
             <% if current_user and current_user.applies.find_by(community_id: community).present? %>

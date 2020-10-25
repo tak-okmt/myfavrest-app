@@ -67,12 +67,13 @@ module ApplicationHelper
     def post_type_most(community, type)
         num = []
         community.posts.each do |p|
-            num << p.area if type == '1' and !p.area.blank?  # エリア
+            num << p.prefecture_code if type == '1' and !p.prefecture_code.blank?  # エリア
             num << p.rest_type if type == '2' and !p.rest_type.blank? # 店タイプ
         end
         unless num.empty?
             most = num.max_by { |v| num.count(v) }
-            most_name = user_code_name(type, most) # コードから名称を取得
+            most_name = JpPrefecture::Prefecture.find(code: most).try(:name) if type == '1' # 都道府県コードから名称を取得
+            most_name = user_code_name(type, most) if type == '2' # 店タイプコードから名称を取得
         end
         return most_name
     end
