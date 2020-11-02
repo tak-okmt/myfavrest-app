@@ -4,7 +4,8 @@ RSpec.describe User, type: :model do
   let(:user) { FactoryBot.create(:user) }
   let(:user1) { FactoryBot.create(:user) }
   let(:user2) { FactoryBot.create(:user) }
-  
+  let(:community) { FactoryBot.create(:community) }
+
   # ユーザID,メール,パスワードがあれば有効な状態であること
   it "is valid with a email and password" do
     expect(FactoryBot.build(:user)).to be_valid
@@ -151,38 +152,43 @@ RSpec.describe User, type: :model do
   # 削除の依存関係
   describe "dependent: destoy" do
     # 削除すると、紐づく店舗も全て削除されること
+    before do
+      user.posts.create(title:"a"*6, description:"あ", prefecture_code:"1", rest_type:"1",community_id: community.id)
+    end
+
     it "destroys all posts when deleted" do
+      expect { user.destroy }.to change(user.posts, :count).by(-2)
     end
 
-    # 削除すると、紐づくいいねも全て削除されること
-    it "destroys all followers when deleted" do
+    # # 削除すると、紐づくいいねも全て削除されること
+    # it "destroys all followers when deleted" do
 
-    end
+    # end
 
-    # 削除すると、紐づく口コミも全て削除されること
-    it "destroys all followers when deleted" do
+    # # 削除すると、紐づく口コミも全て削除されること
+    # it "destroys all followers when deleted" do
 
-    end
+    # end
 
-    # 削除すると、紐づく所属情報も全て削除されること
-    it "destroys all followers when deleted" do
+    # # 削除すると、紐づく所属情報も全て削除されること
+    # it "destroys all followers when deleted" do
 
-    end
+    # end
 
-    # 削除すると、紐づく加入申請も全て削除されること
-    it "destroys all followers when deleted" do
+    # # 削除すると、紐づく加入申請も全て削除されること
+    # it "destroys all followers when deleted" do
 
-    end
+    # end
 
-    # 削除すると、紐づくフォローも全て削除されること
-    it "destroys all follows when deleted" do
+    # # 削除すると、紐づくフォローも全て削除されること
+    # it "destroys all follows when deleted" do
       
-    end
+    # end
 
-    # 削除すると、紐づくフォロワーも全て削除されること
-    it "destroys all followers when deleted" do
+    # # 削除すると、紐づくフォロワーも全て削除されること
+    # it "destroys all followers when deleted" do
 
-    end
+    # end
 
 
   end

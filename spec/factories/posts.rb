@@ -4,6 +4,8 @@ FactoryBot.define do
     description {"口コミのテストです"}
     prefecture_code {"1"}
     rest_type {"1"}
+    community_id { 1 }
+
     association :user
     association :community
   end
