@@ -1,10 +1,9 @@
 FactoryBot.define do
   factory :post do
-    sequence(:title) { |n| "テスト投稿#{n}"}
-    description {"口コミのテストです"}
+    title { "test" }
+    description {"test"}
     prefecture_code {"1"}
     rest_type {"1"}
-    community_id { 1 }
 
     association :user
     association :community

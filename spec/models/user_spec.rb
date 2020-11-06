@@ -151,14 +151,16 @@ RSpec.describe User, type: :model do
 
   # 削除の依存関係
   describe "dependent: destoy" do
-    # 削除すると、紐づく店舗も全て削除されること
     before do
-      user.posts.create(title:"a"*6, description:"あ", prefecture_code:"1", rest_type:"1",community_id: community.id)
+      @com  = Community.create(name: "1"*8, create_user_id: user.id, publish_flg: 1)
     end
 
+    # 削除すると、紐づく店舗も全て削除されること
     it "destroys all posts when deleted" do
+      2.times { FactoryBot.create(:post, user: user, community: @com) }
       expect { user.destroy }.to change(user.posts, :count).by(-2)
     end
+  end
 
     # # 削除すると、紐づくいいねも全て削除されること
     # it "destroys all followers when deleted" do
@@ -189,10 +191,5 @@ RSpec.describe User, type: :model do
     # it "destroys all followers when deleted" do
 
     # end
-
-
-  end
-
-
 
 end
