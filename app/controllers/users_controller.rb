@@ -28,7 +28,7 @@ class UsersController < ApplicationController
       @belongings = @user.belongings.page(params[:belong_community]).per(6)
       @comments   = @user.comments.order('updated_at DESC')
       # ３．いいね！した投稿を表示
-      @like_posts = @user.likes.order('updated_at DESC').map{ |n| n.post }
+      @like_posts = @user.likes.order('updated_at DESC').map { |n| n.post }
       @like_posts = Kaminari.paginate_array(@like_posts).page(params[:like_posts]).per(6)
     end
 
