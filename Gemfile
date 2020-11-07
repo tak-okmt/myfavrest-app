@@ -78,6 +78,8 @@ group :development do
   gem 'capistrano-rbenv'
   gem 'capistrano-rbenv-vars'
   gem 'capistrano3-puma'
+  gem 'rubocop', require: false
+  gem 'rubocop-rails', require: false
 end
 
 group :test do

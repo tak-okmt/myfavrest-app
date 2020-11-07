@@ -5,6 +5,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   before_action :configure_account_update_params, only: [:update]
   skip_before_action :authenticate_user!
   before_action :check_guest, only: %i[update destroy]
+  before_action :default_image, only: %i[create update]
   
   # GET /resource/sign_up
   # def new
@@ -12,9 +13,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # POST /resource
-  # def create
-  #   super
-  # end
+  def create
+    super
+  end
 
   # GET /resource/edit
   # def edit
@@ -22,14 +23,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # PUT /resource
-  # def update
-  #   super
-  # end
+  def update
+    super
+  end
 
   # DELETE /resource
-  # def destroy
-  #   super
-  # end
+  def destroy
+    super
+  end
 
   # GET /resource/cancel
   # Forces the session data which is usually expired after sign
@@ -55,6 +56,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def check_guest
     if resource.email == 'guest@example.com'
       redirect_to root_path, alert: 'ゲストユーザーの変更・削除はできません。'
+    end
+  end
+
+  def default_image
+    if !self.image.attached?
+      self.image.attach(io: File.open(Rails.root.join('app/assets/images/no_image.png')), filename: 'no_image.png', content_type: 'image/png')
     end
   end
 

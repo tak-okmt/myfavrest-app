@@ -24,7 +24,7 @@ module ApplicationHelper
 
     # 年代計算
     def age_calc(birth_ym)
-        age = (Date.today.strftime("%Y%m%d").to_i - birth_ym.strftime("%Y%m%d").to_i) / 10000
+        age = (Time.zone.today.strftime("%Y%m%d").to_i - birth_ym.strftime("%Y%m%d").to_i) / 10000
         if age < 10
             return "10代未満"
         elsif
@@ -67,8 +67,8 @@ module ApplicationHelper
     def post_type_most(community, type)
         num = []
         community.posts.each do |p|
-            num << p.prefecture_code if type == '1' and !p.prefecture_code.blank?  # エリア
-            num << p.rest_type if type == '2' and !p.rest_type.blank? # 店タイプ
+            num << p.prefecture_code if type == '1' and p.prefecture_code.present?  # エリア
+            num << p.rest_type if type == '2' and p.rest_type.present? # 店タイプ
         end
         unless num.empty?
             most = num.max_by { |v| num.count(v) }

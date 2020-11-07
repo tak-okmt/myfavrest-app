@@ -60,9 +60,6 @@ GEM
       autoprefixer-rails (>= 9.1.0)
       popper_js (>= 1.14.3, < 2)
       sassc-rails (>= 2.0.0)
-    bootstrap-tooltip-rails (0.1)
-      rails (>= 3.1)
-      thor
     builder (3.2.4)
     byebug (11.1.3)
     capistrano (3.7.0)
@@ -273,6 +270,10 @@ GEM
       unicode-display_width (>= 1.4.0, < 2.0)
     rubocop-ast (0.4.2)
       parser (>= 2.7.1.4)
+    rubocop-rails (2.8.1)
+      activesupport (>= 4.2.0)
+      rack (>= 1.1)
+      rubocop (>= 0.87.0)
     ruby-progressbar (1.10.1)
     ruby_dep (1.5.0)
     rubyzip (2.3.0)
@@ -359,7 +360,6 @@ PLATFORMS
 DEPENDENCIES
   bootsnap (>= 1.1.0)
   bootstrap
-  bootstrap-tooltip-rails
   byebug
   capistrano (= 3.7.0)
   capistrano-bundler
@@ -391,6 +391,8 @@ DEPENDENCIES
   rails-i18n
   ransack
   rspec-rails
+  rubocop
+  rubocop-rails
   sass-rails
   seed-fu
   selenium-webdriver
