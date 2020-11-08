@@ -2,14 +2,14 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-          :recoverable, :rememberable, :validatable, :timeoutable, authentication_keys: [:email]
+         :recoverable, :rememberable, :validatable, :timeoutable, authentication_keys: [:email]
   validates :email, presence: true, uniqueness: true
   validates :username, length: { maximum: 30 }
   has_one_attached :image
 
   has_many :posts, dependent: :destroy
   has_many :likes, dependent: :destroy
-  has_many :comments , dependent: :destroy
+  has_many :comments, dependent: :destroy
   has_many :belongings, dependent: :destroy
   has_many :applies, dependent: :destroy
 
@@ -41,5 +41,4 @@ class User < ApplicationRecord
       user.username = "ゲストユーザー"
     end
   end
-
 end

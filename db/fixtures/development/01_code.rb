@@ -1,12 +1,13 @@
 require 'csv'
 
 # インポートファイルを読み込む
-def import_read( file_name )
+def import_read(file_name)
   lines = CSV.read("db/fixtures/#{Rails.env}/#{file_name}")
-  lines.unshift([])  # index 0番目は空行を入れてスキップさせる
+  lines.unshift([]) # index 0番目は空行を入れてスキップさせる
 
   lines.each_with_index do |line, idx|
-    next unless line.length > 0
+    next unless line.length.positive?
+
     yield(line, idx) if block_given?
   end
 end

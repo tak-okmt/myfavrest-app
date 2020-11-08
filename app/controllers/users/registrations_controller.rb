@@ -6,7 +6,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   skip_before_action :authenticate_user!
   before_action :check_guest, only: %i[update destroy]
   before_action :default_image, only: %i[create update]
-  
+
   # GET /resource/sign_up
   # def new
   #   @code = Code.all
@@ -45,24 +45,22 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_sign_up_params
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:username, :email, :likes_count, :birth_ym, :work_idt, :work_ocpn, :gender, :image])
+    devise_parameter_sanitizer.permit(:sign_up, keys: %i[username email likes_count birth_ym work_idt work_ocpn gender image])
   end
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_account_update_params
-    devise_parameter_sanitizer.permit(:account_update, keys: [:username, :email, :birth_ym, :work_idt, :work_ocpn, :gender, :image])
+    devise_parameter_sanitizer.permit(:account_update, keys: %i[username email birth_ym work_idt work_ocpn gender image])
   end
 
   def check_guest
-    if resource.email == 'guest@example.com'
-      redirect_to root_path, alert: 'ゲストユーザーの変更・削除はできません。'
-    end
+    redirect_to root_path, alert: 'ゲストユーザーの変更・削除はできません。' if resource.email == 'guest@example.com'
   end
 
   def default_image
-    if !self.image.attached?
-      self.image.attach(io: File.open(Rails.root.join('app/assets/images/no_image.png')), filename: 'no_image.png', content_type: 'image/png')
-    end
+    return if image.attached?
+
+    image.attach(io: File.open(Rails.root.join('app/assets/images/no_image.png')), filename: 'no_image.png', content_type: 'image/png')
   end
 
   # The path used after sign up.

@@ -26,5 +26,3 @@ set :bundle_jobs, 2
 # リリース間での共有リソース定義
 append :linked_files, "config/master.key"
 append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets"
-
-

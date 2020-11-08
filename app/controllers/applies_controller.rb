@@ -1,5 +1,5 @@
 class AppliesController < ApplicationController
-  before_action :authenticate_user!  
+  before_action :authenticate_user!
 
   def create
     current_user.applies.create(community_id: apply_params[:community_id])
@@ -20,8 +20,7 @@ class AppliesController < ApplicationController
 
   private
 
-    def apply_params
-      params.permit(:community_id)
-    end
-
+  def apply_params
+    params.permit(:community_id)
+  end
 end
