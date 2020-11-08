@@ -49,7 +49,7 @@ Style/FrozenStringLiteralComment:
 Bundler/OrderedGems:  
   Enabled: false
 
-# ネストしたモジュール/クラス定義の推奨記法を無視
+# ネストしたモジュール/クラス定義の推奨記法を無視（deviseでの自動作成分にて指摘されるため）
 Style/ClassAndModuleChildren:
   Enabled: false
 
@@ -63,4 +63,8 @@ HashSyntax:
 
 # "Specify an :inverse_of option"を無視
 Rails/InverseOf:
+  Enabled: false
+
+# Windows使用のためローカルではCRLFだがリモートリポジトリではLFに変換されるので無視
+Layout/EndOfLine:
   Enabled: false

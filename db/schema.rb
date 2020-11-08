@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_07_134615) do
+ActiveRecord::Schema.define(version: 2020_11_08_031914) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -101,7 +101,6 @@ ActiveRecord::Schema.define(version: 2020_11_07_134615) do
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
     t.integer "likes_count", default: 0, null: false
-    t.string "image"
     t.string "prefecture_code"
     t.string "address"
     t.string "area"
@@ -133,7 +132,6 @@ ActiveRecord::Schema.define(version: 2020_11_07_134615) do
     t.string "work_idt"
     t.string "work_ocpn"
     t.string "gender"
-    t.string "image"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
