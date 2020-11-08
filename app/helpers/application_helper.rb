@@ -27,8 +27,7 @@ module ApplicationHelper
     if age < 10
       "10代未満"
     else
-      disp_ages = age / 10
-      "#{disp_ages}0代"
+      "#{age / 10}0代"
     end
   end
 
