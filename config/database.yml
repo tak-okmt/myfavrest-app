@@ -16,11 +16,11 @@ default: &default
   username: mydev
   password: myportfolio123rubyonrails5@mysqldb
   socket: /var/run/mysqld/mysqld.sock
+  host: db
   # socket: /var/lib/mysql/mysql.sock
 
 development:
   <<: *default
-  host: db
   database: myfavrest-app_development
 
 # Warning: The database defined as "test" will be erased and
@@ -28,7 +28,7 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  host: test-db
+  host: 127.0.0.1
   database: myfavrest-app_test
 
 # As with config/secrets.yml, you never want to store sensitive information,
