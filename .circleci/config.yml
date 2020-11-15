@@ -8,12 +8,16 @@ jobs:
         environment:
           RAILS_ENV: test
           MYSQL_HOST: 127.0.0.1
+          MYSQL_USERNAME: 'mydev'
+          MYSQL_PASSWORD: 'myportfolio123rubyonrails5@mysqldb'
+          MYSQL_PORT: 3307
 
       - image: circleci/mysql:5.7
         environment:
-          MYSQL_ALLOW_EMPTY_PASSWORD: yes
+          MYSQL_ALLOW_EMPTY_PASSWORD: true
+          MYSQL_ROOT_PASSWORD: 'myportfolio123rubyonrails5@mysqldb'
           MYSQL_DATABASE: myfavrest-app_test
-    
+
     # 並列実行するコンテナ数。無料プランでは1しか指定できない
     parallelism: 1
     
@@ -64,7 +68,7 @@ jobs:
       # mysqlの起動待機
       - run:
           name: Wait for DB
-          command: dockerize -wait tcp://127.0.0.1:3306 -timeout 120s
+          command: dockerize -wait tcp://127.0.0.1:3307 -timeout 120s
       
       # DBセットアップ
       - run:
