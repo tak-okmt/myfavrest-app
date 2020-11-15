@@ -29,6 +29,7 @@ development:
 test:
   <<: *default
   host: 127.0.0.1
+  # host: test-db
   database: myfavrest-app_test
 
 # As with config/secrets.yml, you never want to store sensitive information,
