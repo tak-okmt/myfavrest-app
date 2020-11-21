@@ -13,8 +13,8 @@ default: &default
   adapter: mysql2
   encoding: utf8
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  username: ENV['DEV_DB_USER']
-  password: ENV['DEV_DB_PASSWORD']
+  username: mydev
+  password: myportfolio123rubyonrails5@mysqldb
   socket: /var/run/mysqld/mysqld.sock
   host: db
   # socket: /var/lib/mysql/mysql.sock
@@ -54,5 +54,5 @@ test:
 production:
   <<: *default
   database: myfavrest-app_production
-  username: ENV['PRO_DB_USER']
-  password: ENV['PRO_DB_PASSWORD']
+  username: root
+  password: password
