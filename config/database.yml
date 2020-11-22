@@ -11,16 +11,16 @@
 #
 default: &default
   adapter: mysql2
+  charset: utf8
   encoding: utf8
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: mydev
   password: myportfolio123rubyonrails5@mysqldb
   socket: /var/run/mysqld/mysqld.sock
-  # socket: /var/lib/mysql/mysql.sock
+  host: db
 
 development:
   <<: *default
-  host: db
   database: myfavrest-app_development
 
 # Warning: The database defined as "test" will be erased and
@@ -28,7 +28,8 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  host: test-db
+  host: 127.0.0.1
+  # host: test-db
   database: myfavrest-app_test
 
 # As with config/secrets.yml, you never want to store sensitive information,
@@ -52,6 +53,7 @@ test:
 #
 production:
   <<: *default
-  database: myfavrest-app_production
-  username: root
-  password: password
+  database: <%= ENV['DB_NAME_PRODUCTION'] %>
+  username: <%= ENV['DB_USER_PRODUCTION'] %>
+  host: <%= ENV['DB_HOST_PRODUCTION'] %>
+  password: <%= ENV['DB_PW_PRODUCTION'] %>

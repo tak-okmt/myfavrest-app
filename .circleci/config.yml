@@ -1,0 +1,83 @@
+# circleciのバージョン
+version: 2.1
+
+jobs:
+  build:
+    docker:
+      - image: circleci/ruby:2.6.5-stretch-node
+        environment:
+          RAILS_ENV: test
+          MYSQL_HOST: 127.0.0.1
+          
+      - image: circleci/mysql:5.7
+        environment:
+          MYSQL_ALLOW_EMPTY_PASSWORD: yes
+          MYSQL_DATABASE: myfavrest-app_test
+          MYSQL_USER: mydev
+          MYSQL_PASSWORD: myportfolio123rubyonrails5@mysqldb
+
+    # 並列実行するコンテナ数。無料プランでは1しか指定できない
+    parallelism: 1
+    
+    # 作業ディレクトリを指定
+    working_directory: ~/myapp
+    
+    steps:
+      # CI環境上のworking_directoryの場所にgitリポジトリをコピーする
+      - checkout
+      
+      # 環境変数の展開
+      - run: echo ${CUSTOM_ENV} | base64 --decode >> $BASH_ENV
+      
+      # bundlerのバージョン1.17.3へのアップデート
+      - run:  
+          name: Update bundler   
+          command: |
+            gem uninstall bundler
+            gem install bundler -v 1.17.3
+      
+      # バージョン確認
+      - run:
+          name: Which bundler?
+          command: bundle -v
+      
+      # bundle install高速化のため、キャッシュを利用
+      - restore_cache:
+          keys:
+            - rails-bundle-v2-{{ checksum "Gemfile.lock" }}
+            - rails-bundle-v2-
+      
+      # gemのインストールを行う
+      - run:
+          name: gem install
+          command: bundle install --jobs=4 --retry=3
+          
+      # キャッシュを保存する
+      - save_cache:
+          key: rails-bundle-v2-{{ checksum "Gemfile.lock" }}
+          paths:
+            - ~/.bundle
+
+      # rubocopテスト
+      - run:
+          name: Rubocop
+          command: bundle exec rubocop
+      
+      # mysqlの起動待機
+      - run:
+          name: Wait for DB
+          command: dockerize -wait tcp://127.0.0.1:3306 -timeout 120s
+      
+      # DBセットアップ
+      - run:
+          name: Setting DB
+          command: bundle exec rails db:schema:load --trace
+
+      # CircleCiの無料プランのスペックでは高確率でテストがハングする。
+      # 開発環境でのテストをクリアしていることから、一時的にスキップとする。
+      # rspecテスト
+      # - run:
+      #     name: Rspec
+      #     command: bundle exec rspec --profile
+      #     no_output_timeout: 15m
+

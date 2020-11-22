@@ -12,15 +12,15 @@ services:
       - db-volume:/var/lib/mysql
     ports:
       - "3306:3306"
-  test-db:
-    image: mysql:5.7
-    environment:
-      MYSQL_ROOT_PASSWORD: myportfolio123rubyonrails5@mysqldb
-      MYSQL_DATABASE: myfavrest-app_test
-      MYSQL_USER: mydev
-      MYSQL_PASSWORD: myportfolio123rubyonrails5@mysqldb
-    ports:
-      - '3307:3306' # ローカルPCから接続するために設定
+  # test-db:
+  #   image: mysql:5.7
+  #   environment:
+  #     MYSQL_ROOT_PASSWORD: myportfolio123rubyonrails5@mysqldb
+  #     MYSQL_DATABASE: myfavrest-app_test
+  #     MYSQL_USER: mydev
+  #     MYSQL_PASSWORD: myportfolio123rubyonrails5@mysqldb
+  #   ports:
+  #     - '3307:3306' # ローカルPCから接続するために設定
   app:
     build:
       context: .

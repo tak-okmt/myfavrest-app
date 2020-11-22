@@ -5,7 +5,6 @@
 #   git config --global core.excludesfile '~/.gitignore_global'
 
 /.solargraph.yml
-# APIキーを記述するファイル
 /.env
 
 # Ignore bundler config.
