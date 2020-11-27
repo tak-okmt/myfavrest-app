@@ -17,7 +17,11 @@ set :deploy_to, "/home/#{fetch(:user)}/var/www/#{fetch(:application)}"
 
 # リソース間での共有リソースを定義
 set :linked_files, fetch(:linked_files, []).push("config/master.key")
+append :linked_files, "config/database.yml"
 append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets"
+
+set :stages, %(production, staging)
+set :default_stage, "production"
 
 # 何世代前までリリースを残しておくか
 set :keep_releases, 3
@@ -29,6 +33,7 @@ namespace :deploy do
     task :upload do
         on roles(:app) do |_host|
             execute :mkdir, '-p', "#{shared_path}/config"
+            upload!('config/database.yml', "#{shared_path}/config/database.yml")
             upload!('config/master.key', "#{shared_path}/config/master.key")
 
             # puma.rbをデプロイ時に毎回作成する
@@ -58,9 +63,6 @@ namespace :config do
         end
     end
 end
-
-# デバッグ用
-# before '任意のタスク', 'console'
 
 # デプロイ開始前のサーバ停止タスク(nginx => puma)
 before 'deploy:starting', 'nginx:stop'
