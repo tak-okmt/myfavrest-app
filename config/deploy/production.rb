@@ -5,3 +5,4 @@ server '54.243.217.170', user: 'ec2-user', roles: %w[app db web], ssh_options: {
   forward_agent: true,
   auth_methods: %w(publickey)
 }
+set :stage, :production
