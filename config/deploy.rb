@@ -10,6 +10,7 @@ set :user, "ec2-user"
 # どのリポジトリからアプリをpullするかを指定する
 set :repo_url, "git@github.com:gcp632dsh/myfavrest-app.git"
 
+# デバッグ用に詳細ログを出力
 set :log_level, :debug
 
 # サーバ上でのソースの配置先
@@ -19,9 +20,6 @@ set :deploy_to, "/home/#{fetch(:user)}/var/www/#{fetch(:application)}"
 set :linked_files, fetch(:linked_files, []).push("config/master.key")
 append :linked_files, "config/database.yml"
 append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets"
-
-set :stages, %(production, staging)
-set :default_stage, "production"
 
 # 何世代前までリリースを残しておくか
 set :keep_releases, 3
@@ -65,9 +63,9 @@ namespace :config do
 end
 
 # デプロイ開始前のサーバ停止タスク(nginx => puma)
-before 'deploy:starting', 'nginx:stop'
-after 'nginx:stop', 'puma:stop'
-after 'puma:stop', 'deploy:upload'
+# before 'deploy:starting', 'nginx:stop'
+# after 'nginx:stop', 'puma:stop'
+# after 'puma:stop', 'deploy:upload'
 
 # デプロイ完了後のサーバ起動タスク(puma => nginx)。pumaの起動タイミングはデプロイ直後で、gemで挿入済みのため記述しない
 after 'puma:start', 'nginx:start'
