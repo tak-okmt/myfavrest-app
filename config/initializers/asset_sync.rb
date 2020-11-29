@@ -18,7 +18,7 @@ if defined?(AssetSync)
     # config.fog_port = "9000"
     #
     # Use http instead of https. Default should be "https" (at least for fog-aws)
-    # config.fog_scheme = "http"
+    config.fog_scheme = "http"
     config.fog_directory = ENV['FOG_DIRECTORY']
 
     # Invalidate a file on a cdn after uploading files
