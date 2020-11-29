@@ -3,6 +3,9 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.6.5'
 
+gem 'asset_sync'
+gem 'fog-aws'
+gem 'aws-sdk-s3'
 gem "toastr-rails"
 gem 'gretel'
 gem 'faker'
@@ -12,7 +15,6 @@ gem 'material_icons'
 gem 'rails-i18n'
 gem 'jp_prefecture'
 gem 'dotenv-rails'
-# gem 'mini_magick'
 gem 'kaminari'
 gem 'font_awesome5_rails'
 gem 'jquery-rails'
