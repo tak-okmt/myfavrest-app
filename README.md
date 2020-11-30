@@ -9,6 +9,9 @@
 
 今までの勉強記録は「やってきたこと」の箇所に記載しております。 随時更新中です。  
 
+## URL
+[https://myrest-app.work/](https://myrest-app.work/)  
+
 ## 使用言語  
 * Ruby 2.6.5  Rails 5.2.4.2  
 
@@ -34,7 +37,7 @@ Facebookコミュニティのような形で飲食店の情報を共有し合う
 
 ## 環境
 開発環境：Docker、docker-compose  
-本番環境（現在構築中）：AWS（VPC、EC2、RDS、S3、Route53、ELB、ACM）  
+本番環境：AWS（VPC、EC2、RDS、S3、Route53、ELB、ACM）  
 Webサーバ：Nginx  
 APサーバ：Puma  
 DBサーバ：MySQL  
