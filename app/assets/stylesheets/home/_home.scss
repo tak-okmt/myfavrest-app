@@ -1,0 +1,76 @@
+// title start
+.home-title {
+    min-height: 100px;
+    max-height: 500px;
+    position: relative;
+    display: table;
+    width: 100%;
+    height: auto;
+    padding-top: 8rem;
+    padding-bottom: 8rem;
+    background-image:  linear-gradient(90deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.5) 100%),image-url("homeImg.jpg");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.home-title h1 {
+    font-size: 3rem;
+    margin: 0;
+    padding: 0;
+}
+
+@media (min-width: 992px) {
+    .home-title {
+        height: 100vh;
+    }
+    .home-title h1 {
+        font-size: 5.5rem;
+    }
+}
+
+.top-h1 {
+    color: #333333;
+    font-size: 3.5rem;
+}
+// title end
+
+//  Services start
+.content-services {
+    padding-top: 100px;
+    padding-bottom: 100px;
+    background-color: #dc8989;
+}
+
+.content-services-heading h2 {
+    color: #fff;
+    font-size: 2.8em;
+}
+
+.content-services-heading h3 {
+    text-transform: uppercase;
+    font-size: 1em;
+}
+
+.txt-secondary {
+    color: #ecb807;
+}
+
+.service-icon {
+    background-color: #fff;
+    color: #dc8989;
+    height: 7rem;
+    width: 7rem;
+    display: block;
+    line-height: 7.5rem;
+    font-size: 2.8rem;
+    box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.1);
+}
+
+.service-detail h4{
+    color: #fff;
+}
+
+.text-faded {
+    color: rgba(255, 255, 255, 0.7);
+}
