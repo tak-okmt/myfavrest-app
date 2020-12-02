@@ -15,9 +15,10 @@
 }
 
 .home-title h1 {
-    font-size: 3rem;
+    font-size: 2.8rem;
     margin: 0;
     padding: 0;
+    color: #333333;
 }
 
 @media (min-width: 992px) {
@@ -27,11 +28,6 @@
     .home-title h1 {
         font-size: 5.5rem;
     }
-}
-
-.top-h1 {
-    color: #333333;
-    font-size: 3.5rem;
 }
 // title end
 
