@@ -57,6 +57,10 @@ Style/ClassAndModuleChildren:
 Style/StringLiterals:
   Enabled: false
 
+# デバッグ用のputsが異常検知されるため、falseとする
+Rails/Output:
+  Enabled: false
+
 # ハッシュ記法はruby1.9記法で記載
 HashSyntax:
   EnforcedStyle: ruby19
