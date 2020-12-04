@@ -44,7 +44,10 @@ APサーバ：Puma
 DBサーバ：MySQL  
 その他：GitHub（Issueとブランチを連携させてプルリクベースでの開発）  
 　　　　CircleCI、Capistrano  
-  
+
+## インフラ構成図
+![AWS構成図](https://user-images.githubusercontent.com/20619831/101145985-d21e6d80-365d-11eb-9a4d-d0a517580c32.png)
+
 ## やってきたこと
 **以下は、実施済みの内容を、実施順に記載しています**  
 - 4/19  Rails環境構築、mysqlを用いてDB接続、  
