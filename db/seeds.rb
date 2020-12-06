@@ -10,9 +10,9 @@ require "csv"
 # Codeマスタ登録
 CSV.foreach('db/seeds/csv/code.csv', headers: false) do |row|
     Code.create!(
-        code_id: row[0]
-        sub_id: row[1]
-        code: row[2]
+        code_id: row[0],
+        sub_id: row[1],
+        code: row[2],
         name: row[3]
     )
 end
@@ -20,9 +20,9 @@ end
 # Community登録
 CSV.foreach('db/seeds/csv/community.csv', headers: false) do |row|
     Community.create!(
-        name: row[0]
-        create_user_id: row[1]
-        publish_flg: row[2]
+        name: row[0],
+        create_user_id: row[1],
+        publish_flg: row[2],
         description: row[3]    
     )
 end
@@ -30,8 +30,8 @@ end
 # Belonging登録
 CSV.foreach('db/seeds/csv/belonging.csv', headers: false) do |row|
     Belonging.create!(
-        user_id: row[0]
-        community_id: row[1]
+        user_id: row[0],
+        community_id: row[1],
         admin_flg: row[2]
     )
 end
