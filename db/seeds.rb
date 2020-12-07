@@ -8,31 +8,12 @@
 require "csv"
 
 # Codeマスタ登録
-CSV.foreach('db/seeds/csv/code.csv', headers: false) do |row|
+CSV.foreach('db/csv/code.csv', headers: false) do |row|
     Code.create!(
         code_id: row[0],
         sub_id: row[1],
         code: row[2],
         name: row[3]
-    )
-end
-
-# Community登録
-CSV.foreach('db/seeds/csv/community.csv', headers: false) do |row|
-    Community.create!(
-        name: row[0],
-        create_user_id: row[1],
-        publish_flg: row[2],
-        description: row[3]    
-    )
-end
-
-# Belonging登録
-CSV.foreach('db/seeds/csv/belonging.csv', headers: false) do |row|
-    Belonging.create!(
-        user_id: row[0],
-        community_id: row[1],
-        admin_flg: row[2]
     )
 end
 
@@ -193,7 +174,7 @@ User.create!(
 
 User.create!(
     id: 16,
-    email: "test15@example.com"
+    email: "test15@example.com",
     password: 'password',
     username: "西志村知己",
     birth_ym: '1964-02-01',
@@ -256,3 +237,33 @@ User.create!(
     work_ocpn: '27',
     gender: '男性'
 )
+
+User.create!(
+    id: 22,
+    email: "admin22@example.com",
+    password: 'password',
+    username: "ぬし",
+    birth_ym: '1985-05-01',
+    work_idt: '7',
+    work_ocpn: '6',
+    gender: '男性'
+)
+
+# Community登録
+CSV.foreach('db/csv/community.csv', headers: false) do |row|
+    Community.create!(
+        name: row[0],
+        create_user_id: row[1],
+        publish_flg: row[2],
+        description: row[3]    
+    )
+end
+
+# Belonging登録
+CSV.foreach('db/csv/belonging.csv', headers: false) do |row|
+    Belonging.create!(
+        user_id: row[0],
+        community_id: row[1],
+        admin_flg: row[2]
+    )
+end
