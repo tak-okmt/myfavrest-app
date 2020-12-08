@@ -5,7 +5,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
   before_action :configure_account_update_params, only: [:update]
   skip_before_action :authenticate_user!
   before_action :check_guest, only: %i[update destroy]
-  before_action :default_image, only: %i[create update]
 
   # GET /resource/sign_up
   # def new
@@ -55,12 +54,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def check_guest
     redirect_to root_path, alert: 'ゲストユーザーの変更・削除はできません。' if resource.email == 'guest@example.com'
-  end
-
-  def default_image
-    return if image.attached?
-
-    image.attach(io: File.open(Rails.root.join('app/assets/images/no_image.png')), filename: 'no_image.png', content_type: 'image/png')
   end
 
   # The path used after sign up.
