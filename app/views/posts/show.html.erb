@@ -43,7 +43,7 @@
                 </div>
                 <span class="mini-item-name-gray">更新日：<%= @post.updated_at.strftime("%Y/%m/%d") %></span><br>
                 <span class="shopadr"><i class="fas fa-map-marker-alt"></i> <%= @post.address %></span><br>
-                <%= simple_format(h(@post.description), {}, sanitize: false, wrapper_tag:"div") %>
+                <%= simple_format(h(@post.description), {}, sanitize: false, wrapper_tag:"div", class: 'post-description') %>
             </div>
         </div>
     </div>
