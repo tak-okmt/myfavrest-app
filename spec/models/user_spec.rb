@@ -149,44 +149,60 @@ RSpec.describe User, type: :model do
 
   # 削除の依存関係
   describe "dependent: destoy" do
-    before do
-      @com = Community.create(name: "1" * 8, create_user_id: user.id, publish_flg: 1)
+    context "relation of other models" do
+      before do
+        @com = Community.create(name: "1" * 8, create_user_id: user.id, publish_flg: 1)
+      end
+
+      # 削除すると、紐づく店舗も全て削除されること
+      it "destroys all posts when deleted" do
+        2.times { FactoryBot.create(:post, user: user, community: @com) }
+        expect { user.destroy }.to change(user.posts, :count).by(-2)
+      end
+
+      # 削除すると、紐づくいいねも全て削除されること
+      it "destroys all likes when deleted" do
+        post = FactoryBot.create(:post, user: user, community: @com)
+        Like.create(user_id:user.id ,post_id: post.id)
+        expect { user.destroy }.to change(user.likes, :count).by(-1)
+      end
+
+      # 削除すると、紐づく口コミも全て削除されること
+      it "destroys all comments when deleted" do
+        post = FactoryBot.create(:post, user: user, community: @com)
+        Comment.create(content:"test", user_id:user.id, post_id:post.id, score:5, visitday: "2020/09/08")
+        expect { user.destroy }.to change(user.comments, :count).by(-1)
+      end
+
+      # 削除すると、紐づく所属情報も全て削除されること
+      it "destroys all belongings when deleted" do
+        Belonging.create(user_id: user.id, community_id: @com.id)
+        expect { user.destroy }.to change(user.belongings, :count).by(-1)      
+      end
+
+      # 削除すると、紐づく加入申請も全て削除されること
+      it "destroys all applies when deleted" do
+        Apply.create(user_id: user.id, community_id: @com.id)
+        expect { user.destroy }.to change(user.applies, :count).by(-1)
+      end
     end
 
-    # 削除すると、紐づく店舗も全て削除されること
-    it "destroys all posts when deleted" do
-      2.times { FactoryBot.create(:post, user: user, community: @com) }
-      expect { user.destroy }.to change(user.posts, :count).by(-2)
+    # フォロー/フォロワーの削除の依存関係
+    context "relation of follow and follower" do
+      before do
+        user1.follow(user2.id)
+      end
+
+      # 削除すると、紐づくフォローも全て削除されること
+      it "destroys all follows when deleted" do
+        expect { user1.destroy }.to change(user1.follower, :count).by(-1)
+      end
+
+      # 削除すると、紐づくフォロワーも全て削除されること
+      it "destroys all followers when deleted" do
+        expect { user2.destroy }.to change(user2.followed, :count).by(-1)
+      end
     end
   end
 
-  # # 削除すると、紐づくいいねも全て削除されること
-  # it "destroys all followers when deleted" do
-
-  # end
-
-  # # 削除すると、紐づく口コミも全て削除されること
-  # it "destroys all followers when deleted" do
-
-  # end
-
-  # # 削除すると、紐づく所属情報も全て削除されること
-  # it "destroys all followers when deleted" do
-
-  # end
-
-  # # 削除すると、紐づく加入申請も全て削除されること
-  # it "destroys all followers when deleted" do
-
-  # end
-
-  # # 削除すると、紐づくフォローも全て削除されること
-  # it "destroys all follows when deleted" do
-
-  # end
-
-  # # 削除すると、紐づくフォロワーも全て削除されること
-  # it "destroys all followers when deleted" do
-
-  # end
 end
