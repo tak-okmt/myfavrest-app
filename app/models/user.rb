@@ -6,6 +6,7 @@ class User < ApplicationRecord
   validates :email, presence: true, uniqueness: true
   validates :username, length: { maximum: 30 }
   has_one_attached :image
+  include ImageValidators
 
   has_many :posts, dependent: :destroy
   has_many :likes, dependent: :destroy

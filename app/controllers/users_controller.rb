@@ -20,7 +20,7 @@ class UsersController < ApplicationController
       @follow_posts = Post.where(user_id: @user.following_user, community_id: @available_communities).order('updated_at DESC').page(params[:follow_posts]).per(6)
       # ２．フォロー中のユーザの口コミを表示
       comments = Comment.where(user_id: @user.following_user).order('updated_at DESC')
-      @follow_comments = comments.select{ |n| n.post.community.in?(@available_communities) }
+      @follow_comments = comments.select { |n| n.post.community.in?(@available_communities) }
       @follow_comments = Kaminari.paginate_array(@follow_comments).page(params[:follow_comments]).per(10)
     end
     @belongings = @user.belongings.page(params[:belong_community]).per(6)

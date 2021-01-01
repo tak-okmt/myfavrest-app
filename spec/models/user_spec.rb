@@ -94,17 +94,6 @@ RSpec.describe User, type: :model do
     end
   end
 
-  # 画像のアップロード
-  describe "check image upload" do
-    # 画像を設定できること
-    it "can set an image" do
-      image_path = Rails.root.join("app/assets/images/homeImg.jpg")
-      user.image.attach(io: File.open(image_path), filename: 'homeImg.jpg', content_type: 'image/jpeg')
-      user.save
-      expect(user.image).to be_attached
-    end
-  end
-
   # フォロー・アンフォローを行う
   describe "can follow or unfollow the user" do
     # フォローしているとき
@@ -147,6 +136,57 @@ RSpec.describe User, type: :model do
     end
   end
 
+  # 画像のアップロード
+  describe "check image upload" do
+    # 画像を設定できること（jpg）
+    it "can set an image of jpg" do
+      image_path = Rails.root.join("app/assets/images/homeImg.jpg")
+      user.image.attach(io: File.open(image_path), filename: 'homeImg.jpg', content_type: 'image/jpeg')
+      user.save
+      expect(user.image).to be_attached
+    end
+
+    # 画像を設定できること（jpeg）
+    it "can set an image of jpeg" do
+      image_path = Rails.root.join("app/assets/images/test_img.jpeg")
+      user.image.attach(io: File.open(image_path), filename: 'test_img.jpeg', content_type: 'image/jpeg')
+      user.save
+      expect(user.image).to be_attached
+    end
+
+    # 画像を設定できること（gif）
+    it "can set an image of gif" do
+      image_path = Rails.root.join("app/assets/images/test_img.gif")
+      user.image.attach(io: File.open(image_path), filename: 'test_img.gif', content_type: 'image/gif')
+      user.save
+      expect(user.image).to be_attached
+    end
+
+    # 画像を設定できること（png）
+    it "can set an image of png" do
+      image_path = Rails.root.join("app/assets/images/test_img.png")
+      user.image.attach(io: File.open(image_path), filename: 'test_img.png', content_type: 'image/png')
+      user.save
+      expect(user.image).to be_attached
+    end
+
+    # 1MBを超える画像はアップロードできないこと
+    it "can not upload an image over 1MB" do
+      image_path = Rails.root.join("app/assets/images/over_1MB.jpg")
+      user.image.attach(io: File.open(image_path), filename: 'over_1MB.jpg', content_type: 'image/jpeg')
+      user.valid?
+      expect(user.errors[:image]).to include "は1MB以下にする必要があります"
+    end
+
+    # ファイル拡張子が不適切な場合はアップロードできないこと
+    it "can not upload an inappropriate file extension" do
+      image_path = Rails.root.join("app/assets/images/inappropriate_image.csv")
+      user.image.attach(io: File.open(image_path), filename: 'inappropriate_image.csv', content_type: 'text/csv')
+      user.valid?
+      expect(user.errors[:image]).to include "ファイル拡張子が適切ではありません"
+    end
+  end
+
   # 削除の依存関係
   describe "dependent: destoy" do
     context "relation of other models" do
@@ -163,21 +203,21 @@ RSpec.describe User, type: :model do
       # 削除すると、紐づくいいねも全て削除されること
       it "destroys all likes when deleted" do
         post = FactoryBot.create(:post, user: user, community: @com)
-        Like.create(user_id:user.id ,post_id: post.id)
+        Like.create(user_id: user.id, post_id: post.id)
         expect { user.destroy }.to change(user.likes, :count).by(-1)
       end
 
       # 削除すると、紐づく口コミも全て削除されること
       it "destroys all comments when deleted" do
         post = FactoryBot.create(:post, user: user, community: @com)
-        Comment.create(content:"test", user_id:user.id, post_id:post.id, score:5, visitday: "2020/09/08")
+        Comment.create(content: "test", user_id: user.id, post_id: post.id, score: 5, visitday: "2020/09/08")
         expect { user.destroy }.to change(user.comments, :count).by(-1)
       end
 
       # 削除すると、紐づく所属情報も全て削除されること
       it "destroys all belongings when deleted" do
         Belonging.create(user_id: user.id, community_id: @com.id)
-        expect { user.destroy }.to change(user.belongings, :count).by(-1)      
+        expect { user.destroy }.to change(user.belongings, :count).by(-1)
       end
 
       # 削除すると、紐づく加入申請も全て削除されること
@@ -204,5 +244,4 @@ RSpec.describe User, type: :model do
       end
     end
   end
-
 end

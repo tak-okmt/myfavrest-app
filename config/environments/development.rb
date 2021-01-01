@@ -1,9 +1,7 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
   # allow to acsess from Docker network on local development env.
-  unless Rails.env.production?
-    config.web_console.whitelisted_ips = '192.168.99.1'
-  end
+  config.web_console.whitelisted_ips = '192.168.99.1' unless Rails.env.production?
   # In the development environment your application's code is reloaded on
   # every request. This slows down response time but is perfect for development
   # since you don't have to restart the web server when you make code changes.

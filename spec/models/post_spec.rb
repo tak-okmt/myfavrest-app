@@ -92,12 +92,12 @@ RSpec.describe Post, type: :model do
       expect(@valid_post.image).to be_attached
     end
 
-    # 5MBを超える画像はアップロードできないこと
-    it "can not upload an image over 5MB" do
-      image_path = Rails.root.join("app/assets/images/over_5MB.jpg")
-      @valid_post.image.attach(io: File.open(image_path), filename: 'over_5MB.jpg', content_type: 'image/jpeg')
+    # 1MBを超える画像はアップロードできないこと
+    it "can not upload an image over 1MB" do
+      image_path = Rails.root.join("app/assets/images/over_1MB.jpg")
+      @valid_post.image.attach(io: File.open(image_path), filename: 'over_1MB.jpg', content_type: 'image/jpeg')
       @valid_post.valid?
-      expect(@valid_post.errors[:image]).to include "は5MB以下にする必要があります"
+      expect(@valid_post.errors[:image]).to include "は1MB以下にする必要があります"
     end
 
     # ファイル拡張子が不適切な場合はアップロードできないこと
@@ -113,15 +113,14 @@ RSpec.describe Post, type: :model do
   describe "dependent: destoy" do
     # 削除すると、紐づくいいねも全て削除されること
     it "destroys all likes when deleted" do
-      Like.create(user_id:user.id ,post_id: @valid_post.id)
+      Like.create(user_id: user.id, post_id: @valid_post.id)
       expect { @valid_post.destroy }.to change(user.likes, :count).by(-1)
     end
 
     # 削除すると、紐づくコメントも全て削除されること
     it "destroys all comments when deleted" do
-      Comment.create(content:"test", user_id:user.id, post_id:@valid_post.id, score:5, visitday: "2020/09/08")
+      Comment.create(content: "test", user_id: user.id, post_id: @valid_post.id, score: 5, visitday: "2020/09/08")
       expect { @valid_post.destroy }.to change(@valid_post.comments, :count).by(-1)
     end
   end
-
 end
