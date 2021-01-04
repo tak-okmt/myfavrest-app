@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_08_031914) do
+ActiveRecord::Schema.define(version: 2020_12_09_015216) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -75,12 +75,12 @@ ActiveRecord::Schema.define(version: 2020_11_08_031914) do
   end
 
   create_table "communities", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
-    t.string "name"
+    t.string "name", limit: 20, null: false
     t.integer "create_user_id", null: false
     t.integer "publish_flg", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.text "description"
+    t.string "description", limit: 50
     t.index ["name", "create_user_id"], name: "index_communities_on_name_and_create_user_id", unique: true
   end
 

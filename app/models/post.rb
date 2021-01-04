@@ -3,7 +3,9 @@ class Post < ApplicationRecord
   validates :description, presence: true, length: { maximum: 200 }
   validates :prefecture_code, presence: true
   validates :rest_type, presence: true
+  validate :validate_image
   has_one_attached :image
+  include ImageValidators
 
   belongs_to :user
   belongs_to :community

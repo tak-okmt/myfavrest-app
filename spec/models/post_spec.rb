@@ -60,12 +60,67 @@ RSpec.describe Post, type: :model do
 
   # 画像のアップロード
   describe "check image upload" do
-    # 画像を設定できること
-    it "can set an image" do
+    # 画像を設定できること（jpg）
+    it "can set an image of jpg" do
       image_path = Rails.root.join("app/assets/images/homeImg.jpg")
       @valid_post.image.attach(io: File.open(image_path), filename: 'homeImg.jpg', content_type: 'image/jpeg')
       @valid_post.save
       expect(@valid_post.image).to be_attached
+    end
+
+    # 画像を設定できること（jpeg）
+    it "can set an image of jpeg" do
+      image_path = Rails.root.join("app/assets/images/test_img.jpeg")
+      @valid_post.image.attach(io: File.open(image_path), filename: 'test_img.jpeg', content_type: 'image/jpeg')
+      @valid_post.save
+      expect(@valid_post.image).to be_attached
+    end
+
+    # 画像を設定できること（gif）
+    it "can set an image of gif" do
+      image_path = Rails.root.join("app/assets/images/test_img.gif")
+      @valid_post.image.attach(io: File.open(image_path), filename: 'test_img.gif', content_type: 'image/gif')
+      @valid_post.save
+      expect(@valid_post.image).to be_attached
+    end
+
+    # 画像を設定できること（png）
+    it "can set an image of png" do
+      image_path = Rails.root.join("app/assets/images/test_img.png")
+      @valid_post.image.attach(io: File.open(image_path), filename: 'test_img.png', content_type: 'image/png')
+      @valid_post.save
+      expect(@valid_post.image).to be_attached
+    end
+
+    # 1MBを超える画像はアップロードできないこと
+    it "can not upload an image over 1MB" do
+      image_path = Rails.root.join("app/assets/images/over_1MB.jpg")
+      @valid_post.image.attach(io: File.open(image_path), filename: 'over_1MB.jpg', content_type: 'image/jpeg')
+      @valid_post.valid?
+      expect(@valid_post.errors[:image]).to include "は1MB以下にする必要があります"
+    end
+
+    # ファイル拡張子が不適切な場合はアップロードできないこと
+    it "can not upload an inappropriate file extension" do
+      image_path = Rails.root.join("app/assets/images/inappropriate_image.csv")
+      @valid_post.image.attach(io: File.open(image_path), filename: 'inappropriate_image.csv', content_type: 'text/csv')
+      @valid_post.valid?
+      expect(@valid_post.errors[:image]).to include "ファイル拡張子が適切ではありません"
+    end
+  end
+
+  # 削除の依存関係
+  describe "dependent: destoy" do
+    # 削除すると、紐づくいいねも全て削除されること
+    it "destroys all likes when deleted" do
+      Like.create(user_id: user.id, post_id: @valid_post.id)
+      expect { @valid_post.destroy }.to change(user.likes, :count).by(-1)
+    end
+
+    # 削除すると、紐づくコメントも全て削除されること
+    it "destroys all comments when deleted" do
+      Comment.create(content: "test", user_id: user.id, post_id: @valid_post.id, score: 5, visitday: "2020/09/08")
+      expect { @valid_post.destroy }.to change(@valid_post.comments, :count).by(-1)
     end
   end
 end

@@ -39,11 +39,11 @@
                     <div id="comments_area">
                         <i class="fas fa-comments"></i> <%= @comments.count %>
                     </div>&nbsp&nbsp
-                    <div class="category-tag"><%= user_code_name("2",@post.rest_type) %></div>
+                    <span class="<%= rest_type_class(@post.rest_type) %> font-size-mid text-color-white mt-2 p-1"><%= user_code_name("2", @post.rest_type) %></span>
                 </div>
                 <span class="mini-item-name-gray">更新日：<%= @post.updated_at.strftime("%Y/%m/%d") %></span><br>
                 <span class="shopadr"><i class="fas fa-map-marker-alt"></i> <%= @post.address %></span><br>
-                <%= simple_format(h(@post.description), { class: 'post-description' }, sanitize: false, wrapper_tag:"div") %>
+                <%= simple_format(h(@post.description), { class: 'post-description' }, wrapper_tag:"div") %>
             </div>
         </div>
     </div>

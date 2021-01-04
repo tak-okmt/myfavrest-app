@@ -2,11 +2,7 @@ module ApplicationHelper
   # ページごとの完全なタイトルを返す
   def full_title(page_title = '')
     base_title = "グルコミュ"
-    if page_title.empty?
-      base_title
-    else
-      page_title + " | " + base_title
-    end
+    page_title.empty? ? base_title : "#{page_title} | #{base_title}"
   end
 
   # リンクの動的制御
@@ -24,11 +20,7 @@ module ApplicationHelper
   # 年代計算
   def age_calc(birth_ym)
     age = (Time.zone.today.strftime("%Y%m%d").to_i - birth_ym.strftime("%Y%m%d").to_i) / 10_000
-    if age < 10
-      "10代未満"
-    else
-      "#{age / 10}0代"
-    end
+    age < 10 ? "10代未満" : "#{age / 10}0代"
   end
 
   # コードのIDからコード名称を表示する
@@ -49,11 +41,7 @@ module ApplicationHelper
 
   # 各グループ内の口コミ総件数を算出
   def community_comment_calc(community)
-    num = 0
-    community.posts.each do |post|
-      num += post.comments.count
-    end
-    num
+    community.posts.inject(0) { |sum, com| sum + com.comments.count }
   end
 
   # グループの作成者ユーザオブジェクト取得
@@ -68,12 +56,15 @@ module ApplicationHelper
       num << p.prefecture_code if (type == '1') && p.prefecture_code.present? # エリア
       num << p.rest_type if (type == '2') && p.rest_type.present? # 店タイプ
     end
-    unless num.empty?
-      most = num.max_by { |v| num.count(v) }
-      most_name = JpPrefecture::Prefecture.find(code: most).try(:name) if type == '1' # 都道府県コードから名称を取得
-      most_name = user_code_name(type, most) if type == '2' # 店タイプコードから名称を取得
+    return if num.empty?
+
+    most = num.max_by { |v| num.count(v) }
+    case type
+    when '1'
+      JpPrefecture::Prefecture.find(code: most).try(:name) # 都道府県コードから名称を取得
+    when '2'
+      user_code_name(type, most) # 店タイプコードから名称を取得
     end
-    most_name
   end
 
   # 店舗ジャンルのclassを返す

@@ -42,7 +42,7 @@
                 </p>
             <!-- 所属しているor公開グループのみ表示 START -->
             <% if @community.user_belonging?(current_user) or @community.publish_flg == 0 %>
-                <p class="comm-desc"><%= @community.description %></p>
+                <%= simple_format(h(@community.description), { class: 'comm-desc' }) %>
                 <% if user_admin_flg(current_user,@community) == 1 %>
                     <%= link_to "承認待ち一覧", community_applies_path(@community), class:"btn btn-primary" %>
                 <% end %>

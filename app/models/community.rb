@@ -1,6 +1,9 @@
 class Community < ApplicationRecord
   validates :name, uniqueness: { scope: :create_user_id }, presence: true, length: { maximum: 20 }
   validates :description, length: { maximum: 50 }
+  validates :create_user_id, presence: true
+  validates :publish_flg, presence: true
+  include ImageValidators
 
   belongs_to :create_user, class_name: "User"
   has_many :posts, dependent: :destroy
