@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_09_015216) do
+ActiveRecord::Schema.define(version: 2020_12_10_135611) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -34,17 +34,17 @@ ActiveRecord::Schema.define(version: 2020_12_09_015216) do
   end
 
   create_table "applies", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
-    t.bigint "user_id"
-    t.bigint "community_id"
+    t.bigint "user_id", null: false
+    t.bigint "community_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id", "community_id"], name: "index_applies_on_user_id_and_community_id", unique: true
   end
 
   create_table "belongings", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "community_id"
-    t.integer "admin_flg", default: 0
+    t.integer "user_id", null: false
+    t.integer "community_id", null: false
+    t.integer "admin_flg", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id", "community_id"], name: "index_belongings_on_user_id_and_community_id", unique: true
@@ -62,8 +62,8 @@ ActiveRecord::Schema.define(version: 2020_12_09_015216) do
 
   create_table "comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
     t.text "content"
-    t.bigint "user_id"
-    t.bigint "post_id"
+    t.bigint "user_id", null: false
+    t.bigint "post_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "score"
