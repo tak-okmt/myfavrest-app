@@ -3,6 +3,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.6.5'
 
+gem "nokogiri", ">= 1.11.0.rc4"
 gem 'asset_sync'
 gem 'fog-aws'
 gem 'aws-sdk-s3'

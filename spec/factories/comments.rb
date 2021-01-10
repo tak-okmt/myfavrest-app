@@ -5,6 +5,6 @@ FactoryBot.define do
     visitday { "2021/1/1" }
 
     association :user
-    association :post    
+    association :post
   end
 end
