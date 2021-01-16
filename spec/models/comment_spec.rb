@@ -105,5 +105,4 @@ RSpec.describe Comment, type: :model do
       expect(@valid_comment.errors[:image]).to include "ファイル拡張子が適切ではありません"
     end
   end
-
 end
