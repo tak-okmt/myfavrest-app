@@ -70,3 +70,12 @@
 .text-faded {
     color: rgba(255, 255, 255, 0.7);
 }
+
+.home-flex{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .home-login{
+        margin-right: 30px;
+    }
+}
