@@ -19,6 +19,13 @@ end
 
 # Userの初期データ
 User.create!(
+  id: 1,
+  email: "guest@example.com",
+  password: SecureRandom.urlsafe_base64,
+  username: "ゲストユーザー",
+)
+
+User.create!(
   id: 2,
   email: "test1@example.com",
   password: 'password',
@@ -259,7 +266,7 @@ CSV.foreach('db/csv/community.csv', headers: false) do |row|
   )
 end
 
-# Belonging登録
+Belonging登録
 CSV.foreach('db/csv/belonging.csv', headers: false) do |row|
   Belonging.create!(
     user_id: row[0],

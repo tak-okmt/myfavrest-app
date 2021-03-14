@@ -10,6 +10,7 @@ services:
       MYSQL_PASSWORD: myportfolio123rubyonrails5@mysqldb
     volumes:
       - db-volume:/var/lib/mysql
+      - ./docker-entrypoint-initdb.d:/myapp/docker-entrypoint-initdb.d
     ports:
       - "3306:3306"
   # test-db:
