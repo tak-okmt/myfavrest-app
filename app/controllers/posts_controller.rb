@@ -6,11 +6,7 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
-    @pref_name = if @post.prefecture_code.present?
-                   @post.prefecture.name
-                 else
-                   ""
-                 end
+    @pref_name = set_pref_name
     @comments = @post.comments
     @comments = set_comment_order(@comments, params[:comment_order])
     @score = @comments.average(:score)&.round(1) # 口コミの評価平均
@@ -82,5 +78,9 @@ class PostsController < ApplicationController
 
   def set_community
     @community = Community.find(params[:community_id])
+  end
+
+  def set_pref_name
+    @post.prefecture_code.present? ? @post.prefecture.name : ""
   end
 end
