@@ -9,9 +9,6 @@
 
 今までの勉強記録は「やってきたこと」の箇所に記載しております。 随時更新中です。  
 
-## URL
-[https://myrest-app.work/](https://myrest-app.work/)  
-
 ## 使用言語  
 * Ruby 2.6.5  Rails 5.2.4.2  
 
